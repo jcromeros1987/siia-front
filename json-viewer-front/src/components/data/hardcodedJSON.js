@@ -1,0 +1,514 @@
+// src/data/hardcodedJSON.js
+const hardcodedJSON = {
+    nombre: "Dr. Leonardo Ledesma Domínguez",
+    nombramiento_vigente: { 
+      descripcion: "Profesor de Asignatura A",
+      adicional: "Jefe de Área en Coordinación de Proyectos" 
+    },
+    entidad_adscripcion: "Facultad de Ingeniería, UNAM",
+    antiguedad_unam: "10 años (desde 2014)",
+    grado_maximo_estudios: "Doctorado en Ciencia e Ingeniería de la Computación",
+    sni: "—",
+    pride: "—",
+    contacto: {
+      correo_institucional: "leonardo.ledesma@ingenieria.unam.edu",
+      correo_alternativo: "leonardoledd@gmail.com",
+      linkedin: "https://www.linkedin.com/in/leonardo-ledesma-dom%C3%ADnguez-a70b11202/",
+      pagina_personal: "https://leonardoledd.academy/cvleo/"
+    },
+    formacion: [
+      {
+        nivel: "Doctorado",
+        institucion: "UNAM",
+        titulo: "Doctor en Ciencia e Ingeniería de la Computación",
+        fecha: "2024",
+        cedula: "14500869",
+        tesis: "Predicción de Factores de Transcripción usando Deep Learning",
+        opcion_titulacion: "Tesis o tesina y examen profesional",
+        apoyo_conacyt: true,
+        programa: "Programa SECIHTI - Beca Nacional"
+      },
+      {
+        nivel: "Maestría",
+        institucion: "UNAM",
+        titulo: "Maestro en Ciencias e Ingeniería de la Computación",
+        fecha: "2019",
+        cedula: "11817282",
+        tesis: "Redes Neuronales Convolucionales Hermitianas",
+        opcion_titulacion: "Tesis o tesina y examen profesional",
+        apoyo_conacyt: true,
+        programa: "Programa SECIHTI - Beca Nacional"
+      },
+      {
+        nivel: "Licenciatura",
+        institucion: "UNAM",
+        titulo: "Ingeniero en Computación",
+        fecha: "2015",
+        cedula: "9629262",
+        tesis: "No especificada en el JSON original",
+        opcion_titulacion: "Tesis individual o de grupo y examen profesional"
+      }
+    ],
+    firmas: ["Ledesma L.", "Ledesma, Leonardo", "Ledesma-Domínguez L.", "Ledesma Domínguez, Leonardo"],
+    orcid: "0000-0002-5374-3954",
+    scopus_ids: ["58993330900", "57204166249"],
+    area_conocimiento: {
+      area: "Ingenierías y Desarrollo Tecnológico",
+      campo: "Ingeniería",
+      disciplina: "Ingeniería de sistemas",
+      subdisciplina: "Ciencias computacionales"
+    },
+    publicaciones: [
+      "Deep Learning for Transcription Factor Prediction",
+      "A Survey on Machine Learning in Regulatory Genomics",
+      "Feature Selection Methods for Gene Expression"
+    ],
+    semblanza: "Dr. Leonardo Ledesma es Ingeniero en Computación y Doctor en Ciencias de la Computación e Ingeniería por la UNAM. Su principal interés es contribuir al avance científico para mejorar la calidad de vida. Su investigación abarca dos áreas clave: el desarrollo de métricas para evaluar la educación superior en México y el diseño de modelos de inteligencia artificial en bioinformática para mejorar la comprensión de procesos genómicos con aplicaciones biológicas y clínicas.\n\nHa participado en proyectos de alto impacto, como la predicción de factores de transcripción con modelos de deep learning, el desarrollo de herramientas bioinformáticas como CDBProm y ENTRAF v2.0, y la creación de un sistema de diagnóstico de COVID-19 en colaboración con hospitales. Ha publicado 10 artículos científicos y participado en eventos académicos nacionales e internacionales.\n\nActualmente, es Coordinador de Proyectos para la Gestión y Evaluación Institucional en la UNAM, donde ha desarrollado sistemas para medir el desempeño académico y su impacto en el desarrollo sostenible. Ha recibido múltiples distinciones, incluyendo la Medalla Alfonso Caso y el primer lugar en el Premio Nacional de Ciencia de Datos.",
+    intereses: ["Deep Learning", "Bioinformática", "Inteligencia Artificial", "Ciencias de la Computación"],
+    logros: [
+      {
+        nombre: "Medalla Alfonso Caso",
+        institucion: "UNAM",
+        año: "2024",
+        descripcion: "Mejor alumno del Programa de Posgrado de la generación 2018, a nivel Maestría"
+      },
+      {
+        nombre: "Premio Nacional de Ciencias de Datos",
+        institucion: "Tecnológico de Monterrey",
+        año: "2021",
+        descripcion: "Sistema de detección de COVID-19 mediante análisis de imágenes médicas"
+      },
+      {
+        nombre: "Reconocimiento a Egresados Distinguidos",
+        institucion: "UNAM",
+        año: "2017",
+        descripcion: "Los primeros tres lugares de mayor promedio de la generación 2011-2015"
+      },
+      {
+        nombre: "Primer Lugar en Predicción de Falla - Concurso Nacional de Puentes de Madera XIII",
+        institucion: "UNAM",
+        año: "2013",
+        descripcion: "Determinar la falla de un puente de madera mediante cálculo de esfuerzo infinitesimales"
+      },
+      {
+        nombre: "Primer Lugar de Concurso Nacional de Puentes de Madera XI",
+        institucion: "UNAM",
+        año: "2011",
+        descripcion: "Diseño y construcción de puentes de madera, a eficiencia y carga masiva"
+      }
+    ],
+    trayectoria_profesional: [
+      {
+        puesto: "Jefe de Área / Coordinador de Proyectos",
+        institucion: "UNAM",
+        fecha_inicio: "2023",
+        fecha_fin: "Presente",
+        descripcion: "Diseño y desarrollo de un sistema para la Educación Superior en México. Diseño y desarrollo de sistemas internos de la UNAM.",
+        identificador: "878955"
+      },
+      {
+        puesto: "Profesor de Asignatura A",
+        institucion: "UNAM, Facultad de Ingeniería",
+        fecha_inicio: "2023",
+        fecha_fin: "Presente",
+        descripcion: "Impartición de cursos en la Facultad de Ingeniería"
+      },
+      {
+        puesto: "Coordinador de Proyectos",
+        institucion: "UNAM",
+        fecha_inicio: "2016",
+        fecha_fin: "2023",
+        descripcion: "Diseño y desarrollo de sistemas para la gestión universitaria"
+      },
+      {
+        puesto: "Administrador de sistemas y seguridad informática",
+        institucion: "UNAM",
+        fecha_inicio: "2014",
+        fecha_fin: "2016",
+        descripcion: "Implementación de sistemas de autenticación LDAP y migración de plataformas"
+      }
+    ],
+    idiomas: [
+      { 
+        idioma: "Inglés", 
+        nivel: "Avanzado", 
+        certificacion: "TOEFL ITP", 
+        puntuacion: "C1 / 660",
+        vigencia: "2023-2025",
+        lectura: "Avanzado",
+        escritura: "Avanzado",
+        conversacion: "Avanzado"
+      },
+      { 
+        idioma: "Hebreo", 
+        nivel: "Intermedio",
+        lectura: "Intermedio",
+        escritura: "Intermedio",
+        conversacion: "Intermedio"
+      },
+      { 
+        idioma: "Español", 
+        nivel: "Nativo",
+        lectura: "Nativo",
+        escritura: "Nativo",
+        conversacion: "Nativo"
+      },
+      { 
+        idioma: "Ruso", 
+        nivel: "Básico",
+        lectura: "Básico",
+        escritura: "Básico",
+        conversacion: "Básico"
+      }
+    ],
+    publicaciones_cientificas: [
+      {
+        titulo: "CDBProm: the Comprehensive Directory of Bacterial Promoters",
+        revista: "NAR Genomics and Bioinformatics",
+        año: 2024,
+        autores: [
+          "Gustavo Sganzerla Martinez", 
+          "Ernesto Perez Rueda", 
+          "Anuj Kumar",
+          "Mansi Dutt",
+          "Cinthia Rodriguez Maya",
+          "Leonardo Ledesma Domínguez",
+          "Pedro Lenz Casa",
+          "Aditya Kumar",
+          "Scheila de Avila e Silva",
+          "David J Kelvin"
+        ],
+        doi: "10.1093/nargab/lqae018",
+        citas: 3,
+        tipo: "Artículo científico",
+        rol: "Co-autor",
+        producto_principal: false,
+        url: "https://tlapiakali.conahcyt.mx/s/4Qex5wLxMGFoCrX"
+      },
+      {
+        titulo: "DeepReg: a deep learning hybrid model for predicting transcription factors in eukaryotic and prokaryotic genomes.",
+        revista: "Scientific Reports",
+        año: 2024,
+        autores: [
+          "Leonardo Ledesma Domínguez",
+          "Erik Carbajal Degante",
+          "Gabriel Moreno Hagelsieb",
+          "Ernesto Perez Rueda"
+        ],
+        doi: "10.1038/s41598-024-59487-5",
+        citas: 4,
+        tipo: "Artículo científico",
+        apoyo_conacyt: true,
+        programa: "Programa SECIHTI - Beca Nacional",
+        rol: "Autor principal",
+        producto_principal: true,
+        url: "https://tlapiakali.conahcyt.mx/s/7qkjfAKTWDZQEgA"
+      },
+      {
+        titulo: "A multiphase texture-based model of active contours assisted by a convolutional neural network for automatic CT and MRI heart ventricle segmentation",
+        revista: "Computer Methods and Programs in Biomedicine",
+        año: 2021,
+        autores: [
+          "Erik Carbajal-Degante",
+          "Steve Avendaño",
+          "Leonardo Ledesma",
+          "Jimena Olveres",
+          "Enrique Vallejo",
+          "Boris Escalante-Ramirez"
+        ],
+        doi: "10.1016/j.cmpb.2021.106373",
+        citas: 4,
+        tipo: "Artículo científico",
+        rol: "Co-autor",
+        producto_principal: false,
+        url: "https://tlapiakali.conahcyt.mx/s/XRnbGajTgwHR3Fo"
+      },
+      {
+        titulo: "Active contours for multi-region segmentation with a convolutional neural network initialization",
+        revista: "Optics, Photonics and Digital Technologies for Imaging Applications VI",
+        año: 2020,
+        autores: [
+          "Erik Cabarjal Degante",
+          "Steve Avendaño",
+          "Leonardo Ledesma Domínguez",
+          "Jimena Olveres Montiel",
+          "Boris Escalante Ramírez"
+        ],
+        doi: "10.1117/12.2556928",
+        citas: 6,
+        tipo: "Artículo en memorias",
+        apoyo_conacyt: true,
+        programa: "Programa SECIHTI - Beca Nacional",
+        rol: "Co-autor",
+        producto_principal: false,
+        url: "https://tlapiakali.conahcyt.mx/s/2zAHo54SA94Ddto"
+      },
+      {
+        titulo: "Hermite Convolutional Networks",
+        revista: "Lecture Notes in Computer Science",
+        año: 2019,
+        autores: [
+          "Leonardo Ledesma Domínguez",
+          "Jimena Olveres Montiel",
+          "Boris Escalante Ramírez"
+        ],
+        doi: "10.1007/978-3-030-33904-3_37",
+        tipo: "Artículo en memorias",
+        apoyo_conacyt: true,
+        programa: "Programa SECIHTI - Beca Nacional",
+        rol: "Autor principal",
+        producto_principal: true,
+        url: "https://tlapiakali.conahcyt.mx/s/MoLcSHxDrjksAjx"
+      },
+      {
+        titulo: "YAAM: Yeast Amino Acid Modifications Database",
+        revista: "DATABASE-THE JOURNAL OF BIOLOGICAL DATABASES AND CURATION",
+        año: 2018,
+        autores: [
+          "Leonardo Ledesma",
+          "Eduardo Sandoval",
+          "Uriel Cruz-Martinez",
+          "Ana Maria Escalante",
+          "Selene Mejia",
+          "Paola Moreno-Alvarez",
+          "Emiliano Avila",
+          "Erik Garcia",
+          "Gerardo Coello",
+          "Francisco Torres-Quiroz"
+        ],
+        doi: "10.1093/database/bax099",
+        citas: 25,
+        tipo: "Artículo científico",
+        apoyo_conacyt: true,
+        programa: "Fondo Sectorial Convocatoria de Investigación Científica Básica",
+        rol: "Autor principal",
+        producto_principal: true,
+        url: "https://tlapiakali.conahcyt.mx/s/AfHSRpC3gXs4JLN"
+      }
+    ],
+    capitulos_cientificos: [
+      {
+        titulo: "Prediction of DNA-Binding Transcription Factors in Bacteria and Archaea Genomes",
+        libro: "Prokaryotic Gene Regulation",
+        editorial: "Humana Press Inc",
+        año: 2022,
+        autores: ["Rafael Hernandez", "Ernesto Pérez Rueda", "Leonardo Ledesma Domínguez"],
+        doi: "10.1007/978-1-0716-2413-5_7",
+        citas: 1,
+        isbn: "9781071624128",
+        apoyo_conacyt: true,
+        programa: "Programa SECIHTI - Beca Nacional",
+        rol: "Co-autor",
+        producto_principal: true,
+        url: "https://tlapiakali.conahcyt.mx/s/tkA5JWBZRRBjxrz"
+      }
+    ],
+    desarrollos_tecnologicos: [
+      {
+        nombre: "Sistema Integrado de Información de la Educación Superior",
+        tipo: "Software",
+        descripcion: "Sistema de información basado en la encuesta censal 911 de las IES públicas y privadas en México",
+        rol: "Líder, Responsable Técnico",
+        periodo: "2022-2025",
+        nivel_madurez: "TRL 9 - Producto terminado. Pruebas con éxito en entorno real. Despliegue.",
+        impacto: "Proporcionar indicadores y métricas de la Educación Superior para la rendición de cuentas",
+        beneficiarios: "Sistema de acceso público y de uso especializado de los gestores de la planeación de IES públicas así como de la Subsecretaria de Educación Superior",
+        actores: [
+          {nombre: "Leonardo Ledesma Domínguez", rol: "Líder"},
+          {nombre: "David Flores Nieves", rol: "Colaborador"}
+        ],
+        url: "https://tlapiakali.conahcyt.mx/s/F6TmLn3zNYANE5D"
+      },
+      {
+        nombre: "Sistema Integral de Información Académica (SIIA)",
+        tipo: "Software",
+        descripcion: "Sistema para la gestión integral de producción académica y científica de los académicos de la UNAM",
+        rol: "Líder, Responsable Técnico",
+        periodo: "2016-2023",
+        nivel_madurez: "TRL 9 - Producto terminado. Pruebas con éxito en entorno real. Despliegue.",
+        impacto: "Disponibilidad de información confiable y certera para evaluación institucional",
+        beneficiarios: "Su uso es de acceso público y privado, también es usado como mecanismo de transparencia y redención de cuentas de la UNAM",
+        actores: [
+          {nombre: "Javier Lozano Espinosa", rol: "Colaborador"},
+          {nombre: "David Flores Nieves", rol: "Colaborador"}
+        ]
+      }
+    ],
+    propiedad_intelectual: [
+      {
+        titulo: "Sistema en línea de diagnóstico asistido por inteligencia artificial para COVID-19 mediante imágenes médicas",
+        tipo: "Derechos de autor",
+        estado: "Otorgada",
+        año: 2023,
+        numero_solicitud: "03202312141244570001",
+        fecha_solicitud: "2023-12-18",
+        solicitantes: [
+          "Leonardo Ledesma Domínguez",
+          "Moreno Tagle Jose Carlos",
+          "Valencia Arana Carlos",
+          "Rodriguez Maya Cinthia"
+        ],
+        rol: "Co-Autor",
+        resumen: "Herramienta auxiliar para diagnostico de COVID-19 en hospitales públicos y privados en México. Basada en redes neuronales, entrenado con imágenes de TOC y Rayos X, dicha herramienta calcula la probabilidad de que el paciente presente COVID-19 y marcar las posibles lesiones en el TORAX.",
+        producto_principal: true,
+        url: "https://tlapiakali.conahcyt.mx/s/ZxdJb9JcXLWXyFN"
+      }
+    ],
+    cursos_impartidos: [
+      {
+        nombre: "Programación Orientada a Objetos",
+        horas: 96,
+        nivel: "Licenciatura",
+        año: 2023,
+        institucion: "UNAM",
+        facultad: "Facultad de Ingeniería",
+        programa: "Ingeniería de la Computación",
+        periodo: "Agosto-Noviembre 2023",
+        producto_principal: true
+      },
+      {
+        nombre: "Estructura de Datos y Algoritmos I",
+        horas: 96,
+        nivel: "Licenciatura",
+        año: 2024,
+        institucion: "UNAM",
+        facultad: "Facultad de Ingeniería",
+        programa: "Ingeniería de la Computación",
+        periodo: "Enero-Mayo 2024",
+        producto_principal: true
+      },
+      {
+        nombre: "Lenguajes Formales y Automátas",
+        horas: 64,
+        nivel: "Licenciatura",
+        año: 2024,
+        institucion: "UNAM",
+        facultad: "Facultad de Ingeniería",
+        programa: "Ingeniería de la Computación",
+        periodo: "Agosto-Noviembre 2024",
+        producto_principal: true
+      },
+      {
+        nombre: "Programación",
+        horas: 100,
+        nivel: "Licenciatura",
+        año: 2020,
+        institucion: "UNAM",
+        facultad: "Facultad de Ciencias",
+        programa: "Licenciatura en Actuaría",
+        periodo: "Septiembre-Febrero 2021"
+      },
+      {
+        nombre: "Introducción a las Ciencias de la Computación",
+        horas: 100,
+        nivel: "Licenciatura",
+        año: 2021,
+        institucion: "UNAM",
+        facultad: "Facultad de Ciencias",
+        programa: "Licenciatura en Matemáticas",
+        periodo: "Marzo-Agosto 2021"
+      },
+      {
+        nombre: "Introducción a las Ciencias de la Computación",
+        horas: 100,
+        nivel: "Licenciatura",
+        año: 2022,
+        institucion: "UNAM",
+        facultad: "Facultad de Ciencias",
+        programa: "Licenciatura en Ciencias de la Computación",
+        periodo: "Agosto-Diciembre 2022"
+      }
+    ],
+    participacion_congresos: [
+      {
+        nombre: "II Escola Latino-Americana de Bioinformática",
+        pais: "Brasil",
+        año: 2024,
+        participacion: "Presentación de artículo en extenso",
+        titulo_trabajo: "DeepReg: a deep learning hybrid model for predicting transcription factors in eukaryotic and prokaryotic genomes.",
+        producto_principal: true
+      },
+      {
+        nombre: "24th Iberoamerican Congress on Pattern Recognition",
+        pais: "Cuba",
+        año: 2019,
+        participacion: "Ponencia",
+        titulo_trabajo: "Hermite Convolutional Networks",
+        producto_principal: true
+      },
+      {
+        nombre: "Escuela de Verano de Aprendizaje Profundo",
+        pais: "México",
+        año: 2019,
+        participacion: "Conferencia magistral",
+        titulo_trabajo: "Detección de Cáncer de Mamá usando Redes Neuronales",
+        producto_principal: true
+      },
+      {
+        nombre: "XV Simposio Mexicano de Computación y Robótica en Medicina Mexcas",
+        pais: "México",
+        año: 2014,
+        tipo: "Seminario",
+        horas: 11,
+        institucion: "Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán"
+      }
+    ],
+    formacion_continua: [
+      {
+        nombre: "2nd Workshop in Advanced Bioinformatics",
+        tipo: "Taller",
+        horas: 40,
+        institucion: "CINVESTAV",
+        año: "2021"
+      },
+      {
+        nombre: "The 3rd. Advanced School in Computer Science and Engineering: Blockchains and Cryptocurriencies",
+        tipo: "Seminario",
+        horas: 40,
+        institucion: "Universidad Hebrea de Jerusalén",
+        pais: "Israel",
+        año: "2018"
+      },
+      {
+        nombre: "Escuela de Invierno 2018",
+        tipo: "Curso",
+        horas: 40,
+        institucion: "UNAM",
+        año: "2018"
+      },
+      {
+        nombre: "Introducción al Análisis Bioinformático de Transcriptomas (RNA-SEQ)",
+        tipo: "Curso",
+        horas: 40,
+        institucion: "Global Agronomics",
+        año: "2017"
+      }
+    ],
+    evaluaciones: [
+      {
+        tipo: "Revisor",
+        revista: "NAR Genomics and Bioinformatics",
+        articulo: "Sequence-based modeling of low-affinity transcription factor–DNA binding through deep learning",
+        fecha: "Octubre-Noviembre 2024",
+        cargo: "Revisor"
+      },
+      {
+        tipo: "Jurado examinador",
+        institucion: "UNAM, Facultad de Ingeniería",
+        producto: "Tesis: Desarrollo de Herramienta de Software para la Automatización del Diseño de Muros Pantalla",
+        fecha: "Octubre 2024",
+        cargo: "Secretario"
+      }
+    ],
+    estancias: [
+      {
+        institucion: "Wilfrid Laurier University",
+        pais: "Canadá",
+        tipo: "Estancia de Investigación",
+        periodo: "Mayo-Agosto 2022",
+        logros: "Avances significativos en el doctorado, obteniendo la candidatura"
+      }
+    ]
+};
+
+export default hardcodedJSON;
