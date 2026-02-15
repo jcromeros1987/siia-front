@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { useToken } from '../hooks/useToken'
 
 let isRefreshing = false
 let failedQueue = []
@@ -50,7 +49,7 @@ export const createApiClient = (token) => {
           try {
             // Call your refresh endpoint
             const response = await axios.post(
-              `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'}/auth/refresh`,
+              `${import.meta.env.API_URL || 'http://localhost:8000'}/api/token/refresh/`,
               {},
               { withCredentials: true }
             )
