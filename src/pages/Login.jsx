@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createApiClient } from '../api/axiosConfig'
-import { useToken } from '../hooks/useToken'
+import { createApiClient } from '@/api/axiosConfig'
+import { useToken } from '@/hooks/useToken'
 
 const Login = () => {
   const navigate = useNavigate()
