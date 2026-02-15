@@ -4,8 +4,9 @@ import { useToken } from '../hooks/useToken'
 const ProtectedRoute = () => {
   const { token } = useToken()
 
+  console.log('ProtectedRoute - token:', token) // Debug log to check token value
   // If there is no token, redirect to the login page
-  if (!token) {
+  if (!token.access) {
     return <Navigate to='/login' replace />
   }
 
