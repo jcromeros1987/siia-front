@@ -19,7 +19,7 @@ const processQueue = (error, token = null) => {
 
 export const createApiClient = (token) => {
   const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000',
+    baseURL: import.meta.env.API_URL || 'http://localhost:8000',
     withCredentials: true // Include cookies (httpOnly refresh token)
   })
 
