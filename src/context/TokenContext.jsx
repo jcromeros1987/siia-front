@@ -1,5 +1,6 @@
 import { createContext, useState, useCallback } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { jwtDecode } from 'jwt-decode'
 
 const TokenContext = createContext()
 
@@ -13,6 +14,8 @@ const TokenProvider = ({ children }) => {
   // Loading state for apps that need to rehydrate on mount
   const [isLoading, setIsLoading] = useState(true)
 
+  const [userId, setUserId] = useState(null)
+
   const token = {
     access: accessToken,
     refresh: refreshToken
@@ -22,6 +25,10 @@ const TokenProvider = ({ children }) => {
     setAccessToken(access)
     if (refresh) {
       setRefreshToken(refresh)
+    }
+    if (access) {
+      const decodedPayload = jwtDecode(access)
+      setUserId(decodedPayload.user_id)
     }
   }, [setRefreshToken])
 
@@ -41,7 +48,8 @@ const TokenProvider = ({ children }) => {
       updateAccessToken,
       clearTokens,
       isLoading,
-      setIsLoading
+      setIsLoading,
+      userId
     }}
     >
       {children}
