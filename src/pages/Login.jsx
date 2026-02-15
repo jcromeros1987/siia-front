@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { createApiClient } from '../api/axiosConfig'
 import { useToken } from '../hooks/useToken'
 
 const Login = () => {
@@ -8,34 +8,31 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
   const [emailFilled, setEmailFilled] = useState(false)
   const [passwordFilled, setPasswordFilled] = useState(false)
-  const { setToken } = useToken()
+  const { setToken, isLoading } = useToken()
+  const api = createApiClient()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    setLoading(true)
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/`, {
+      const response = await api.post('/api/token/', {
         email,
         password
       })
 
-      const data = response.data.data
+      const { accessToken, refreshToken } = response.data
 
-      if (data.token) {
-        console.log('Token recibido:', data.token)
-        setToken(data.token)
+      if (accessToken) {
+        console.log('Token recibido:', accessToken)
+        setToken(accessToken, refreshToken)
         navigate('/', { replace: true })
       } else {
         setError('No se recibió el token')
       }
     } catch (err) {
       setError(err.response?.data?.detail || err.message || 'Error al iniciar sesión')
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -100,10 +97,10 @@ const Login = () => {
             </div>
             <button
               type='submit'
-              disabled={loading}
+              disabled={isLoading}
               className='bg-primary text-base-100 py-3 px-12 rounded-full mt-4 font-bold hover:bg-primary/90 active:scale-95 disabled:opacity-60 transition-all duration-300 shadow-lg hover:shadow-xl'
             >
-              {loading
+              {isLoading
                 ? (
                   <span className='flex items-center justify-center gap-2'>
                     <span className='loading loading-spinner loading-sm' />
