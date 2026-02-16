@@ -11,6 +11,7 @@ const Home = () => {
   const [currentTab, setCurrentTab] = useState(null)
   const [selectedIsFormFile, setSelectedIsFormFile] = useState(true)
   const [expandedProductId, setExpandedProductId] = useState(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     fetchCVU({ token, userId })
@@ -62,90 +63,152 @@ const Home = () => {
   }
 
   return (
-    <>
-      <div className='row mt-3'>
-        {/* Tab content CVU */}
-        <div className='col-md-3 mb-3 cl-bx'>
-          <h6>Contenido</h6>
-          <ul id='bx-pill' className='nav nav-pills flex-column bx-pill-v' role='tablist'>
-            {Object.entries(cvuData).map(([key, list]) => (
-              <li className='nav-item' key={key}>
-                <a
-                  className={`nav-link nav-link-p ${currentTab === key ? 'active' : ''}`}
-                  href='#'
-                  onClick={(e) => {
-                    e.preventDefault()
-                    changeTab(key)
-                  }}
-                >
-                  {list.nombre}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <div className='drawer lg:drawer-open min-h-screen bg-gradient-to-br from-base-100 to-base-200'>
+      <input
+        id='sidebar-drawer'
+        type='checkbox'
+        className='drawer-toggle'
+        checked={sidebarOpen}
+        onChange={(e) => setSidebarOpen(e.target.checked)}
+      />
+      
+      {/* Main Content Area */}
+      <div className='drawer-content flex flex-col p-6'>
+        {/* Toggle button for mobile */}
+        <div className='flex items-center justify-between lg:hidden mb-4'>
+          <h1 className='text-2xl font-bold text-primary'>Contenido</h1>
+          <label htmlFor='sidebar-drawer' className='btn btn-circle btn-ghost'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              className='w-6 h-6 stroke-current'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 6h16M4 12h16M4 18h16' />
+            </svg>
+          </label>
         </div>
 
-        <div className='col-md-9'>
-          <div className='col-md-12'>
-            <h4>
-              Detalle de contenido
-              <div>
-                <button
-                  type='button'
-                  className='btn btnAct-add me-2'
-                  title='Mostrar formulario'
-                >
-                  Mostrar formulario
-                </button>
-                {!selectedIsFormFile && (
+        <div className='max-w-7xl mx-auto w-full'>
+          <div className='card bg-base-100 shadow-lg'>
+            <div className='card-body p-6'>
+              <div className='flex flex-col gap-4 mb-6'>
+                <h1 className='card-title text-2xl text-primary'>Detalle de contenido</h1>
+                <div className='flex gap-2 flex-wrap'>
                   <button
                     type='button'
-                    className='btn btnAct-edit'
+                    className='btn btn-primary gap-2'
                     title='Mostrar formulario'
                   >
-                    <i className='fa fa-pencil' aria-hidden='true' />
-                  </button>
-                )}
-              </div>
-            </h4>
-
-            {/* Collapse items */}
-            {selectedList && selectedList.length > 0
-              ? selectedList.map((producto) => (
-                <div key={producto.id}>
-                  <p>
-                    <a
-                      href='#'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        toggleCollapse(producto.id)
-                      }}
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      className='w-4 h-4 stroke-current'
                     >
-                      {producto.id}
-                    </a>
-                  </p>
-                  <div
-                    id={'collapse' + producto.id}
-                    className={`collapse ${expandedProductId === producto.id ? 'show' : ''}`}
-                  >
-                    <div>
-                      <div>
+                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
+                    </svg>
+                    Mostrar formulario
+                  </button>
+                  {!selectedIsFormFile && (
+                    <button
+                      type='button'
+                      className='btn btn-outline btn-primary gap-2'
+                      title='Editar'
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        className='w-4 h-4 stroke-current'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
+                        />
+                      </svg>
+                      Editar
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Collapse items */}
+              <div className='space-y-3'>
+                {selectedList && selectedList.length > 0
+                  ? selectedList.map((producto) => (
+                    <div key={producto.id} className='collapse collapse-plus bg-base-200 border border-base-300'>
+                      <input
+                        type='checkbox'
+                        checked={expandedProductId === producto.id}
+                        onChange={() => toggleCollapse(producto.id)}
+                      />
+                      <div className='collapse-title font-semibold text-base text-primary'>
+                        {producto.id}
+                      </div>
+                      <div className='collapse-content'>
                         {expandedProductId === producto.id && (
-                          <RecursiveDisplay data={getProductoData(producto)} spec={getCurrentSpec()} />
+                          <div className='pt-4 border-t border-base-300'>
+                            <RecursiveDisplay data={getProductoData(producto)} spec={getCurrentSpec()} />
+                          </div>
                         )}
                       </div>
                     </div>
-                  </div>
-                  <hr />
-                </div>
-              ))
-              : (
-                <p>No data available</p>
-                )}
+                  ))
+                  : (
+                    <div className='alert alert-info'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        className='w-6 h-6 stroke-current'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                        />
+                      </svg>
+                      <span>No hay datos disponibles</span>
+                    </div>
+                  )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </>
+
+      {/* Sidebar - Tab Navigation */}
+      <div className='drawer-side z-40'>
+        <label htmlFor='sidebar-drawer' className='drawer-overlay'></label>
+        <div className='w-80 bg-base-100 h-full'>
+          <div className='p-6 sticky top-0'>
+            <h2 className='card-title text-lg text-primary mb-4'>Contenido</h2>
+            <div className='menu menu-compact w-full p-0'>
+              {Object.entries(cvuData).map(([key, list]) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    changeTab(key)
+                    setSidebarOpen(false)
+                  }}
+                  className={`menu-item justify-start text-left px-4 py-3 rounded-lg transition-all ${
+                    currentTab === key
+                      ? 'bg-primary text-primary-content font-semibold'
+                      : 'text-base-content hover:bg-base-200'
+                  }`}
+                >
+                  {list.nombre}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
