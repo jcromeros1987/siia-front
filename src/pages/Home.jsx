@@ -71,7 +71,7 @@ const Home = () => {
         checked={sidebarOpen}
         onChange={(e) => setSidebarOpen(e.target.checked)}
       />
-      
+
       {/* Main Content Area */}
       <div className='drawer-content flex flex-col p-6'>
         {/* Toggle button for mobile */}
@@ -108,7 +108,7 @@ const Home = () => {
                     >
                       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
                     </svg>
-                    Mostrar formulario
+                    Agregar
                   </button>
                   {!selectedIsFormFile && (
                     <button
@@ -174,7 +174,7 @@ const Home = () => {
                       </svg>
                       <span>No hay datos disponibles</span>
                     </div>
-                  )}
+                    )}
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@ const Home = () => {
 
       {/* Sidebar - Tab Navigation */}
       <div className='drawer-side z-40'>
-        <label htmlFor='sidebar-drawer' className='drawer-overlay'></label>
+        <label htmlFor='sidebar-drawer' className='drawer-overlay' />
         <div className='w-80 bg-base-100 h-full'>
           <div className='p-6 sticky top-0'>
             <h2 className='card-title text-lg text-primary mb-4'>Contenido</h2>
