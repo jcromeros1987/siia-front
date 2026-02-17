@@ -30,6 +30,7 @@ const DynamicForm = forwardRef(
     const submitForm = async () => {
       setFormValidated(true)
       if (!formRef.current?.checkValidity()) {
+        setSubmitError('Por favor, complete todos los campos requeridos correctamente.')
         return Promise.reject(new Error('Form validation failed'))
       }
 
@@ -47,6 +48,7 @@ const DynamicForm = forwardRef(
           data.id = idEntry
           //response = await axiosInstance.patch('cvu/update-entry/', data)
         } else {
+          console.log('Submitting new CVU entry with data:', data)
           // response = await axiosInstance.post('cvu/create-entry/', data)
         }
 
