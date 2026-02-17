@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useToken } from '@/hooks/useToken'
-import { fetchCVU } from '@/repository/cvuRepository'
+import { fetchCVU, getFormSpecification } from '@/repository/cvuRepository'
 import RecursiveDisplay from '@/components/RecursiveDisplay'
+import DynamicForm from '@/components/DynamicForm'
 
 const Home = () => {
   const { token, userId } = useToken()
+  const dynamicFormRef = useRef(null)
 
   const [cvuData, setCvuData] = useState({})
   const [selectedList, setSelectedList] = useState(null)
@@ -12,6 +14,8 @@ const Home = () => {
   const [selectedIsFormFile, setSelectedIsFormFile] = useState(true)
   const [expandedProductId, setExpandedProductId] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [formModalOpen, setFormModalOpen] = useState(false)
+  const [formSpecification, setFormSpecification] = useState(null)
 
   useEffect(() => {
     fetchCVU({ token, userId })
@@ -62,6 +66,18 @@ const Home = () => {
     setSelectedIsFormFile(true)
   }
 
+  const addNewCVUEntry = () => {
+    console.log('Adding new CVU entry for product type:', currentTab)
+    getFormSpecification({ token, productType: currentTab })
+      .then((response) => {
+        const spec = response.data
+        console.log('Form specification fetched:', spec)
+        setFormSpecification(spec)
+        setFormModalOpen(true)
+      })
+      .catch((error) => console.error('Error fetching form specification:', error))
+  }
+
   return (
     <div className='drawer lg:drawer-open min-h-screen bg-gradient-to-br from-base-100 to-base-200'>
       <input
@@ -98,7 +114,8 @@ const Home = () => {
                   <button
                     type='button'
                     className='btn btn-primary gap-2'
-                    title='Mostrar formulario'
+                    title='Crear nuevo registro'
+                    onClick={addNewCVUEntry}
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -208,6 +225,35 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal para DynamicForm */}
+      {formModalOpen && (
+        <div className='modal modal-open'>
+          <div className='modal-box w-full max-w-2xl max-h-screen overflow-y-auto'>
+            <button
+              className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
+              onClick={() => setFormModalOpen(false)}
+            >
+              ✕
+            </button>
+            <h3 className='font-bold text-lg mb-4'>Crear nuevo registro CVU</h3>
+            <DynamicForm
+              ref={dynamicFormRef}
+              initialSpecification={formSpecification}
+              onSuccess={(response) => {
+                console.log('Formulario enviado exitosamente:', response)
+                setFormModalOpen(false)
+                setFormSpecification(null)
+                // Aquí puedes recargar los datos si es necesario
+                if (dynamicFormRef.current) {
+                  dynamicFormRef.current.reset()
+                }
+              }}
+            />
+          </div>
+          <div className='modal-backdrop' onClick={() => setFormModalOpen(false)} />
+        </div>
+      )}
     </div>
   )
 }
