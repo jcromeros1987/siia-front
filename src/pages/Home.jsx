@@ -5,7 +5,7 @@ import RecursiveDisplay from '@/components/RecursiveDisplay'
 import DynamicForm from '@/components/DynamicForm'
 
 const Home = () => {
-  const { token, userId } = useToken()
+  const { token, updateAccessToken, userId } = useToken()
   const dynamicFormRef = useRef(null)
 
   const [cvuData, setCvuData] = useState({})
@@ -16,9 +16,10 @@ const Home = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [formModalOpen, setFormModalOpen] = useState(false)
   const [formSpecification, setFormSpecification] = useState(null)
+  const [cvuFormData, setCvuFormData] = useState({})
 
   useEffect(() => {
-    fetchCVU({ token, userId })
+    fetchCVU({ token, onTokenRefresh: updateAccessToken, userId })
       .then((response) => {
         console.log('CVU data fetched:', response.data)
         const data = response.data.data || {}
@@ -68,10 +69,15 @@ const Home = () => {
 
   const addNewCVUEntry = () => {
     console.log('Adding new CVU entry for product type:', currentTab)
-    getFormSpecification({ token, productType: currentTab })
+    getFormSpecification({ token, onTokenRefresh: updateAccessToken, productType: currentTab })
       .then((response) => {
         const spec = response.data
         console.log('Form specification fetched:', spec)
+        const initialData = {
+          product_type: currentTab,
+          isEdit: false
+        }
+        setCvuFormData(initialData)
         setFormSpecification(spec)
         setFormModalOpen(true)
       })
@@ -240,6 +246,7 @@ const Home = () => {
             <DynamicForm
               ref={dynamicFormRef}
               initialSpecification={formSpecification}
+              initialData={cvuFormData}
               onSuccess={(response) => {
                 console.log('Formulario enviado exitosamente:', response)
                 setFormModalOpen(false)
