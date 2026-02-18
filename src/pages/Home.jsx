@@ -67,16 +67,23 @@ const Home = () => {
     setSelectedIsFormFile(true)
   }
 
-  const addNewCVUEntry = () => {
+  const addNewCVUEntry = (isEdit = false) => {
     console.log('Adding new CVU entry for product type:', currentTab)
     getFormSpecification({ token, onTokenRefresh: updateAccessToken, productType: currentTab })
       .then((response) => {
         const spec = response.data
         console.log('Form specification fetched:', spec)
-        const initialData = {
-          product_type: currentTab,
-          isEdit: false
-        }
+        const initialData = isEdit
+          ? {
+              product_type: currentTab,
+              isEdit: true,
+              id: expandedProductId,
+              data: getProductoData(selectedList.find((item) => item.id === expandedProductId))
+            }
+          : {
+              product_type: currentTab,
+              isEdit: false
+            }
         setCvuFormData(initialData)
         setFormSpecification(spec)
         setFormModalOpen(true)
@@ -138,6 +145,7 @@ const Home = () => {
                       type='button'
                       className='btn btn-outline btn-primary gap-2'
                       title='Editar'
+                      onClick={() => addNewCVUEntry(true)}
                     >
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -168,8 +176,9 @@ const Home = () => {
                         checked={expandedProductId === producto.id}
                         onChange={() => toggleCollapse(producto.id)}
                       />
-                      <div className='collapse-title font-semibold text-base text-primary'>
-                        {producto.id}
+                      <div className='collapse-title font-semibold text-sm md:text-base text-primary px-2 md:px-2 py-2 md:py-2 line-clamp-2'>
+                        <span className='block'>{producto.id}</span>
+                        <span className='block'>{producto.titulo}</span>
                       </div>
                       <div className='collapse-content'>
                         {expandedProductId === producto.id && (
@@ -251,10 +260,23 @@ const Home = () => {
                 console.log('Formulario enviado exitosamente:', response)
                 setFormModalOpen(false)
                 setFormSpecification(null)
-                // Aquí puedes recargar los datos si es necesario
+                setCvuFormData(null)
                 if (dynamicFormRef.current) {
                   dynamicFormRef.current.reset()
                 }
+                // Refetch CVU data after successful submission
+                fetchCVU({ token, onTokenRefresh: updateAccessToken, userId })
+                  .then((response) => {
+                    console.log('CVU data refreshed:', response.data)
+                    const data = response.data.data || {}
+                    setCvuData(data)
+                    const keys = Object.keys(data)
+                    const newTab = !currentTab || !keys.includes(currentTab) ? keys[0] : currentTab
+                    setCurrentTab(newTab)
+                    setSelectedList(data[newTab]?.productos || [])
+                    setExpandedProductId(null)
+                  })
+                  .catch((error) => console.error('Error refreshing CVU data:', error))
               }}
             />
           </div>
