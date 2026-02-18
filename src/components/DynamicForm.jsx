@@ -1,5 +1,7 @@
 import { useState, useRef, useImperativeHandle, forwardRef } from 'react'
 import RecursiveForm from '@/components/RecursiveForm'
+import { updateEntry, addEntry } from '@/repository/cvuRepository'
+import { useToken } from '@/hooks/useToken'
 
 const DynamicForm = forwardRef(
   ({ initialData = null, initialSpecification = null, onSuccess = null }, ref) => {
@@ -12,6 +14,7 @@ const DynamicForm = forwardRef(
     const [formValidated, setFormValidated] = useState(false)
     const [submitLoading, setSubmitLoading] = useState(false)
     const [submitError, setSubmitError] = useState(null)
+    const { token, updateAccessToken } = useToken()
 
     // Backwards compatibility: expose load function via ref
     useImperativeHandle(ref, () => ({
@@ -43,20 +46,21 @@ const DynamicForm = forwardRef(
           data: cvuFormData
         }
 
-        let response
+        const repoMethod = isEdit ? updateEntry : addEntry
         if (isEdit) {
           data.id = idEntry
-          //response = await axiosInstance.patch('cvu/update-entry/', data)
-        } else {
-          console.log('Submitting new CVU entry with data:', data)
-          // response = await axiosInstance.post('cvu/create-entry/', data)
         }
 
-        if (onSuccess) {
-          onSuccess(response)
-        }
-
-        return response
+        repoMethod({ token, onTokenRefresh: updateAccessToken, entryData: data })
+          .then((res) => {
+            onSuccess && onSuccess(res)
+          })
+          .catch((err) => {
+            setSubmitError(err.message || 'Error al enviar el formulario')
+          })
+          .finally(() => {
+            setSubmitLoading(false)
+          })
       } catch (error) {
         setSubmitError(error.message || 'Error al enviar el formulario')
         throw error
