@@ -21,4 +21,13 @@ const updateEntry = ({ token, onTokenRefresh, entryData }) => {
   return api.patch('/api/v1/cvu/update-entry/', entryData)
 }
 
-export { fetchCVU, getFormSpecification, addEntry, updateEntry }
+const uploadCVU = ({ token, onTokenRefresh, file }) => {
+  const api = createApiClient(token, onTokenRefresh)
+  return api.post('/api/v1/cvu/', file, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+export { fetchCVU, getFormSpecification, addEntry, updateEntry, uploadCVU }
