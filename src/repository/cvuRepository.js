@@ -11,4 +11,14 @@ const getFormSpecification = async ({ token, onTokenRefresh, productType }) => {
   return api.get(`/api/v1/cvu/form/${productType}/`)
 }
 
-export { fetchCVU, getFormSpecification }
+const addEntry = ({ token, onTokenRefresh, entryData }) => {
+  const api = createApiClient(token, onTokenRefresh)
+  return api.post('/api/v1/cvu/create-entry/', entryData)
+}
+
+const updateEntry = ({ token, onTokenRefresh, entryData }) => {
+  const api = createApiClient(token, onTokenRefresh)
+  return api.patch('/api/v1/cvu/update-entry/', entryData)
+}
+
+export { fetchCVU, getFormSpecification, addEntry, updateEntry }
