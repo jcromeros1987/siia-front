@@ -3,6 +3,7 @@ import { useToken } from '@/hooks/useToken'
 import { fetchCVU, getFormSpecification } from '@/repository/cvuRepository'
 import RecursiveDisplay from '@/components/RecursiveDisplay'
 import DynamicForm from '@/components/DynamicForm'
+import CVUUpload from '@/components/CVUUpload'
 
 const Home = () => {
   const { token, updateAccessToken, userId } = useToken()
@@ -103,26 +104,57 @@ const Home = () => {
 
       {/* Main Content Area */}
       <div className='drawer-content flex flex-col p-6'>
-        {/* Toggle button for mobile */}
-        <div className='flex items-center justify-between lg:hidden mb-4'>
-          <h1 className='text-2xl font-bold text-primary'>Contenido</h1>
-          <label htmlFor='sidebar-drawer' className='btn btn-circle btn-ghost'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              className='w-6 h-6 stroke-current'
-            >
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 6h16M4 12h16M4 18h16' />
-            </svg>
-          </label>
+        {/* Top header with title and CVU button */}
+        <div className='flex items-center justify-between mb-4'>
+          <h1 className='text-2xl font-bold text-primary lg:hidden'>Contenido</h1>
+          <div className='flex items-center gap-2 ml-auto lg:ml-0'>
+            <CVUUpload
+              token={token}
+              onTokenRefresh={updateAccessToken}
+              userId={userId}
+              onSuccess={(response) => {
+                console.log('CVU file uploaded successfully:', response)
+                // Refetch CVU data after successful upload
+                fetchCVU({ token, onTokenRefresh: updateAccessToken, userId })
+                  .then((response) => {
+                    console.log('CVU data refreshed:', response.data)
+                    const data = response.data.data || {}
+                    setCvuData(data)
+                    const keys = Object.keys(data)
+                    console.log('Current tab before refresh:', currentTab)
+                    const newTab = !currentTab || !keys.includes(currentTab) ? keys[0] : currentTab
+                    console.log('New tab after refresh:', newTab)
+                    setCurrentTab(newTab)
+                    console.log('Selected list for new tab:', data[newTab]?.productos || [])
+                    setSelectedList(data[newTab]?.productos || [])
+                    setExpandedProductId(null)
+                  })
+                  .catch((error) => console.error('Error refreshing CVU data:', error))
+              }}
+              onError={(error) => {
+                console.error('Error uploading CVU file:', error)
+              }}
+            />
+            <label htmlFor='sidebar-drawer' className='btn btn-circle btn-ghost lg:hidden'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='w-6 h-6 stroke-current'
+              >
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 6h16M4 12h16M4 18h16' />
+              </svg>
+            </label>
+          </div>
         </div>
 
         <div className='max-w-7xl mx-auto w-full'>
           <div className='card bg-base-100 shadow-lg'>
             <div className='card-body p-6'>
               <div className='flex flex-col gap-4 mb-6'>
-                <h1 className='card-title text-2xl text-primary'>Detalle de contenido</h1>
+                <div className='flex items-center justify-between'>
+                  <h1 className='card-title text-2xl text-primary'>Detalle de contenido</h1>
+                </div>
                 <div className='flex gap-2 flex-wrap'>
                   <button
                     type='button'
