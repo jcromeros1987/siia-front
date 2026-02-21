@@ -7,7 +7,10 @@ export const useFetchCVU = () => {
   const [cvuData, setCvuData] = useState({})
   const [userData, setUserData] = useState({})
 
-  const fetchCVUData = () => {
+  const fetchCVUData = ({ skipCache = false } = {}) => {
+    if (!skipCache && cvuData && Object.keys(cvuData).length > 0 && userData && Object.keys(userData).length > 0) {
+      return
+    }
     fetchCVU({ token, onTokenRefresh: updateAccessToken, userId })
       .then((response) => {
         const data = response.data.data || {}
