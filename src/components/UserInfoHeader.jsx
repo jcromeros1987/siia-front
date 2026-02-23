@@ -1,7 +1,43 @@
 import { useFormatDate } from '@/hooks/useFormatDate'
+import Skeleton from 'react-loading-skeleton'
 
-const UserInfoHeader = ({ userData }) => {
+const UserInfoHeaderSkeleton = () => (
+  <div className='card bg-base-100 shadow-xl mb-6'>
+    <div className='card-body'>
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-6 items-start'>
+        <div className='flex justify-center'>
+          <Skeleton circle width={160} height={160} />
+        </div>
+        <div className='md:col-span-3'>
+          <Skeleton width={300} height={40} className='mb-4' />
+          <Skeleton width={250} height={20} className='mb-4' />
+          <Skeleton count={3} className='mb-4' />
+          <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
+            {[...Array(6)].map((_, i) => (
+              <div key={i}>
+                <Skeleton width={80} height={16} className='mb-2' />
+                <Skeleton width={100} height={20} />
+              </div>
+            ))}
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
+            {[...Array(2)].map((_, i) => (
+              <div key={i}>
+                <Skeleton width={60} height={16} className='mb-2' />
+                <Skeleton width={150} height={20} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)
+
+const UserInfoHeader = ({ userData, isLoading }) => {
   const fechaNacimiento = useFormatDate(userData.fecha_nacimiento)
+
+  if (isLoading) return <UserInfoHeaderSkeleton />
 
   return (
     <div className='card bg-base-100 shadow-xl mb-6'>

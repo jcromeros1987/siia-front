@@ -1,4 +1,24 @@
-const UserInfoKnowledgeArea = ({ userData }) => {
+import Skeleton from 'react-loading-skeleton'
+
+const UserInfoKnowledgeAreaSkeleton = () => (
+  <div className='card bg-base-100 shadow-lg mb-6'>
+    <div className='card-body'>
+      <Skeleton width={200} height={28} className='mb-4' />
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className='space-y-1 pb-4'>
+            <Skeleton width={80} height={16} className='mb-2' />
+            <Skeleton width={150} height={20} className='mb-2' />
+            <Skeleton width={100} height={14} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)
+
+const UserInfoKnowledgeArea = ({ userData, isLoading }) => {
+  if (isLoading) return <UserInfoKnowledgeAreaSkeleton />
   if (!userData.area_conocimiento) {
     return null
   }
