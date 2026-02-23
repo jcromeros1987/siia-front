@@ -11,20 +11,24 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='caruousel w-full'>
-      <div id='slide1' className='carousel-item relative w-full'>
-        <UserInfo userData={userData} isLoading={isLoading} />
-        <div className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between'>
-          <a href='#slide2' className='btn btn-circle'>❮</a>
-          <a href='#slide2' className='btn btn-circle'>❯</a>
+    <div className='carousel carousel-center w-full h-screen bg-primary snap-x snap-mandatory overflow-x-auto overflow-hidden'>
+      <div id='userInfo' className='carousel-item relative w-full h-full flex-shrink-0 flex flex-col'>
+        <div className='flex-1 overflow-y-auto w-full'>
+          <UserInfo userData={userData} isLoading={isLoading} />
+        </div>
+        <div className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between pointer-events-none'>
+          <a href='#cvuInfo' className='btn btn-circle pointer-events-auto'>❮</a>
+          <a href='#cvuInfo' className='btn btn-circle pointer-events-auto'>❯</a>
         </div>
       </div>
 
-      <div id='slide2' className='carousel-item relative w-full'>
-        <CVUInfo cvuData={cvuData} fetchCVUData={fetchCVUData} isLoading={isLoading} />
-        <div className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between'>
-          <a href='#slide1' className='btn btn-circle'>❮</a>
-          <a href='#slide1' className='btn btn-circle'>❯</a>
+      <div id='cvuInfo' className='carousel-item relative w-full h-full flex-shrink-0 flex flex-col'>
+        <div className='flex-1 overflow-y-auto w-full'>
+          <CVUInfo cvuData={cvuData} fetchCVUData={fetchCVUData} isLoading={isLoading} />
+        </div>
+        <div className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between pointer-events-none z-50'>
+          <a href='#userInfo' className='btn btn-circle pointer-events-auto'>❮</a>
+          <a href='#userInfo' className='btn btn-circle pointer-events-auto'>❯</a>
         </div>
       </div>
 
