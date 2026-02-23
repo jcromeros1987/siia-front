@@ -14,7 +14,7 @@ const Home = () => {
     <div className='carousel carousel-center w-full h-screen bg-primary snap-x snap-mandatory overflow-x-auto overflow-hidden'>
       <div id='userInfo' className='carousel-item relative w-full h-full flex-shrink-0 flex flex-col'>
         <div className='flex-1 overflow-y-auto w-full'>
-          <UserInfo userData={userData} isLoading={isLoading} />
+          <UserInfo userData={userData} isLoading={isLoading} fetchCVUData={fetchCVUData} />
         </div>
         <div className='absolute left-5 right-5 top-1/2 hidden md:flex -translate-y-1/2 transform justify-between pointer-events-none'>
           <a href='#cvuInfo' className='btn btn-circle pointer-events-auto'>❮</a>
@@ -37,7 +37,6 @@ const Home = () => {
           <span className='badge badge-neutral text-xs'>← Desliza para atrás</span>
         </div>
       </div>
-
     </div>
   )
 }
