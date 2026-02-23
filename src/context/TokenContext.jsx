@@ -14,7 +14,7 @@ const TokenProvider = ({ children }) => {
   // Loading state for apps that need to rehydrate on mount
   const [isLoading, setIsLoading] = useState(true)
 
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useLocalStorage('userId', null)
 
   const token = {
     access: accessToken,
@@ -30,7 +30,7 @@ const TokenProvider = ({ children }) => {
       const decodedPayload = jwtDecode(access)
       setUserId(decodedPayload.user_id)
     }
-  }, [setRefreshToken, setAccessToken])
+  }, [setRefreshToken, setAccessToken, setUserId])
 
   const updateAccessToken = useCallback((newAccessToken) => {
     setAccessToken(newAccessToken)
@@ -39,7 +39,8 @@ const TokenProvider = ({ children }) => {
   const clearTokens = useCallback(() => {
     setAccessToken(null)
     setRefreshToken(null)
-  }, [setAccessToken, setRefreshToken])
+    setUserId(null)
+  }, [setAccessToken, setRefreshToken, setUserId])
 
   return (
     <TokenContext.Provider value={{
