@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createApiClient } from '@/api/axiosConfig'
 import { useToken } from '@/hooks/useToken'
+import axios from 'axios'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ const Login = () => {
       return
     }
     try {
-      const response = await api.post('/api/token/', {
+      const response = await axios.post('/api/token/', {
         email,
         password
       })
