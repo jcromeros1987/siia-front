@@ -23,7 +23,7 @@ const Login = () => {
       return
     }
     try {
-      const response = await axios.post('/api/token/', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/token/`, {
         email,
         password
       })
