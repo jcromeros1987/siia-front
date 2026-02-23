@@ -222,7 +222,7 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
       {/* Sidebar - Tab Navigation */}
       <div className='drawer-side z-40'>
         <label htmlFor='sidebar-drawer' className='drawer-overlay' />
-        <div className='w-80 bg-base-100 h-full'>
+        <div className='w-80 bg-base-100'>
           <div className='p-6 sticky top-0'>
             <h2 className='card-title text-lg text-primary mb-4'>Contenido</h2>
             <div className='menu menu-compact w-full p-0'>
