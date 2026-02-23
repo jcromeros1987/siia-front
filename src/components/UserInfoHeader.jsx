@@ -37,6 +37,13 @@ const UserInfoHeaderSkeleton = () => (
 const UserInfoHeader = ({ userData, isLoading }) => {
   const fechaNacimiento = useFormatDate(userData.fecha_nacimiento)
 
+  const getFotoURL = () => {
+    if (userData.fotografia && userData.fotografia.uri) {
+      return `${userData.fotografia.uri}/download/${userData.fotografia.nombre}`
+    }
+    return null
+  }
+
   if (isLoading) return <UserInfoHeaderSkeleton />
 
   return (
@@ -49,9 +56,9 @@ const UserInfoHeader = ({ userData, isLoading }) => {
               <div className='avatar placeholder'>
                 <div className='bg-primary text-primary-content rounded-full w-40'>
                   <img
-                    src={userData.fotografia.uri}
+                    src={getFotoURL()}
                     alt='Fotografía del usuario'
-                    className='w-40 h-40 object-cover rounded-full py-17 px-2'
+                    className={getFotoURL() ? 'w-40 h-40 object-cover rounded-full' : 'w-40 h-40 object-cover rounded-full py-17 px-2'}
                   />
                 </div>
               </div>
