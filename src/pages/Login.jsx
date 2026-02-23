@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createApiClient } from '@/api/axiosConfig'
 import { useToken } from '@/hooks/useToken'
 import axios from 'axios'
 
@@ -13,7 +12,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [passwordFilled, setPasswordFilled] = useState(false)
   const { setToken } = useToken()
-  const api = createApiClient()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,7 +38,7 @@ const Login = () => {
         setError('No se recibió el token')
       }
     } catch (err) {
-      setError(err.response?.data?.detail || err.message || 'Error al iniciar sesión')
+      setError(err.response?.data?.detail || 'Error al iniciar sesión')
     } finally {
       setIsLoading(false)
     }
