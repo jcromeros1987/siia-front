@@ -68,7 +68,7 @@ const UserInfoHeader = ({ userData, isLoading }) => {
           {/* Info básica */}
           <div className='md:col-span-3'>
             <div className='flex items-baseline gap-2 mb-4'>
-              <h2 className='card-title text-3xl'>{userData.titulo}</h2>
+              <h2 className='card-title text-3xl'>{userData.titulo} {userData.nombre} {userData.primer_apellido} {userData.segundo_apellido}</h2>
               <span className='badge badge-lg badge-primary'>{userData.nivel_academico}</span>
             </div>
 
