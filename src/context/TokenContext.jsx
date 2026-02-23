@@ -6,7 +6,7 @@ const TokenContext = createContext()
 
 const TokenProvider = ({ children }) => {
   // Access token in memory (lost on refresh for security)
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', null)
 
   // Refresh token in localStorage (persists across refreshes)
   const [refreshToken, setRefreshToken] = useLocalStorage('refreshToken', null)
@@ -30,16 +30,16 @@ const TokenProvider = ({ children }) => {
       const decodedPayload = jwtDecode(access)
       setUserId(decodedPayload.user_id)
     }
-  }, [setRefreshToken])
+  }, [setRefreshToken, setAccessToken])
 
   const updateAccessToken = useCallback((newAccessToken) => {
     setAccessToken(newAccessToken)
-  }, [])
+  }, [setAccessToken])
 
   const clearTokens = useCallback(() => {
     setAccessToken(null)
     setRefreshToken(null)
-  }, [setRefreshToken])
+  }, [setAccessToken, setRefreshToken])
 
   return (
     <TokenContext.Provider value={{
