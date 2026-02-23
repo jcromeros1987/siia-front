@@ -104,7 +104,7 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
               token={token}
               onTokenRefresh={updateAccessToken}
               userId={userId}
-              onSuccess={fetchCVUData}
+              onSuccess={() => fetchCVUData({ skipCache: true })}
               onError={(error) => {
                 console.error('Error uploading CVU file:', error)
               }}
@@ -270,7 +270,7 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
                 if (dynamicFormRef.current) {
                   dynamicFormRef.current.reset()
                 }
-                fetchCVUData()
+                fetchCVUData({ skipCache: true })
               }}
             />
           </div>
