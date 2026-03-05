@@ -1,11 +1,12 @@
 import { useState, useRef, useImperativeHandle, forwardRef } from 'react'
 import RecursiveForm from '@/components/RecursiveForm'
-import { useCVURepository } from '@/repository/cvuRepository'
+import { updateEntry, addEntry } from '@/services/cvuApi'
+import { useApi } from '@/hooks/useApi'
 
 const DynamicForm = forwardRef(
   ({ initialData = null, initialSpecification = null, onSuccess = null }, ref) => {
     const formRef = useRef(null)
-    const { updateEntry, addEntry } = useCVURepository()
+    const api = useApi()
     const [cvuFormData, setCvuFormData] = useState(initialData?.data || {})
     const [formSpecification, setFormSpecification] = useState(initialSpecification)
     const [productType, setProductType] = useState(initialData?.product_type || '')
@@ -50,7 +51,7 @@ const DynamicForm = forwardRef(
           data.id = idEntry
         }
 
-        repoMethod(data)
+        repoMethod({ api, entryData: data })
           .then((res) => {
             onSuccess && onSuccess(res)
           })
