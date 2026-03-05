@@ -1,8 +1,9 @@
-import { useCVURepository } from '@/repository/cvuRepository'
+import { getFormSpecification } from '@/services/cvuApi'
 import RecursiveDisplay from '@/components/RecursiveDisplay'
 import DynamicForm from '@/components/DynamicForm'
 import CVUUpload from '@/components/CVUUpload'
 import { useState, useRef, useEffect } from 'react'
+import { useApi } from '@/hooks/useApi'
 
 export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
   const [selectedList, setSelectedList] = useState(null)
@@ -13,7 +14,7 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
   const [formModalOpen, setFormModalOpen] = useState(false)
   const [formSpecification, setFormSpecification] = useState(null)
   const [cvuFormData, setCvuFormData] = useState({})
-  const { getFormSpecification } = useCVURepository()
+  const api = useApi()
   const dynamicFormRef = useRef(null)
 
   const safeData = cvuData || {}
@@ -61,7 +62,7 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
 
   const addNewCVUEntry = (isEdit = false) => {
     console.log('Adding new CVU entry for product type:', currentTab)
-    getFormSpecification(currentTab)
+    getFormSpecification({ api, productType: currentTab })
       .then((response) => {
         const spec = response.data
         console.log('Form specification fetched:', spec)
