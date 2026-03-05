@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
-import { useCVURepository } from '@/repository/cvuRepository'
+import { fetchCVU } from '@/services/cvuApi'
+import { useApi } from '@/hooks/useApi'
 
 export const useFetchCVU = () => {
   const { userId } = useToken()
-  const { fetchCVU } = useCVURepository()
   const [cvuData, setCvuData] = useState({})
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const { api } = useApi()
 
   const fetchCVUData = ({ skipCache = false } = {}) => {
     if (!skipCache && cvuData && Object.keys(cvuData).length > 0 && userData && Object.keys(userData).length > 0) {
@@ -16,7 +17,7 @@ export const useFetchCVU = () => {
     }
     setIsLoading(true)
     setError(null)
-    fetchCVU(userId)
+    fetchCVU({ api, userId })
       .then((response) => {
         const data = response.data.data || {}
         const userData = response.data.user_data || {}
