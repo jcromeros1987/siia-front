@@ -11,7 +11,7 @@ import { useToken } from '@/hooks/useToken'
 import { useNavigate } from 'react-router-dom'
 
 const UserInfo = ({ userData, isLoading = false, fetchCVUData = null }) => {
-  const { token, clearTokens, updateAccessToken, userId } = useToken()
+  const { clearTokens } = useToken()
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -36,9 +36,6 @@ const UserInfo = ({ userData, isLoading = false, fetchCVUData = null }) => {
             <div className='flex items-center gap-2'>
               {fetchCVUData && (
                 <CVUUpload
-                  token={token}
-                  onTokenRefresh={updateAccessToken}
-                  userId={userId}
                   onSuccess={() => fetchCVUData({ skipCache: true })}
                   onError={(error) => {
                     console.error('Error uploading CVU file:', error)

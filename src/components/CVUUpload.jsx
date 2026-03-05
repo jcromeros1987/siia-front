@@ -1,10 +1,13 @@
 import { useState, useRef } from 'react'
-import { uploadCVU } from '@/repository/cvuRepository'
+import { useCVURepository } from '@/repository/cvuRepository'
+import { useToken } from '@/hooks/useToken'
 
-const CVUUpload = ({ token, onTokenRefresh, userId, onSuccess = null, onError = null }) => {
+const CVUUpload = ({ onSuccess = null, onError = null }) => {
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const { uploadCVU } = useCVURepository()
+  const { userId } = useToken()
 
   const handleFileSelect = (event) => {
     const file = event.target.files?.[0]
@@ -41,7 +44,7 @@ const CVUUpload = ({ token, onTokenRefresh, userId, onSuccess = null, onError = 
       formData.append('cvuFile', file)
       formData.append('usuario', userId)
 
-      const response = await uploadCVU({ token, onTokenRefresh, file: formData })
+      const response = await uploadCVU(formData)
 
       console.log('CVU file uploaded successfully:', response)
       if (fileInputRef.current) {

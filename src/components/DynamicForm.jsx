@@ -1,11 +1,11 @@
 import { useState, useRef, useImperativeHandle, forwardRef } from 'react'
 import RecursiveForm from '@/components/RecursiveForm'
-import { updateEntry, addEntry } from '@/repository/cvuRepository'
-import { useToken } from '@/hooks/useToken'
+import { useCVURepository } from '@/repository/cvuRepository'
 
 const DynamicForm = forwardRef(
   ({ initialData = null, initialSpecification = null, onSuccess = null }, ref) => {
     const formRef = useRef(null)
+    const { updateEntry, addEntry } = useCVURepository()
     const [cvuFormData, setCvuFormData] = useState(initialData?.data || {})
     const [formSpecification, setFormSpecification] = useState(initialSpecification)
     const [productType, setProductType] = useState(initialData?.product_type || '')
@@ -14,7 +14,6 @@ const DynamicForm = forwardRef(
     const [formValidated, setFormValidated] = useState(false)
     const [submitLoading, setSubmitLoading] = useState(false)
     const [submitError, setSubmitError] = useState(null)
-    const { token, updateAccessToken } = useToken()
 
     // Backwards compatibility: expose load function via ref
     useImperativeHandle(ref, () => ({
@@ -51,7 +50,7 @@ const DynamicForm = forwardRef(
           data.id = idEntry
         }
 
-        repoMethod({ token, onTokenRefresh: updateAccessToken, entryData: data })
+        repoMethod(data)
           .then((res) => {
             onSuccess && onSuccess(res)
           })

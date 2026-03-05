@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import CVUUpload from '@/components/CVUUpload'
 import { useToken } from '@/hooks/useToken'
 
-const CVUNotFound = ({ fetchCVUData, isLoading }) => {
-  const { token, updateAccessToken, userId, clearTokens } = useToken()
+const CVUNotFound = ({ fetchCVUData }) => {
+  const { clearTokens } = useToken()
   const [uploadSuccess, setUploadSuccess] = useState(false)
   const navigate = useNavigate()
 
@@ -53,9 +53,6 @@ const CVUNotFound = ({ fetchCVUData, isLoading }) => {
 
           <div className='w-full flex flex-col items-center gap-3'>
             <CVUUpload
-              token={token}
-              onTokenRefresh={updateAccessToken}
-              userId={userId}
               onSuccess={handleUploadSuccess}
               onError={handleUploadError}
             />

@@ -16,7 +16,7 @@ const processQueue = (error, token = null) => {
   failedQueue = []
 }
 
-export const createApiClient = (token, onTokenRefresh) => {
+export const createApiClient = (token, onTokenRefresh, onTokenRefreshFailed) => {
   const api = axios.create({
     baseURL: import.meta.env.API_URL || 'http://localhost:8000',
     withCredentials: true // Include cookies (httpOnly refresh token)
@@ -70,7 +70,10 @@ export const createApiClient = (token, onTokenRefresh) => {
           } catch (err) {
             console.error('Token refresh failed:', err)
             processQueue(err, null)
-            // Redirect to login on refresh failure
+            // Clear tokens and redirect to login on refresh failure
+            if (onTokenRefreshFailed) {
+              onTokenRefreshFailed()
+            }
             window.location.href = '/login'
             return Promise.reject(err)
           }

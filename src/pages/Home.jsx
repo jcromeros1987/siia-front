@@ -16,7 +16,7 @@ const Home = () => {
     return (
       <div className='w-full h-screen flex items-center justify-center bg-primary'>
         <div className='flex flex-col items-center gap-4'>
-          <span className='loading loading-spinner loading-lg text-base-100'></span>
+          <span className='loading loading-spinner loading-lg text-base-100' />
           <p className='text-base-100 text-lg'>Cargando datos...</p>
         </div>
       </div>

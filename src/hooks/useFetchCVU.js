@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useToken } from '@/hooks/useToken'
-import { fetchCVU } from '@/repository/cvuRepository'
+import { useCVURepository } from '@/repository/cvuRepository'
 
 export const useFetchCVU = () => {
-  const { token, updateAccessToken, userId } = useToken()
+  const { userId } = useToken()
+  const { fetchCVU } = useCVURepository()
   const [cvuData, setCvuData] = useState({})
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
@@ -15,7 +16,7 @@ export const useFetchCVU = () => {
     }
     setIsLoading(true)
     setError(null)
-    fetchCVU({ token, onTokenRefresh: updateAccessToken, userId })
+    fetchCVU(userId)
       .then((response) => {
         const data = response.data.data || {}
         const userData = response.data.user_data || {}

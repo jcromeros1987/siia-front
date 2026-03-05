@@ -1,9 +1,8 @@
-import { getFormSpecification } from '@/repository/cvuRepository'
+import { useCVURepository } from '@/repository/cvuRepository'
 import RecursiveDisplay from '@/components/RecursiveDisplay'
 import DynamicForm from '@/components/DynamicForm'
 import CVUUpload from '@/components/CVUUpload'
 import { useState, useRef, useEffect } from 'react'
-import { useToken } from '@/hooks/useToken'
 
 export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
   const [selectedList, setSelectedList] = useState(null)
@@ -14,7 +13,7 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
   const [formModalOpen, setFormModalOpen] = useState(false)
   const [formSpecification, setFormSpecification] = useState(null)
   const [cvuFormData, setCvuFormData] = useState({})
-  const { token, updateAccessToken, userId } = useToken()
+  const { getFormSpecification } = useCVURepository()
   const dynamicFormRef = useRef(null)
 
   const safeData = cvuData || {}
@@ -62,7 +61,7 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
 
   const addNewCVUEntry = (isEdit = false) => {
     console.log('Adding new CVU entry for product type:', currentTab)
-    getFormSpecification({ token, onTokenRefresh: updateAccessToken, productType: currentTab })
+    getFormSpecification(currentTab)
       .then((response) => {
         const spec = response.data
         console.log('Form specification fetched:', spec)
@@ -101,9 +100,6 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
           <h1 className='text-2xl font-bold text-primary lg:hidden'>Contenido</h1>
           <div className='flex items-center gap-2 ml-auto lg:ml-0'>
             <CVUUpload
-              token={token}
-              onTokenRefresh={updateAccessToken}
-              userId={userId}
               onSuccess={() => fetchCVUData({ skipCache: true })}
               onError={(error) => {
                 console.error('Error uploading CVU file:', error)
