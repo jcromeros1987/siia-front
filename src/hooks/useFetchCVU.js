@@ -9,7 +9,7 @@ export const useFetchCVU = () => {
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const { api } = useApi()
+  const api = useApi()
 
   const fetchCVUData = ({ skipCache = false } = {}) => {
     if (!skipCache && cvuData && Object.keys(cvuData).length > 0 && userData && Object.keys(userData).length > 0) {
@@ -17,6 +17,7 @@ export const useFetchCVU = () => {
     }
     setIsLoading(true)
     setError(null)
+    console.log('Fetching CVU data for userId:', userId)
     fetchCVU({ api, userId })
       .then((response) => {
         const data = response.data.data || {}
