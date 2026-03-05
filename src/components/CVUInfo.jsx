@@ -236,6 +236,9 @@ export const CVUInfo = ({ cvuData, fetchCVUData, isLoading }) => {
                       : 'text-base-content hover:bg-base-200'
                   }`}
                 >
+                  {list.productos && (
+                    <span className='badge badge-secondary ml-auto mr-2 rounded-full font-bold'>{list.productos.length}</span>
+                  )}
                   {list.nombre}
                 </button>
               ))}
