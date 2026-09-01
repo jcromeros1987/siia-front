@@ -1,0 +1,15 @@
+# Dependencias de Node (se instalan con npm install)
+node_modules/
+
+# Logs de npm / yarn / pnpm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm
+.yarn/
+
+# Caché y build de Vite
+dist/
+dist-ssr/
+.vite/
