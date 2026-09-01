@@ -1,15 +1,12 @@
-// src/components/CVUUpload.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useCVULoader from '../hooks/useCVULoader';
 import FileUploader from './FileUploader';
 import ProgressBar from './ProgressBar';
 import ProfileView from './ProfileView/ProfileView';
 import Notification from './Notification';
-import hardcodedJSON from './data/hardcodedJSON';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 export default function CVUUpload() {
-  const [showProfile, setShowProfile] = useState(false);
   const {
     perfil,
     archivo,
@@ -20,15 +17,9 @@ export default function CVUUpload() {
     selectFile,
     startLoad,
     resetProfile
-  } = useCVULoader(hardcodedJSON);
-  
-  const [notification, setNotification] = useState(null);
+  } = useCVULoader();
 
-  // Verificar localStorage al cargar
-  useEffect(() => {
-    const savedProfile = localStorage.getItem('cvuProfile');
-    setShowProfile(!!savedProfile);
-  }, []);
+  const [notification, setNotification] = useState(null);
 
   const handleStartLoad = async () => {
     const success = await startLoad();
@@ -38,13 +29,7 @@ export default function CVUUpload() {
         message: 'Perfil cargado correctamente',
         duration: 3000
       });
-      setShowProfile(true);
     }
-  };
-
-  const handleReset = () => {
-    resetProfile();
-    setShowProfile(false);
   };
 
   return (
@@ -58,20 +43,20 @@ export default function CVUUpload() {
         />
       )}
 
-      {showProfile ? (
+      {perfil ? (
         <>
           <div className="flex justify-end mb-4">
             <button
-              onClick={handleReset}
+              onClick={resetProfile}
               className="flex items-center text-sm text-blue-600 hover:text-blue-800"
             >
               <ArrowPathIcon className="h-4 w-4 mr-1" />
               Cargar nuevo CVU
             </button>
           </div>
-          
+
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <ProfileView perfil={perfil || JSON.parse(localStorage.getItem('cvuProfile'))} />
+            <ProfileView perfil={perfil} />
           </div>
         </>
       ) : (
@@ -81,7 +66,7 @@ export default function CVUUpload() {
               Cargar CVU Académico
             </h2>
             <p className="text-[#082C3B] mb-6">
-              Sube tu archivo JSON para generar una vista previa de tu perfil académico
+              Sube el JSON de perfil completo de SECIHTI (por ejemplo <code>perfilCompleto_*.json</code>).
             </p>
 
             <FileUploader

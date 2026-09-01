@@ -1,8 +1,17 @@
-// src/hooks/useCVULoader.js
 import { useState } from 'react';
+import { normalizeProfile } from '../utils/normalizeCvu';
 
-export default function useCVULoader(hardcodedJSON) {
-  const [perfil, setPerfil] = useState(null);
+function readStoredProfile() {
+  try {
+    const saved = localStorage.getItem('cvuProfile');
+    return saved ? normalizeProfile(JSON.parse(saved)) : null;
+  } catch {
+    return null;
+  }
+}
+
+export default function useCVULoader() {
+  const [perfil, setPerfil] = useState(readStoredProfile);
   const [archivo, setArchivo] = useState(null);
   const [error, setError] = useState('');
   const [cargando, setCargando] = useState(false);
@@ -12,12 +21,12 @@ export default function useCVULoader(hardcodedJSON) {
   const selectFile = file => {
     setError('');
     if (!file) return setArchivo(null);
-    
+
     if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
       setError('Por favor, selecciona un archivo JSON válido');
       return setArchivo(null);
     }
-    
+
     setArchivo(file);
   };
 
@@ -30,9 +39,8 @@ export default function useCVULoader(hardcodedJSON) {
     setCargando(true);
     setProgreso(0);
     setMensaje('Iniciando procesamiento...');
-    
+
     try {
-      // Simulación más rápida del procesamiento
       const steps = [
         { progress: 30, message: 'Validando archivo...' },
         { progress: 60, message: 'Procesando datos...' },
@@ -41,18 +49,18 @@ export default function useCVULoader(hardcodedJSON) {
       ];
 
       for (const step of steps) {
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 150));
         setProgreso(step.progress);
         setMensaje(step.message);
       }
 
-      // Guardar en localStorage
-      localStorage.setItem('cvuProfile', JSON.stringify(hardcodedJSON));
-      setPerfil(hardcodedJSON);
+      const parsed = JSON.parse(await archivo.text());
+      const normalized = normalizeProfile(parsed);
+      localStorage.setItem('cvuProfile', JSON.stringify(parsed));
+      setPerfil(normalized);
       return true;
-      
     } catch (err) {
-      setError('Error al procesar el archivo');
+      setError('El archivo no contiene un JSON de CVU válido');
       return false;
     } finally {
       setCargando(false);

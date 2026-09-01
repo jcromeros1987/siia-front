@@ -1,0 +1,252 @@
+{
+  "nombre": "Dr. Leonardo Ledesma Domínguez",
+  "entidad": "Facultad de Ingeniería",
+  "grado_maximo_estudios": "Doctorado",
+  "antiguedad_unam": "4 años",
+  "nombramiento_vigente": {
+    "descripcion": "Profesor Asignatura A No Definitivo",
+    "entidad": "Facultad de Ingeniería",
+    "desde": "16-08-2024"
+  },
+  "firmas": [
+    "Ledesma L.",
+    "Ledesma, Leonardo",
+    "Ledesma-Dominguez L."
+  ],
+  "scopus_ids": [
+    "58993330900",
+    "57204166249"
+  ],
+  "orcid": "0000-0002-5374-3954",
+  "coautorias_entidades_unam": [
+    "Instituto de Investigaciones en Matemáticas Aplicadas y en Sistemas",
+    "Facultad de Ciencias",
+    "Facultad de Ingeniería"
+  ],
+  "revistas": [
+    {
+      "titulo": "COMPUTER METHODS AND PROGRAMS IN BIOMEDICINE",
+      "pais": "Irlanda",
+      "año": "2021"
+    },
+    {
+      "titulo": "DATABASE–THE JOURNAL OF BIOLOGICAL DATABASES AND CURATION",
+      "pais": "Reino Unido",
+      "año": "2018"
+    },
+    {
+      "titulo": "Lecture Notes in Computer Science",
+      "pais": "Suiza",
+      "año": "2019"
+    },
+    {
+      "titulo": "Methods in Molecular Biology",
+      "pais": "Estados Unidos",
+      "año": "2022"
+    },
+    {
+      "titulo": "Nar Genomics And Bioinformatics",
+      "pais": "",
+      "año": "2024"
+    },
+    {
+      "titulo": "OPTICS, PHOTONICS, AND DIGITAL TECHNOLOGIES FOR IMAGING APPLICATIONS VIII",
+      "pais": "Estados Unidos",
+      "año": "2021"
+    },
+    {
+      "titulo": "SCIENTIFIC REPORTS",
+      "pais": "Reino Unido",
+      "año": "2024"
+    }
+  ],
+  "lineas_investigacion": [
+    {
+      "titulo": "Mecánica de Suelos Avanzada",
+      "descripcion": "Estudio del comportamiento de suelos bajo condiciones extremas y desarrollo de nuevos métodos de análisis geotécnico."
+    },
+    {
+      "titulo": "Ingeniería Sísmica",
+      "descripcion": "Análisis y diseño de estructuras resistentes a sismos, con enfoque en sistemas de aislamiento sísmico."
+    }
+  ],
+  "nombramientos": {
+    "vigente": {
+      "puesto": "Profesor Asignatura A No Definitivo",
+      "entidad": "Facultad de Ingeniería",
+      "desde": "16-08-2024"
+    },
+    "anteriores": [
+      {
+        "puesto": "Profesor Asignatura A TP No Definitivo",
+        "entidad": "Facultad de Ingeniería",
+        "periodo": "16-10-2023 – 15-08-2024"
+      },
+      {
+        "puesto": "Ayudante Profesor B TP No Definitivo",
+        "entidad": "Facultad de Ciencias",
+        "periodo": "16-10-2022 – 31-07-2023"
+      }
+    ]
+  },
+  "logros": [
+    {
+      "nombre": "Medalla Alfonso Caso",
+      "institucion": "UNAM",
+      "año": "2024",
+      "descripcion": "Mejor alumno del Programa de Posgrado de la generación 2018, a nivel Maestría"
+    },
+    {
+      "nombre": "Premio Nacional de Ciencias de Datos",
+      "institucion": "Tecnológico de Monterrey",
+      "año": "2021",
+      "descripcion": "Sistema de detección de COVID-19 mediante análisis de imágenes médicas"
+    },
+    {
+      "nombre": "Reconocimiento a Egresados Distinguidos",
+      "institucion": "UNAM",
+      "año": "2017",
+      "descripcion": "Los primeros tres lugares de mayor promedio de la generación 2011-2015"
+    },
+    {
+      "nombre": "Primer Lugar en Predicción de Falla - Concurso Nacional de Puentes de Madera XIII",
+      "institucion": "UNAM",
+      "año": "2013",
+      "descripcion": "Determinar la falla de un puente de madera mediante cálculo de esfuerzo infinitesimales"
+    },
+    {
+      "nombre": "Primer Lugar de Concurso Nacional de Puentes de Madera XI",
+      "institucion": "UNAM",
+      "año": "2011",
+      "descripcion": "Diseño y construcción de puentes de madera, a eficiencia y carga masiva"
+    }
+  ],
+  "documentos_indexados": [
+    { "año": 2018, "wos": 1, "scopus": 1 },
+    { "año": 2019, "wos": 1, "scopus": 1 },
+    { "año": 2021, "wos": 2, "scopus": 2 },
+    { "año": 2022, "wos": 0, "scopus": 4 },
+    { "año": 2024, "wos": 2, "scopus": 2 }
+  ],
+  "publicaciones": [
+    {
+      "titulo": "CDBProm: the Comprehensive Directory of Bacterial Promoters",
+      "autores": "Coautor: Ledesma–Dominguez L., Martínez G.S., Pérez–Rueda E., Dutt M., et al.",
+      "año": 2024,
+      "revista": "NAR Genomics And Bioinformatics",
+      "fuente": "WoS-id: 001169137700001\nScopus-id: 2-s2.0-85185968074",
+      "citas_wos": 3,
+      "citas_scopus": 2
+    },
+    {
+      "titulo": "DeepReg: a deep learning hybrid model for predicting transcription factors in eukaryotic and prokaryotic genomes",
+      "autores": "1er autor: Ledesma–Dominguez L., Carbajal–Degante E., Moreno-Hagelsieb G., Perez–Rueda E.",
+      "año": 2024,
+      "revista": "SCIENTIFIC REPORTS",
+      "fuente": "WoS-id: 001207003700015\nScopus-id: 2-s2.0-85190824879",
+      "citas_wos": 2,
+      "citas_scopus": 3
+    },
+    {
+      "titulo": "Prediction of DNA-Binding Transcription Factors in Bacteria and Archaea Genomes",
+      "autores": "1er autor: Ledesma L., Hernandez-Guerrero R., Perez–Rueda E.",
+      "año": 2022,
+      "revista": "Methods in Molecular Biology",
+      "fuente": "Scopus-id: 2-s2.0-85135500848",
+      "citas_wos": 0,
+      "citas_scopus": 4
+    },
+    {
+      "titulo": "Active Contours for Multi-Region Segmentation with a Convolutional Neural Network Initialization",
+      "autores": "Coautor: Ledesma L., Carbajal–Degante E., Avendaño S., Olveres J., et al.",
+      "año": 2021,
+      "revista": "OPTICS, PHOTONICS, AND DIGITAL TECHNOLOGIES FOR IMAGING APPLICATIONS VIII",
+      "fuente": "WoS-id: 000671891800004\nScopus-id: 2-s2.0-85092726643",
+      "citas_wos": 3,
+      "citas_scopus": 3
+    },
+    {
+      "titulo": "A multiphase texture-based model of active contours assisted by a convolutional neural network for automatic CT and MRI heart ventricle segmentation",
+      "autores": "Coautor: Ledesma, Leonardo; Carbajal–Degante, Erik; Avendano, Steve; OLVERES, JIMENA, et al.",
+      "año": 2021,
+      "revista": "COMPUTER METHODS AND PROGRAMS IN BIOMEDICINE",
+      "fuente": "WoS-id: 000702665200008\nScopus-id: 2-s2.0-85115395830",
+      "citas_wos": 5,
+      "citas_scopus": 5
+    },
+    {
+      "titulo": "Hermite Convolutional Networks",
+      "autores": "1er autor: Ledesma, Leonardo, Olveres, Jimena, Escalante-Ramirez, Boris",
+      "año": 2019,
+      "revista": "Lecture Notes in Computer Science",
+      "fuente": "WoS-id: 000582428400036\nScopus-id: 2-s2.0-85075652260",
+      "citas_wos": 2,
+      "citas_scopus": 3
+    },
+    {
+      "titulo": "YAAM: Yeast Amino Acid Modifications Database",
+      "autores": "1er autor: Ledesma, Leonardo, Sandoval, Eduardo, Cruz-Martinez, Uriel, Maria Escalante, Ana, et al.",
+      "año": 2018,
+      "revista": "DATABASE-THE JOURNAL OF BIOLOGICAL DATABASES AND CURATION",
+      "fuente": "WoS-id: 000427194400001\nScopus-id: 2-s2.0-85054772422",
+      "citas_wos": 11,
+      "citas_scopus": 1
+    }
+  ],
+  "docencia": [
+    {
+      "faculty": "Facultad de Ingeniería",
+      "level": "Licenciatura",
+      "course": "Estructura de Datos y Algoritmos I",
+      "period": "Enero-Mayo 2024",
+      "students": 42,
+      "year": 2024,
+      "sources": ["SIIA", "SECIHTI"]
+    },
+    {
+      "faculty": "Facultad de Ingeniería",
+      "level": "Licenciatura",
+      "course": "Programación Orientada a Objetos",
+      "period": "Agosto-Noviembre 2023",
+      "students": 44,
+      "year": 2023,
+      "sources": ["SIIA", "SECIHTI"]
+    },
+    {
+      "faculty": "UNAM",
+      "level": "Licenciatura",
+      "course": "Lenguajes Formales y Autómatas",
+      "period": "Agosto-Noviembre 2024",
+      "students": 0,
+      "year": 2024,
+      "sources": ["SECIHTI"]
+    },
+    {
+      "faculty": "UNAM",
+      "level": "Licenciatura",
+      "course": "Programación",
+      "period": "Septiembre-Febrero 2021",
+      "students": 0,
+      "year": 2021,
+      "sources": ["SECIHTI"]
+    },
+    {
+      "faculty": "UNAM",
+      "level": "Licenciatura",
+      "course": "Introducción a las Ciencias de la Computación",
+      "period": "Marzo-Agosto 2021",
+      "students": 0,
+      "year": 2021,
+      "sources": ["SECIHTI"]
+    },
+    {
+      "faculty": "UNAM",
+      "level": "Licenciatura",
+      "course": "Introducción a las Ciencias de la Computación",
+      "period": "Agosto-Diciembre 2022",
+      "students": 0,
+      "year": 2022,
+      "sources": ["SECIHTI"]
+    }
+  ]
+}

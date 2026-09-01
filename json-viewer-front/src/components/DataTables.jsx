@@ -74,13 +74,13 @@ export function TeachingTable({ teaching }) {
               <td className="px-4 py-2 text-[#192C38] flex items-center gap-2">
                 <span>{t.course}</span>
                 <div className="flex gap-1">
-                  {t.sources.includes('SIIA') && <SiiaBadge />}
-                  {t.sources.includes('SECIHTI') && <SecihtiBadge />}
+                  {t.sources?.includes('SIIA') && <SiiaBadge />}
+                  {t.sources?.includes('SECIHTI') && <SecihtiBadge />}
                 </div>
               </td>
               <td className="px-4 py-2 text-[#082C3B]">{t.period}</td>
               <td className="px-4 py-2 text-[#082C3B]">{t.students}</td>
-              <td className="px-4 py-2 text-[#082C3B]">{t.sources.join(', ')}</td>
+              <td className="px-4 py-2 text-[#082C3B]">{(t.sources || []).join(', ')}</td>
             </tr>
           ))}
         </tbody>

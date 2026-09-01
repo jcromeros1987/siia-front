@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 const SecihtiBadge = ({ className = '' }) => (
   <span className={`bg-[#3D543F] text-white text-xs px-2 py-1 rounded-md flex items-center w-fit ${className}`}>
     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -8,7 +9,7 @@ const SecihtiBadge = ({ className = '' }) => (
   </span>
 );
 
-export default function TabsPerfil() {
+export default function TabsPerfil({ perfil = {} }) {
   const [activeTab, setActiveTab] = useState('investigacion');
 
   const tabs = [
@@ -16,38 +17,11 @@ export default function TabsPerfil() {
     { id: 'nombramientos', label: 'Nombramientos' },
     { id: 'reconocimientos', label: 'Reconocimientos' },
   ];
-  const logros = [
-    {
-      nombre: "Medalla Alfonso Caso",
-      institucion: "UNAM",
-      año: "2024",
-      descripcion: "Mejor alumno del Programa de Posgrado de la generación 2018, a nivel Maestría"
-    },
-    {
-      nombre: "Premio Nacional de Ciencias de Datos",
-      institucion: "Tecnológico de Monterrey",
-      año: "2021",
-      descripcion: "Sistema de detección de COVID-19 mediante análisis de imágenes médicas"
-    },
-    {
-      nombre: "Reconocimiento a Egresados Distinguidos",
-      institucion: "UNAM",
-      año: "2017",
-      descripcion: "Los primeros tres lugares de mayor promedio de la generación 2011-2015"
-    },
-    {
-      nombre: "Primer Lugar en Predicción de Falla - Concurso Nacional de Puentes de Madera XIII",
-      institucion: "UNAM",
-      año: "2013",
-      descripcion: "Determinar la falla de un puente de madera mediante cálculo de esfuerzo infinitesimales"
-    },
-    {
-      nombre: "Primer Lugar de Concurso Nacional de Puentes de Madera XI",
-      institucion: "UNAM",
-      año: "2011",
-      descripcion: "Diseño y construcción de puentes de madera, a eficiencia y carga masiva"
-    }
-  ];
+
+  const lineas = perfil.lineas_investigacion || [];
+  const logros = perfil.logros || [];
+  const nombramientoVigente = perfil.nombramientos?.vigente || perfil.nombramiento_vigente || {};
+  const nombramientosAnteriores = perfil.nombramientos?.anteriores || [];
 
   return (
     <section className="bg-white border border-gray-200 mb-6">
@@ -73,23 +47,18 @@ export default function TabsPerfil() {
         {activeTab === 'investigacion' && (
           <div>
             <h3 className="text-sm font-semibold text-slate-800 mb-4">LÍNEAS DE INVESTIGACIÓN</h3>
-            <div className="space-y-4">
-              {[
-                {
-                  title: 'Mecánica de Suelos Avanzada',
-                  desc: 'Estudio del comportamiento de suelos bajo condiciones extremas y desarrollo de nuevos métodos de análisis geotécnico.'
-                },
-                {
-                  title: 'Ingeniería Sísmica',
-                  desc: 'Análisis y diseño de estructuras resistentes a sismos, con enfoque en sistemas de aislamiento sísmico.'
-                }
-              ].map((line, i) => (
-                <div key={i} className="border-l border-gray-200 pl-3">
-                  <h4 className="font-medium text-[#192C38]">{line.title}</h4>
-                  <p className="text-sm text-[#082C3B] mt-1">{line.desc}</p>
-                </div>
-              ))}
-            </div>
+            {lineas.length > 0 ? (
+              <div className="space-y-4">
+                {lineas.map((line, i) => (
+                  <div key={i} className="border-l border-gray-200 pl-3">
+                    <h4 className="font-medium text-[#192C38]">{line.titulo || line.title}</h4>
+                    <p className="text-sm text-[#082C3B] mt-1">{line.descripcion || line.desc}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-400">Sin líneas de investigación</p>
+            )}
           </div>
         )}
 
@@ -99,31 +68,32 @@ export default function TabsPerfil() {
             <div className="space-y-6">
               <div>
                 <h4 className="text-xs font-medium text-[#082C3B] mb-2">VIGENTE</h4>
-                <p className="font-medium text-[#192C38]">Profesor Asignatura A No Definitivo</p>
-                <p className="text-sm text-[#082C3B]">Facultad de Ingeniería</p>
-                <p className="text-xs text-gray-400 mt-1">Desde 16-08-2024</p>
+                <p className="font-medium text-[#192C38]">
+                  {nombramientoVigente.puesto || nombramientoVigente.descripcion || '—'}
+                </p>
+                <p className="text-sm text-[#082C3B]">{nombramientoVigente.entidad || ''}</p>
+                {nombramientoVigente.desde && (
+                  <p className="text-xs text-gray-400 mt-1">Desde {nombramientoVigente.desde}</p>
+                )}
               </div>
 
-              <div>
-                <h4 className="text-xs font-medium text-[#082C3B] mb-2">ANTERIORES</h4>
-                <ul className="space-y-4">
-                  <li className="border-t border-gray-100 pt-4">
-                    <p className="font-medium text-[#192C38]">Profesor Asignatura A TP No Definitivo</p>
-                    <p className="text-sm text-[#082C3B]">Facultad de Ingeniería</p>
-                    <p className="text-xs text-gray-400 mt-1">16-10-2023 – 15-08-2024</p>
-                  </li>
-                  <li className="border-t border-gray-100 pt-4">
-                    <p className="font-medium text-[#192C38]">Ayudante Profesor B TP No Definitivo</p>
-                    <p className="text-sm text-[#082C3B]">Facultad de Ciencias</p>
-                    <p className="text-xs text-gray-400 mt-1">16-10-2022 – 31-07-2023</p>
-                  </li>
-                </ul>
-              </div>
+              {nombramientosAnteriores.length > 0 && (
+                <div>
+                  <h4 className="text-xs font-medium text-[#082C3B] mb-2">ANTERIORES</h4>
+                  <ul className="space-y-4">
+                    {nombramientosAnteriores.map((item, index) => (
+                      <li key={index} className="border-t border-gray-100 pt-4">
+                        <p className="font-medium text-[#192C38]">{item.puesto}</p>
+                        <p className="text-sm text-[#082C3B]">{item.entidad}</p>
+                        <p className="text-xs text-gray-400 mt-1">{item.periodo}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         )}
-
-
 
         {activeTab === 'reconocimientos' && (
           <div>
@@ -131,7 +101,7 @@ export default function TabsPerfil() {
               <h3 className="text-sm font-semibold text-slate-800">RECONOCIMIENTOS</h3>
               <SecihtiBadge />
             </div>
-            
+
             {logros.length > 0 ? (
               <div className="space-y-4">
                 {logros.map((logro, index) => (

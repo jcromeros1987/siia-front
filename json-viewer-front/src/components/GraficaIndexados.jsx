@@ -1,15 +1,10 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, LineChart } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line } from 'recharts';
 import React from 'react';
+import { buildDocumentosIndexados } from '../utils/perfilSiia';
 
-const data = [
-  { año: 2010, wos: 1, scopus: 1 },
-  { año: 2021, wos: 1, scopus: 1 },
-  { año: 2022, wos: 1, scopus: 1 },
-  { año: 2023, wos: 2, scopus: 2 },
-  { año: 2024, wos: 2, scopus: 2 }
-];
+export default function GraficaIndexados({ perfil = {} }) {
+  const data = buildDocumentosIndexados(perfil);
 
-export default function GraficaIndexados() {
   return (
     <div className="bg-white p-4 shadow rounded">
       <h2 className="text-xl font-semibold text-blue-700 mb-4">Documentos indexados (WoS y Scopus)</h2>

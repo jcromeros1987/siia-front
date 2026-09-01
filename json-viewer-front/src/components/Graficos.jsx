@@ -1,16 +1,23 @@
-// src/components/ProfileView/ProfileView.jsx
 import React from 'react';
-import PerfilHeader from './PerfilHeader';
 import DataTabs from './DataTabs';
+import ProduccionGrafica from './tabs/ProduccionGrafica';
+import { mapPublicacion } from '../utils/perfilSiia';
 
-// Si los datos están en src/data/
-import { publications } from './data/publications';
-import { teaching }    from './data/teaching';
+export default function Graficos({ perfil = {} }) {
+  const publications = (perfil.publicaciones || []).map(mapPublicacion);
+  const teaching = perfil.docencia || [];
 
-export default function ProfileView() {
   return (
     <div className="py-8 space-y-8">
-      {/* Data Tabs con tablas y gráficos */}
+      <section className="bg-white border border-gray-200 mb-6">
+        <div className="p-6">
+          <h2 className="text-lg font-semibold text-[#192C38] mb-4 border-b border-gray-200 pb-2">
+            PRODUCCIÓN INDEXADA
+          </h2>
+          <ProduccionGrafica perfil={perfil} />
+        </div>
+      </section>
+
       <DataTabs
         publications={publications}
         teaching={teaching}
