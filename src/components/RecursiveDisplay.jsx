@@ -1,5 +1,58 @@
+const getDisplayValue = (value) => {
+  if (value === null || value === undefined) return 'N/A'
+
+  if (typeof value === 'string') return value
+  if (typeof value === 'number') return String(value)
+  if (typeof value === 'boolean') return value ? 'Sí' : 'No'
+
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => getDisplayValue(item))
+      .filter((item) => item !== 'N/A' && item !== '')
+      .join(', ')
+  }
+
+  if (typeof value === 'object') {
+    if (value.nombre !== null && value.nombre !== undefined) {
+      return getDisplayValue(value.nombre)
+    }
+
+    if (value.descripcion !== null && value.descripcion !== undefined) {
+      return getDisplayValue(value.descripcion)
+    }
+
+    if (value.label !== null && value.label !== undefined) {
+      return getDisplayValue(value.label)
+    }
+
+    if (value.name !== null && value.name !== undefined) {
+      return getDisplayValue(value.name)
+    }
+
+    return Object.entries(value)
+      .map(([key, item]) => {
+        const display = getDisplayValue(item)
+        return display === 'N/A' || display === ''
+          ? ''
+          : `${key}: ${display}`
+      })
+      .filter(Boolean)
+      .join(' | ')
+  }
+
+  return String(value)
+}
+
 const RecursiveDisplay = ({ data, spec = {} }) => {
   const isList = Array.isArray(data)
+
+  if (data === null || data === undefined) {
+    return <span className='text-slate-400'>N/A</span>
+  }
+
+  if (typeof data !== 'object' && !isList) {
+    return <span className='font-bold text-black'>{getDisplayValue(data)}</span>
+  }
 
   const getSortedKeys = () => {
     if (isList) return []
@@ -18,7 +71,7 @@ const RecursiveDisplay = ({ data, spec = {} }) => {
 
   const getLabel = (key) => {
     if (spec && spec[key] && spec[key].label) {
-      return spec[key].label
+      return getDisplayValue(spec[key].label)
     }
     return key
   }
@@ -38,15 +91,15 @@ const RecursiveDisplay = ({ data, spec = {} }) => {
       return (
         <ul className='space-y-2'>
           {data.map((item, index) => (
-            <li key={index} className='list-disc list-inside text-base-content'>
+            <li key={index} className='list-disc list-inside text-black'>
               {item != null && typeof item === 'object'
                 ? (
-                  <div className='ml-6 mt-2 pl-4 border-l-2 border-primary'>
+                  <div className='ml-6 mt-2 pl-4 border-l-2 border-[#000080]'>
                     <RecursiveDisplay data={item} spec={spec} />
                   </div>
                   )
                 : (
-                  <span>{typeof item === 'boolean' ? item.toString() : item}</span>
+                  <span className='font-bold text-black'>{getDisplayValue(item)}</span>
                   )}
             </li>
           ))}
@@ -57,12 +110,12 @@ const RecursiveDisplay = ({ data, spec = {} }) => {
     // Otherwise render as responsive table
     return (
       <div className='overflow-x-auto'>
-        <table className='table table-sm table-zebra w-full border border-base-300'>
+        <table className='table table-sm w-full border border-[#D6D6EF]'>
           {data.length > 0 && (
-            <thead className='bg-base-200'>
+            <thead className='bg-[#F3F3FC]'>
               <tr>
                 {Object.keys(data[0]).map((key) => (
-                  <th key={key} className='text-base-content font-semibold text-sm'>
+                  <th key={key} className='text-black font-semibold text-sm'>
                     {key}
                   </th>
                 ))}
@@ -71,15 +124,15 @@ const RecursiveDisplay = ({ data, spec = {} }) => {
           )}
           <tbody>
             {data.map((item, index) => (
-              <tr key={index} className='hover:bg-base-100'>
+              <tr key={index} className='hover:bg-[#F8F8FD]'>
                 {Object.entries(item).map(([key, value]) => (
-                  <td key={key} className='text-sm text-base-content'>
+                  <td key={key} className='text-sm text-black'>
                     {typeof value === 'object'
                       ? (
                         <RecursiveDisplay data={item[key]} spec={spec} />
                         )
                       : (
-                        <span>{typeof value === 'boolean' ? value.toString() : value}</span>
+                        <span className='font-bold text-black'>{getDisplayValue(value)}</span>
                         )}
                   </td>
                 ))}
@@ -95,32 +148,32 @@ const RecursiveDisplay = ({ data, spec = {} }) => {
   return (
     <ul className='space-y-2'>
       {sortedKeys.map((key) => (
-        <li key={key} className='text-base-content'>
+        <li key={key} className='text-black'>
           <div className='flex flex-col gap-1'>
-            <span className='font-semibold text-primary text-sm'>{getLabel(key)}:</span>
+            <span className='font-semibold text-[#000080] text-sm'>{getLabel(key)}:</span>
             {data[key] != null && typeof data[key] === 'object'
               ? (
-                <div className='ml-4 pl-4 border-l-2 border-primary'>
+                <div className='ml-4 pl-4 border-l-2 border-[#000080]'>
                   {!Array.isArray(data[key]) &&
                   'list' in getChildSpec(key) &&
                   !getChildSpec(key).list
                     ? (
                       <div className='overflow-x-auto'>
-                        <table className='table table-sm table-zebra w-full border border-base-300'>
-                          <thead className='bg-base-200'>
+                        <table className='table table-sm w-full border border-[#D6D6EF]'>
+                          <thead className='bg-[#F3F3FC]'>
                             <tr>
                               {Object.keys(data[key]).map((k) => (
-                                <th key={k} className='text-base-content font-semibold text-sm'>
+                                <th key={k} className='text-black font-semibold text-sm'>
                                   {getLabel(k)}
                                 </th>
                               ))}
                             </tr>
                           </thead>
                           <tbody>
-                            <tr className='hover:bg-base-100'>
+                            <tr className='hover:bg-[#F8F8FD]'>
                               {Object.entries(data[key]).map(([k, value]) => (
-                                <td key={k} className='text-sm text-base-content'>
-                                  <span>{typeof value === 'boolean' ? value.toString() : value}</span>
+                                <td key={k} className='text-sm text-black'>
+                                  <span className='font-bold text-black'>{getDisplayValue(value)}</span>
                                 </td>
                               ))}
                             </tr>
@@ -134,8 +187,8 @@ const RecursiveDisplay = ({ data, spec = {} }) => {
                 </div>
                 )
               : (
-                <span className='text-base-content ml-4'>
-                  {typeof data[key] === 'boolean' ? data[key].toString() : data[key]}
+                <span className='font-bold text-black ml-4'>
+                  {getDisplayValue(data[key])}
                 </span>
                 )}
           </div>

@@ -44,220 +44,214 @@ const Login = () => {
     }
   }
 
+
   return (
-    <div className='min-h-screen bg-gradient-to-br from-primary/20 via-base-100 to-primary/10 flex justify-center items-center relative overflow-hidden'>
-      {/* Animated background elements */}
-      <div className='absolute inset-0 overflow-hidden pointer-events-none'>
-        <div className='absolute top-0 -left-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse' />
-        <div className='absolute bottom-0 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse animation-delay-2000' />
+    <div className='min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8'>
+      {/* Fondo institucional sutil, sin competir visualmente con el formulario. */}
+      <div className='absolute inset-0 pointer-events-none overflow-hidden'>
+        <div className='absolute -top-32 -left-32 h-80 w-80 rounded-full bg-indigo-100/60 blur-3xl' />
+        <div className='absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-indigo-100/50 blur-3xl' />
       </div>
 
-      <div className='relative z-10 flex flex-col items-center gap-4 animate-fade-in'>
-        {/* Avatar */}
-        <div className='avatar mb-4 animate-fade-in-scale'>
-          <div className='bg-gradient-to-br from-primary to-primary/70 rounded-full w-32 shadow-lg border-4 border-base-100 flex justify-center items-center hover:shadow-xl hover:scale-110 transition-all duration-300'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='1.5'
-              stroke='currentColor'
-              className='w-16 h-16 text-base-100'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z'
-              />
-            </svg>
+      <main className='relative z-10 w-full max-w-md'>
+        {/* Identidad institucional del sistema. */}
+        <div className='text-center mb-6'>
+          <div className='inline-flex items-center gap-2'>
+            <div className='flex h-11 w-11 items-center justify-center rounded-xl bg-[#000080] shadow-sm'>
+              <span className='text-lg font-bold text-white'>S</span>
+            </div>
+
+            <div className='text-left'>
+              <div className='text-lg font-bold leading-none text-[#000080]'>
+                SIIA
+              </div>
+              <div className='text-xs font-medium tracking-wide text-slate-500'>
+                CVU
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Card Container */}
-        <div className='card bg-base-100 shadow-2xl max-w-sm md:max-w-lg w-full mx-4 animate-fade-in-up hover:shadow-3xl transition-shadow duration-500'>
-          <div className='relative'>
-            {/* Form Section */}
-            <div className='card-body pt-8'>
-              <h2 className='card-title justify-center text-3xl text-primary font-bold text-center'>
-                Bienvenido de vuelta
-              </h2>
-              <p className='text-center text-base-content/60 text-sm -mt-2'>Accede a tu cuenta</p>
+        {/* Tarjeta principal de autenticación. */}
+        <section className='overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60'>
+          <div className='h-1.5 bg-[#000080]' />
 
-              <form onSubmit={handleSubmit} className='space-y-6 mt-4'>
-                {/* Email Input */}
-                <div className='relative group'>
+          <div className='px-7 py-8 sm:px-9 sm:py-9'>
+            {/* Encabezado del formulario. */}
+            <div className='mb-8 text-center'>
+              <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50 ring-8 ring-slate-50'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth='1.7'
+                  stroke='currentColor'
+                  className='h-8 w-8 text-[#000080]'
+                  aria-hidden='true'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z'
+                  />
+                </svg>
+              </div>
+
+              <h1 className='text-2xl font-bold text-[#000080] sm:text-3xl'>
+                Bienvenido
+              </h1>
+
+              <p className='mt-2 text-sm text-slate-500'>
+                Accede a tu cuenta
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className='space-y-5'>
+              {/* Campo de correo con el mismo lenguaje visual del CVU. */}
+              <div>
+                <label
+                  htmlFor='email'
+                  className='mb-2 block text-sm font-semibold text-slate-700'
+                >
+                  Correo
+                </label>
+
+                <div className='relative'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth='1.7'
+                    stroke='currentColor'
+                    className='pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400'
+                    aria-hidden='true'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M21.75 6.75v10.5A2.25 2.25 0 0 1 19.5 19.5h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0l-7.5-4.615A2.25 2.25 0 0 1 2.25 6.993V6.75'
+                    />
+                  </svg>
+
                   <input
                     id='email'
                     type='email'
-                    className='peer block w-full border-b-2 border-gray-300 px-0 pb-2 pt-4 bg-transparent focus:outline-none focus:border-primary transition-colors duration-300'
+                    autoComplete='email'
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value)
                       setEmailFilled(e.target.value.length > 0)
                     }}
-                    placeholder=' '
+                    placeholder='Ingresa tu correo'
+                    className='w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#000080] focus:ring-4 focus:ring-indigo-100'
+                    required
                   />
-                  <label
-                    htmlFor='email'
-                    className={`absolute font-bold text-primary transition-all duration-300
-                                            ${emailFilled || email ? 'left-0 top-0 scale-75' : 'top-4 scale-100'}
-                                            peer-focus:top-0 peer-focus:scale-75 peer-focus:left-0
-                                            ${!emailFilled && !email ? 'font-semibold' : ''}`}
-                  >
-                    Correo
-                  </label>
-                  <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 peer-focus:w-full' />
                 </div>
+              </div>
 
-                {/* Password Input */}
-                <div className='relative group'>
+              {/* Campo de contraseña. Se conserva el comportamiento existente. */}
+              <div>
+                <label
+                  htmlFor='password'
+                  className='mb-2 block text-sm font-semibold text-slate-700'
+                >
+                  Contraseña
+                </label>
+
+                <div className='relative'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth='1.7'
+                    stroke='currentColor'
+                    className='pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400'
+                    aria-hidden='true'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M16.5 10.5V7.875a4.5 4.5 0 0 0-9 0V10.5m-.75 0h10.5A2.25 2.25 0 0 1 19.5 12.75v6A2.25 2.25 0 0 1 17.25 21h-10.5A2.25 2.25 0 0 1 4.5 18.75v-6A2.25 2.25 0 0 1 6.75 10.5Z'
+                    />
+                  </svg>
+
                   <input
                     id='password'
                     type='password'
-                    className='peer block w-full border-b-2 border-gray-300 px-0 pb-2 pt-4 bg-transparent focus:outline-none focus:border-primary transition-colors duration-300'
+                    autoComplete='current-password'
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value)
                       setPasswordFilled(e.target.value.length > 0)
                     }}
-                    placeholder=' '
+                    placeholder='Ingresa tu contraseña'
+                    className='w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#000080] focus:ring-4 focus:ring-indigo-100'
+                    required
                   />
-                  <label
-                    htmlFor='password'
-                    className={`absolute font-bold text-primary transition-all duration-300
-                                               ${passwordFilled || password ? 'left-0 top-0 scale-75' : 'top-4 scale-100'}
-                                               peer-focus:top-0 peer-focus:scale-75 peer-focus:left-0
-                                               ${!passwordFilled && !password ? 'font-semibold' : ''}`}
-                  >
-                    Contraseña
-                  </label>
-                  <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 peer-focus:w-full' />
                 </div>
+              </div>
 
-                {/* Forgot Password Link */}
-                <div className='text-right'>
-                  <a
-                    href='#'
-                    className='link link-primary text-sm font-medium hover:no-underline hover:text-primary/80 transition-colors duration-200'
+              <div className='flex justify-end'>
+                <a
+                  href='#'
+                  className='text-sm font-medium text-[#000080] transition hover:text-indigo-700 hover:underline'
+                >
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </div>
+
+              {/* Mensaje de error devuelto por la autenticación. */}
+              {error && (
+                <div className='flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth='1.8'
+                    stroke='currentColor'
+                    className='mt-0.5 h-5 w-5 shrink-0'
+                    aria-hidden='true'
                   >
-                    ¿Olvidaste tu contraseña?
-                  </a>
-                </div>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M12 9v3.75m0 3.75h.008v.008H12v-.008Zm8.25-3.75a8.25 8.25 0 1 1-16.5 0 8.25 8.25 0 0 1 16.5 0Z'
+                    />
+                  </svg>
 
-                {/* Error Alert */}
-                {error && (
-                  <div className='alert alert-error shadow-md animate-fade-in-down'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-5 w-5 flex-shrink-0'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth={2}
-                        d='M12 9v2m0 4v2m0-6a4 4 0 110-8 4 4 0 010 8zm0 0a6 6 0 01-6 6m0 0a6 6 0 006-6m0 0a6 6 0 00-6-6m0 0a6 6 0 006 6'
-                      />
-                    </svg>
-                    <span className='text-sm'>{error}</span>
-                  </div>
+                  <span>{error}</span>
+                </div>
+              )}
+
+              <button
+                type='submit'
+                disabled={isLoading}
+                className='flex w-full items-center justify-center gap-2 rounded-xl bg-[#000080] px-5 py-3.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition hover:bg-indigo-900 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-100 disabled:cursor-not-allowed disabled:opacity-60'
+              >
+                {isLoading && (
+                  <span className='loading loading-spinner loading-sm' />
                 )}
 
-                {/* Submit Button */}
-                <button
-                  type='submit'
-                  disabled={isLoading}
-                  className='btn btn-primary w-full mt-8 text-base font-bold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300'
-                >
-                  {isLoading && <span className='loading loading-spinner loading-sm' />}
-                  {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
-                </button>
-              </form>
-            </div>
+                {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
+              </button>
+            </form>
           </div>
+        </section>
+
+        <div className='mt-5 text-center text-sm text-slate-500'>
+          ¿No tienes una cuenta? 
+          <a
+            href='#'
+            className='font-semibold text-[#000080] transition hover:text-indigo-700 hover:underline'
+          >
+            Regístrate aquí
+          </a>
         </div>
 
-        {/* Sign Up Section */}
-        <div className='text-center text-sm animate-fade-in-up animation-delay-300'>
-          <p className='text-base-content'>
-            ¿No tienes una cuenta?{' '}
-            <a href='#' className='link link-primary font-semibold hover:link-hover'>
-              Regístrate aquí
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes fadeInScale {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 0.6s ease-out;
-        }
-
-        .animate-fade-in-scale {
-          animation: fadeInScale 0.6s ease-out;
-        }
-
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .animate-fade-in-down {
-          animation: fadeInDown 0.3s ease-out;
-        }
-
-        .animation-delay-300 {
-          animation-delay: 0.3s;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}
-      </style>
+        <p className='mt-6 text-center text-xs text-slate-400'>
+          Sistema Institucional de Información Académica · CVU
+        </p>
+      </main>
     </div>
   )
 }

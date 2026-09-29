@@ -37,20 +37,21 @@ const RecursiveForm = ({
           {/* Final form fields - Checkbox */}
           {value && typeof value === 'object' && 'final' in value && value.final && value.type === 'checkbox' && (
             <div className='form-control'>
-              <label className='label cursor-pointer gap-3 hover:bg-base-200 p-3 rounded-lg transition-colors'>
+              <label className='flex cursor-pointer items-center gap-3 rounded-lg p-3 transition-colors hover:bg-[#F3F3FC]'>
                 <input
                   type='checkbox'
-                  className='checkbox checkbox-primary'
+                  className='checkbox border-[#000080] [--chk:#000080]'
                   checked={modelValue[key] || false}
                   onChange={(e) => updateValue(key, e.target.checked)}
                   required={value.required}
                   id={value.id}
                 />
-                <span className='label-text font-medium'>{value.label || key}</span>
-                {value.required && <span className='text-error ml-auto text-sm'>*</span>}
+                <span className='font-medium text-slate-700'>{value.label || key}</span>
+                {value.required && <span className='ml-auto text-sm text-red-600'>*</span>}
               </label>
+
               {formValidated && value.required && !modelValue[key] && (
-                <div className='text-error text-xs mt-2 px-3 py-1 bg-error/10 rounded-md'>
+                <div className='mt-2 rounded-md bg-red-50 px-3 py-1 text-xs text-red-600'>
                   {value.invalid_feedback || 'Este campo es requerido.'}
                 </div>
               )}
@@ -60,17 +61,18 @@ const RecursiveForm = ({
           {/* Final form fields - Input */}
           {value && typeof value === 'object' && 'final' in value && value.final && value.type !== 'checkbox' && (
             <div className='form-control w-full'>
-              <label className='label py-2' htmlFor={value.id}>
-                <span className='label-text font-semibold text-base-content'>
+              <label className='mb-1 block' htmlFor={value.id}>
+                <span className='font-semibold text-slate-700'>
                   {value.label || key}
-                  {value.required && <span className='text-error ml-1'>*</span>}
+                  {value.required && <span className='ml-1 text-red-600'>*</span>}
                 </span>
               </label>
+
               <input
                 id={value.id}
                 placeholder={value.label || key}
                 type={value.type || 'text'}
-                className='input input-bordered w-full focus:input-primary transition-colors'
+                className='w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-700 outline-none transition-colors placeholder:text-slate-400 focus:border-[#000080] focus:ring-2 focus:ring-[#000080]/15 disabled:cursor-not-allowed disabled:bg-slate-100'
                 value={modelValue[key] || ''}
                 onChange={(e) => updateValue(key, e.target.value)}
                 required={value.required}
@@ -78,8 +80,9 @@ const RecursiveForm = ({
                 pattern={value.pattern || undefined}
                 disabled={value.disabled || false}
               />
+
               {formValidated && value.required && !modelValue[key] && (
-                <div className='text-error text-xs mt-2 px-3 py-1 bg-error/10 rounded-md'>
+                <div className='mt-2 rounded-md bg-red-50 px-3 py-1 text-xs text-red-600'>
                   {value.invalid_feedback || 'Este campo es requerido.'}
                 </div>
               )}
@@ -88,30 +91,34 @@ const RecursiveForm = ({
 
           {/* List field */}
           {value && typeof value === 'object' && value.list && (
-            <div className='bg-base-100 p-4 rounded-lg border-l-4 border-primary space-y-4'>
+            <div className='space-y-4 rounded-xl border border-[#D6D6EF] bg-[#F8F8FD] p-4'>
               {key !== 'list' && (
                 <div className='mb-4'>
-                  <label className='label' htmlFor={value.id}>
-                    <span className='label-text font-bold text-lg text-primary'>{value.label || key}</span>
-                    <span className='text-xs text-base-content/60 bg-base-200 px-2 py-1 rounded'>
-                      {(modelValue[key] || []).length} registro{(modelValue[key] || []).length !== 1 ? 's' : ''}
-                    </span>
+                  <label className='block' htmlFor={value.id}>
+                    <div className='flex items-center justify-between gap-3'>
+                      <span className='text-lg font-bold text-[#000080]'>{value.label || key}</span>
+                      <span className='rounded bg-[#F3F3FC] px-2 py-1 text-xs text-slate-600'>
+                        {(modelValue[key] || []).length} registro{(modelValue[key] || []).length !== 1 ? 's' : ''}
+                      </span>
+                    </div>
                   </label>
                 </div>
               )}
+
               <div className='space-y-3'>
                 {(modelValue[key] || []).map((item, index) => (
                   <div
                     key={index}
-                    className='card bg-gradient-to-br from-base-200 to-base-100 border-l-4 border-secondary shadow-sm hover:shadow-md transition-shadow'
+                    className='rounded-xl border border-[#D6D6EF] bg-white shadow-sm transition-shadow hover:shadow-md'
                   >
-                    <div className='card-body relative p-4'>
-                      <div className='absolute top-3 right-3 text-xs text-base-content/50 font-semibold'>
+                    <div className='relative p-4'>
+                      <div className='absolute right-3 top-3 text-xs font-semibold text-slate-400'>
                         #{index + 1}
                       </div>
+
                       <button
                         type='button'
-                        className='btn btn-error btn-sm btn-circle absolute top-2 right-12 hover:scale-110 transition-transform'
+                        className='absolute right-12 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-red-200 bg-white text-red-600 transition-colors hover:bg-red-50'
                         onClick={() => removeListItem(key, index)}
                         title='Eliminar este registro'
                       >
@@ -122,9 +129,10 @@ const RecursiveForm = ({
                           viewBox='0 0 24 24'
                           stroke='currentColor'
                         >
-                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' />
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 01-1-1h-4a1 1 0 01-1 1v3M4 7h16' />
                         </svg>
                       </button>
+
                       <RecursiveForm
                         data={value}
                         modelValue={item}
@@ -135,16 +143,17 @@ const RecursiveForm = ({
                   </div>
                 ))}
               </div>
+
               <button
                 type='button'
-                className='btn btn-outline btn-secondary w-full gap-2 hover:scale-105 transition-transform'
+                className='inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#000080] bg-white px-4 py-2.5 text-sm font-semibold text-[#000080] transition-colors hover:bg-[#F3F3FC] focus:outline-none focus:ring-2 focus:ring-[#000080]/20'
                 onClick={() => addListItem(key)}
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
-                  className='w-5 h-5 stroke-current'
+                  className='h-5 w-5 stroke-current'
                 >
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
                 </svg>
@@ -155,11 +164,12 @@ const RecursiveForm = ({
 
           {/* Nested object field */}
           {value && typeof value === 'object' && !value.list && !('final' in value) && (
-            <div className='bg-base-100 p-4 rounded-lg border-l-4 border-accent space-y-4'>
-              <label className='label' htmlFor={value.id}>
-                <span className='label-text font-bold text-lg text-accent'>{value.label || key}</span>
+            <div className='space-y-4 rounded-xl border border-[#D6D6EF] bg-[#F8F8FD] p-4'>
+              <label className='block' htmlFor={value.id}>
+                <span className='text-lg font-bold text-[#000080]'>{value.label || key}</span>
               </label>
-              <div className='bg-base-200/30 p-4 rounded-md'>
+
+              <div className='rounded-lg border border-[#E6E6F2] bg-white p-4'>
                 <RecursiveForm
                   data={value}
                   modelValue={modelValue[key] || {}}

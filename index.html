@@ -1,13 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html lang="es" translate="no">
   <head>
+
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>siia-frontend</title>
+
+    <!--
+      Evita que Google Chrome/Google Translate modifique
+      los nodos de texto administrados por React.
+
+      React necesita conservar exactamente la relación
+      entre los nodos que creó y los que posteriormente
+      actualizará durante la reconciliación.
+    -->
+    <meta
+      name="google"
+      content="notranslate"
+    />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/vite.svg"
+    />
+
+    <title>SIIA | CVU</title>
+
   </head>
+
   <body>
+
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <script
+      type="module"
+      src="/src/main.jsx"
+    ></script>
+
   </body>
 </html>
