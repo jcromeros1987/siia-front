@@ -10,7 +10,7 @@
 //   - Fecha de última modificación.
 //
 // DISEÑO:
-//   - Azul institucional: #000080
+//   - Azul institucional: #002B7A
 //   - Fondo blanco.
 //   - Fondos auxiliares azul muy claro.
 //   - Bordes discretos.
@@ -39,7 +39,7 @@ const UserInfoSystemInfoSkeleton = () => (
           Franja institucional
           ------------------------------------------------------------------ */}
 
-      <div className='h-2 bg-[#000080]' />
+      <div className='h-2 bg-[#002B7A]' />
 
       <div className='p-6 sm:p-8'>
 
@@ -49,7 +49,7 @@ const UserInfoSystemInfoSkeleton = () => (
 
         <div className='mb-6 flex items-center gap-3'>
 
-          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC]'>
+          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA]'>
 
             <Skeleton
               width={20}
@@ -262,7 +262,7 @@ const UserInfoSystemInfo = ({
             FRANJA INSTITUCIONAL
             ------------------------------------------------------------------ */}
 
-        <div className='h-2 bg-[#000080]' />
+        <div className='h-2 bg-[#002B7A]' />
 
 
         <div className='p-6 sm:p-8'>
@@ -277,7 +277,7 @@ const UserInfoSystemInfo = ({
                 Icono
                 -------------------------------------------------------------- */}
 
-            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC] text-[#000080]'>
+            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA] text-[#002B7A]'>
 
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -345,13 +345,13 @@ const UserInfoSystemInfo = ({
 
             {fechaCreacionTexto && (
 
-              <div className='group rounded-xl border border-[#D6D6EF] bg-white p-4 transition-all duration-200 hover:border-[#000080] hover:bg-[#F3F3FC] hover:shadow-sm'>
+              <div className='group rounded-xl border border-[#D1DCEB] bg-white p-4 transition-all duration-200 hover:border-[#002B7A] hover:bg-[#F1F5FA] hover:shadow-sm'>
 
                 <div className='flex items-start gap-3'>
 
                   {/* Icono */}
 
-                  <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F3F3FC] text-[#000080] transition-colors duration-200 group-hover:bg-[#000080] group-hover:text-white'>
+                  <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F1F5FA] text-[#002B7A] transition-colors duration-200 group-hover:bg-[#002B7A] group-hover:text-white'>
 
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -408,13 +408,13 @@ const UserInfoSystemInfo = ({
 
             {fechaModificacionTexto && (
 
-              <div className='group rounded-xl border border-[#D6D6EF] bg-white p-4 transition-all duration-200 hover:border-[#000080] hover:bg-[#F3F3FC] hover:shadow-sm'>
+              <div className='group rounded-xl border border-[#D1DCEB] bg-white p-4 transition-all duration-200 hover:border-[#002B7A] hover:bg-[#F1F5FA] hover:shadow-sm'>
 
                 <div className='flex items-start gap-3'>
 
                   {/* Icono */}
 
-                  <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F3F3FC] text-[#000080] transition-colors duration-200 group-hover:bg-[#000080] group-hover:text-white'>
+                  <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F1F5FA] text-[#002B7A] transition-colors duration-200 group-hover:bg-[#002B7A] group-hover:text-white'>
 
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -476,9 +476,9 @@ const UserInfoSystemInfo = ({
               INDICADOR INSTITUCIONAL
               ================================================================== */}
 
-          <div className='mt-6 flex items-start gap-3 rounded-xl border border-[#D6D6EF] bg-[#F3F3FC] p-4'>
+          <div className='mt-6 flex items-start gap-3 rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] p-4'>
 
-            <div className='mt-0.5 shrink-0 text-[#000080]'>
+            <div className='mt-0.5 shrink-0 text-[#002B7A]'>
 
               <svg
                 xmlns='http://www.w3.org/2000/svg'

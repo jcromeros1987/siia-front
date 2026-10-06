@@ -453,7 +453,7 @@ const UserInfo = ({
 
           <div className='min-w-0'>
 
-            <p className='text-xs font-bold uppercase tracking-[0.12em] text-[#000080]'>
+            <p className='text-xs font-bold uppercase tracking-[0.12em] text-[#002B7A]'>
               Perfil del investigador
             </p>
 
@@ -505,7 +505,7 @@ const UserInfo = ({
 
             <button
               type='button'
-              className='inline-flex h-10 items-center gap-2 rounded-xl border border-[#000080] bg-white px-3 text-sm font-semibold text-[#000080] shadow-sm transition-colors hover:bg-[#F3F3FC] focus:outline-none focus:ring-2 focus:ring-[#000080]/20 disabled:cursor-not-allowed disabled:opacity-50'
+              className='inline-flex h-10 items-center gap-2 rounded-xl border border-[#002B7A] bg-white px-3 text-sm font-semibold text-[#002B7A] shadow-sm transition-colors hover:bg-[#F1F5FA] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20 disabled:cursor-not-allowed disabled:opacity-50'
               title='Descargar CVU completo en formato JSON'
               aria-label='Descargar CVU completo en formato JSON'
               disabled={isLoading}
@@ -724,7 +724,7 @@ const UserInfo = ({
 
             <h3
               id='download-cvu-title'
-              className='text-lg font-bold text-[#000080]'
+              className='text-lg font-bold text-[#002B7A]'
             >
               Descargar CVU
             </h3>
@@ -745,7 +745,7 @@ const UserInfo = ({
 
               <button
                 type='button'
-                className='rounded-xl bg-[#000080] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#15159A] focus:outline-none focus:ring-2 focus:ring-[#000080]/30'
+                className='rounded-xl bg-[#002B7A] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#164A8A] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30'
                 onClick={handleDownloadCVU}
               >
                 Aceptar

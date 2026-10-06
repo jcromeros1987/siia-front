@@ -738,7 +738,7 @@ export const CVUInfo = forwardRef(({
 
         <div className='flex flex-col gap-1'>
 
-          <h2 className='text-xl font-bold text-[#000080] md:text-2xl'>
+          <h2 className='text-xl font-bold text-[#002B7A] md:text-2xl'>
             Productos del investigador
           </h2>
 
@@ -761,8 +761,8 @@ export const CVUInfo = forwardRef(({
           ================================================== */}
 
           <CVUUpload
-            onSuccess={() => {
-              fetchCVUData({
+            onSuccess={async () => {
+              await fetchCVUData({
                 skipCache: true
               })
             }}
@@ -776,7 +776,7 @@ export const CVUInfo = forwardRef(({
 
           <button
             type='button'
-            className='inline-flex items-center gap-2 rounded-xl border border-[#000080] bg-white px-4 py-2.5 text-sm font-semibold text-[#000080] shadow-sm transition-colors hover:bg-[#F3F3FC] focus:outline-none focus:ring-2 focus:ring-[#000080]/20 disabled:cursor-not-allowed disabled:opacity-50'
+            className='inline-flex items-center gap-2 rounded-xl border border-[#002B7A] bg-white px-4 py-2.5 text-sm font-semibold text-[#002B7A] shadow-sm transition-colors hover:bg-[#F1F5FA] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20 disabled:cursor-not-allowed disabled:opacity-50'
             title='Descargar CVU completo en formato JSON'
             disabled={
               isLoading ||
@@ -811,7 +811,7 @@ export const CVUInfo = forwardRef(({
           ESTADO DE CATEGORÍA
           ====================================================== */}
 
-      <div className='rounded-2xl border border-[#D6D6EF] bg-white p-6 shadow-sm'>
+      <div className='rounded-2xl border border-[#D1DCEB] bg-white p-6 shadow-sm'>
 
         <div className='flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between'>
 
@@ -821,7 +821,7 @@ export const CVUInfo = forwardRef(({
               Productos CVU
             </p>
 
-            <h3 className='mt-1 text-lg font-bold text-[#000080]'>
+            <h3 className='mt-1 text-lg font-bold text-[#002B7A]'>
               Selecciona una categoría
             </h3>
 
@@ -833,7 +833,7 @@ export const CVUInfo = forwardRef(({
 
           </div>
 
-          <div className='shrink-0 rounded-full border border-[#D6D6EF] bg-[#F3F3FC] px-4 py-2 text-sm font-semibold text-[#000080]'>
+          <div className='shrink-0 rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-4 py-2 text-sm font-semibold text-[#002B7A]'>
             {Object.keys(safeData).length} categorías
           </div>
 
@@ -861,14 +861,14 @@ export const CVUInfo = forwardRef(({
         >
 
           <div
-            className='relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-[#D6D6EF] bg-slate-50 shadow-2xl'
+            className='relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-[#D1DCEB] bg-slate-50 shadow-2xl'
           >
 
             {/* ==================================================
                 ENCABEZADO DEL POPUP
                 ================================================== */}
 
-            <div className='shrink-0 border-b border-[#D6D6EF] bg-white px-5 py-4 sm:px-6'>
+            <div className='shrink-0 border-b border-[#D1DCEB] bg-white px-5 py-4 sm:px-6'>
 
               <div className='flex items-start justify-between gap-4'>
 
@@ -880,7 +880,7 @@ export const CVUInfo = forwardRef(({
 
                   <h2
                     id='cvu-category-modal-title'
-                    className='mt-1 break-words text-xl font-bold text-[#000080]'
+                    className='mt-1 break-words text-xl font-bold text-[#002B7A]'
                   >
                     {getSafeText(
                       cvuData?.[currentTab]?.nombre ||
@@ -899,7 +899,7 @@ export const CVUInfo = forwardRef(({
 
                 <button
                   type='button'
-                  className='shrink-0 rounded-full border border-[#D6D6EF] bg-[#F3F3FC] px-3 py-1 text-[#000080] transition-colors hover:bg-[#E8E8F7]'
+                  className='shrink-0 rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-3 py-1 text-[#002B7A] transition-colors hover:bg-[#E6EDF5]'
                   onClick={() => setCategoryModalOpen(false)}
                   aria-label='Cerrar categoría'
                   title='Cerrar'
@@ -916,13 +916,13 @@ export const CVUInfo = forwardRef(({
 
               <div className='mt-4 flex flex-wrap items-center gap-2'>
 
-                <span className='rounded-full border border-[#D6D6EF] bg-[#F3F3FC] px-3 py-1.5 text-sm font-semibold text-[#000080]'>
+                <span className='rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-3 py-1.5 text-sm font-semibold text-[#002B7A]'>
                   {selectedList?.length || 0} productos
                 </span>
 
                 <button
                   type='button'
-                  className='inline-flex items-center gap-2 rounded-xl bg-[#000080] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#000066] focus:outline-none focus:ring-2 focus:ring-[#000080]/20 disabled:cursor-not-allowed disabled:opacity-50'
+                  className='inline-flex items-center gap-2 rounded-xl bg-[#002B7A] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#001F5B] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20 disabled:cursor-not-allowed disabled:opacity-50'
                   title='Crear nuevo registro'
                   disabled={isLoading || !currentTab}
                   onClick={() => addNewCVUEntry(false)}
@@ -959,7 +959,7 @@ export const CVUInfo = forwardRef(({
 
                   <button
                     type='button'
-                    className='inline-flex items-center gap-2 rounded-xl border border-[#000080] bg-white px-4 py-2.5 text-sm font-semibold text-[#000080] shadow-sm transition-colors hover:bg-[#F3F3FC] focus:outline-none focus:ring-2 focus:ring-[#000080]/20'
+                    className='inline-flex items-center gap-2 rounded-xl border border-[#002B7A] bg-white px-4 py-2.5 text-sm font-semibold text-[#002B7A] shadow-sm transition-colors hover:bg-[#F1F5FA] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20'
                     title='Editar'
                     onClick={() => addNewCVUEntry(true)}
                   >
@@ -1011,7 +1011,7 @@ export const CVUInfo = forwardRef(({
 
                         <div
                           key={productoId}
-                          className='collapse collapse-plus overflow-hidden rounded-xl border border-[#D6D6EF] bg-white shadow-sm transition-shadow hover:shadow-md'
+                          className='collapse collapse-plus overflow-hidden rounded-xl border border-[#D1DCEB] bg-white shadow-sm transition-shadow hover:shadow-md'
                         >
 
                           <input
@@ -1033,7 +1033,7 @@ export const CVUInfo = forwardRef(({
                                 Registro #{productoId}
                               </span>
 
-                              <span className='mt-1 block break-words text-sm font-bold text-[#000080] md:text-base'>
+                              <span className='mt-1 block break-words text-sm font-bold text-[#002B7A] md:text-base'>
                                 {getSafeText(producto.titulo)}
                               </span>
 
@@ -1050,7 +1050,7 @@ export const CVUInfo = forwardRef(({
 
                             {isExpanded && (
 
-                              <div className='border-t border-[#D6D6EF] pb-2 pt-4'>
+                              <div className='border-t border-[#D1DCEB] pb-2 pt-4'>
 
                                 <RecursiveDisplay
                                   data={getProductoData(producto)}
@@ -1074,7 +1074,7 @@ export const CVUInfo = forwardRef(({
 
                 : (
 
-                  <div className='rounded-xl border border-[#D6D6EF] bg-[#F3F3FC] p-6'>
+                  <div className='rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] p-6'>
 
                     <div className='flex items-start gap-3'>
 
@@ -1082,7 +1082,7 @@ export const CVUInfo = forwardRef(({
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
                         viewBox='0 0 24 24'
-                        className='mt-0.5 h-6 w-6 shrink-0 text-[#000080]'
+                        className='mt-0.5 h-6 w-6 shrink-0 text-[#002B7A]'
                       >
                         <path
                           strokeLinecap='round'
@@ -1093,7 +1093,7 @@ export const CVUInfo = forwardRef(({
                       </svg>
 
                       <div>
-                        <p className='font-semibold text-[#000080]'>
+                        <p className='font-semibold text-[#002B7A]'>
                           No hay datos disponibles
                         </p>
 
@@ -1134,7 +1134,7 @@ export const CVUInfo = forwardRef(({
 
             <div className='flex items-start gap-4'>
 
-              <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F3F3FC] text-[#000080]'>
+              <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F1F5FA] text-[#002B7A]'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -1154,7 +1154,7 @@ export const CVUInfo = forwardRef(({
               <div>
                 <h3
                   id='download-cvu-title'
-                  className='text-lg font-bold text-[#000080]'
+                  className='text-lg font-bold text-[#002B7A]'
                 >
                   Descargar CVU
                 </h3>
@@ -1178,7 +1178,7 @@ export const CVUInfo = forwardRef(({
 
               <button
                 type='button'
-                className='rounded-xl bg-[#000080] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#15159A] focus:outline-none focus:ring-2 focus:ring-[#000080]/30'
+                className='rounded-xl bg-[#002B7A] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#164A8A] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30'
                 onClick={handleDownloadCVU}
               >
                 Aceptar
@@ -1207,7 +1207,7 @@ export const CVUInfo = forwardRef(({
               ================================================== */}
 
           <div
-            className='modal-box w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-[#D6D6EF] bg-white shadow-xl'
+            className='modal-box w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-[#D1DCEB] bg-white shadow-xl'
           >
 
 
@@ -1217,7 +1217,7 @@ export const CVUInfo = forwardRef(({
 
             <button
               type='button'
-              className='btn btn-sm btn-circle border-0 bg-[#F3F3FC] text-[#000080] absolute right-2 top-2 hover:bg-[#E8E8F7]'
+              className='btn btn-sm btn-circle border-0 bg-[#F1F5FA] text-[#002B7A] absolute right-2 top-2 hover:bg-[#E6EDF5]'
               onClick={closeFormModal}
               aria-label='Cerrar formulario'
             >
@@ -1231,7 +1231,7 @@ export const CVUInfo = forwardRef(({
                 TÍTULO DEL MODAL
                 ================================================= */}
 
-            <h3 className='mb-1 pr-10 text-lg font-bold text-[#000080]'>
+            <h3 className='mb-1 pr-10 text-lg font-bold text-[#002B7A]'>
 
               {cvuFormData?.isEdit
                 ? 'Editar registro CVU'

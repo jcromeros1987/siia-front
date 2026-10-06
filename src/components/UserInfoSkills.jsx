@@ -7,7 +7,7 @@
 //
 // DISEÑO:
 //   - Fondo blanco.
-//   - Azul institucional #000080.
+//   - Azul institucional #002B7A.
 //   - Tonos azules suaves para fondos y bordes.
 //   - Morado únicamente como color secundario.
 //   - Tarjetas modernas.
@@ -64,7 +64,7 @@ const UserInfoSkillsSkeleton = () => (
           Franja institucional
           -------------------------------------------------------------- */}
 
-      <div className='h-2 bg-[#000080]' />
+      <div className='h-2 bg-[#002B7A]' />
 
       <div className='p-6 sm:p-8'>
 
@@ -74,7 +74,7 @@ const UserInfoSkillsSkeleton = () => (
 
         <div className='mb-6 flex items-center gap-3'>
 
-          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC]'>
+          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA]'>
 
             <Skeleton
               width={20}
@@ -459,7 +459,7 @@ const UserInfoSkills = ({
             FRANJA INSTITUCIONAL
             ------------------------------------------------------------------ */}
 
-        <div className='h-2 bg-[#000080]' />
+        <div className='h-2 bg-[#002B7A]' />
 
 
         <div className='p-6 sm:p-8'>
@@ -474,7 +474,7 @@ const UserInfoSkills = ({
                 Icono de habilidades
                 -------------------------------------------------------------- */}
 
-            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC] text-[#000080]'>
+            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA] text-[#002B7A]'>
 
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -527,7 +527,7 @@ const UserInfoSkills = ({
 
                 <div
                   key={`${habilidad.nombre}-${index}`}
-                  className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D6D6EF] hover:bg-[#F3F3FC]/60 hover:shadow-sm'
+                  className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D1DCEB] hover:bg-[#F1F5FA]/60 hover:shadow-sm'
                 >
 
                   {/* ----------------------------------------------------------
@@ -549,7 +549,7 @@ const UserInfoSkills = ({
                         Porcentaje
                         -------------------------------------------------------- */}
 
-                    <span className='shrink-0 rounded-full bg-[#F3F3FC] px-2.5 py-1 text-xs font-bold text-[#000080]'>
+                    <span className='shrink-0 rounded-full bg-[#F1F5FA] px-2.5 py-1 text-xs font-bold text-[#002B7A]'>
 
                       {habilidad.nivel}%
 
@@ -572,7 +572,7 @@ const UserInfoSkills = ({
                   >
 
                     <div
-                      className='h-full rounded-full bg-[#000080] transition-all duration-500'
+                      className='h-full rounded-full bg-[#002B7A] transition-all duration-500'
                       style={{
                         width: `${habilidad.nivel}%`
                       }}

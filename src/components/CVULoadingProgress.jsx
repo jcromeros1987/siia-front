@@ -298,7 +298,7 @@ const CVULoadingProgress = ({
           ====================================================== */}
 
       <div
-        className='w-full max-w-lg overflow-hidden rounded-3xl border border-[#D6D6EF] bg-white shadow-2xl'
+        className='w-full max-w-lg overflow-hidden rounded-3xl border border-[#D1DCEB] bg-white shadow-2xl'
       >
 
         {/* ====================================================
@@ -306,7 +306,7 @@ const CVULoadingProgress = ({
             ==================================================== */}
 
         <div
-          className='border-b border-[#D6D6EF] bg-gradient-to-r from-[#000080] to-[#15159A] px-6 py-5 text-white'
+          className='border-b border-[#D1DCEB] bg-gradient-to-r from-[#002B7A] to-[#164A8A] px-6 py-5 text-white'
         >
 
           <div className='flex items-center gap-4'>
@@ -422,7 +422,7 @@ const CVULoadingProgress = ({
                   ? 'text-emerald-600'
                   : isError
                     ? 'text-red-600'
-                    : 'text-[#000080]'
+                    : 'text-[#002B7A]'
               ].join(' ')}
               aria-live='polite'
             >
@@ -449,7 +449,7 @@ const CVULoadingProgress = ({
           <div className='mt-7'>
 
             <div
-              className='h-3 w-full overflow-hidden rounded-full bg-[#E8E8F7]'
+              className='h-3 w-full overflow-hidden rounded-full bg-[#E6EDF5]'
               role='progressbar'
               aria-valuemin='0'
               aria-valuemax='100'
@@ -464,7 +464,7 @@ const CVULoadingProgress = ({
                     ? 'bg-emerald-500'
                     : isError
                       ? 'bg-red-500'
-                      : 'bg-[#000080]'
+                      : 'bg-[#002B7A]'
                 ].join(' ')}
                 style={{
                   width: `${displayProgress}%`
@@ -542,7 +542,7 @@ const CVULoadingProgress = ({
                     completedStage
                       ? 'border-emerald-100 bg-emerald-50/70'
                       : activeStage
-                        ? 'border-[#D6D6EF] bg-[#F7F7FC]'
+                        ? 'border-[#D1DCEB] bg-[#F6F8FB]'
                         : 'border-slate-100 bg-slate-50/60'
                   ].join(' ')}
                 >
@@ -557,7 +557,7 @@ const CVULoadingProgress = ({
                       completedStage
                         ? 'bg-emerald-100 text-emerald-600'
                         : activeStage
-                          ? 'bg-[#000080] text-white'
+                          ? 'bg-[#002B7A] text-white'
                           : 'bg-slate-200 text-slate-400'
                     ].join(' ')}
                     aria-hidden='true'
@@ -608,7 +608,7 @@ const CVULoadingProgress = ({
                         completedStage
                           ? 'text-emerald-700'
                           : activeStage
-                            ? 'text-[#000080]'
+                            ? 'text-[#002B7A]'
                             : 'text-slate-500'
                       ].join(' ')}
                     >
@@ -670,7 +670,7 @@ const CVULoadingProgress = ({
               <button
                 type='button'
                 onClick={onClose}
-                className='inline-flex items-center justify-center rounded-xl bg-[#000080] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#15159A] focus:outline-none focus:ring-2 focus:ring-[#000080]/30 disabled:cursor-not-allowed disabled:opacity-50'
+                className='inline-flex items-center justify-center rounded-xl bg-[#002B7A] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#164A8A] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30 disabled:cursor-not-allowed disabled:opacity-50'
                 disabled={!onClose}
                 aria-label='Aceptar y cerrar mensaje de error'
               >
@@ -744,7 +744,7 @@ const CVULoadingProgress = ({
             <div className='mt-6 flex items-center justify-center gap-2 text-xs text-slate-400'>
 
               <span
-                className='h-2 w-2 animate-pulse rounded-full bg-[#000080]'
+                className='h-2 w-2 animate-pulse rounded-full bg-[#002B7A]'
                 aria-hidden='true'
               />
 

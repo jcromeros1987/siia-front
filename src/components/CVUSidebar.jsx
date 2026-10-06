@@ -807,7 +807,7 @@ export const CVUSidebar = ({
           text-white
         '
         style={{
-          backgroundColor: '#000080'
+          backgroundColor: '#002B7A'
         }}
       >
 
@@ -913,10 +913,10 @@ export const CVUSidebar = ({
               outline-none
               transition
               placeholder:text-slate-400
-              focus:border-[#000080]
+              focus:border-[#002B7A]
               focus:bg-white
               focus:ring-2
-              focus:ring-[#000080]/10
+              focus:ring-[#002B7A]/10
             '
           />
 
@@ -998,8 +998,8 @@ export const CVUSidebar = ({
                   ${
                     isActive
                       ? `
-                        border-[#000080]
-                        bg-[#000080]
+                        border-[#002B7A]
+                        bg-[#002B7A]
                         text-white
                         shadow-sm
                       `
@@ -1007,9 +1007,9 @@ export const CVUSidebar = ({
                         border-transparent
                         bg-white
                         text-slate-600
-                        hover:border-[#D6D6EF]
-                        hover:bg-[#F7F7FC]
-                        hover:text-[#000080]
+                        hover:border-[#D1DCEB]
+                        hover:bg-[#F6F8FB]
+                        hover:text-[#002B7A]
                       `
                   }
                 `}
@@ -1035,7 +1035,7 @@ export const CVUSidebar = ({
                     ${
                       isActive
                         ? 'bg-white/15 text-white'
-                        : 'bg-slate-100 text-[#000080]'
+                        : 'bg-slate-100 text-[#002B7A]'
                     }
                   `}
                 >
@@ -1062,7 +1062,7 @@ export const CVUSidebar = ({
                     ${
                       isActive
                         ? 'bg-white/10 text-white'
-                        : 'bg-[#F1F1FA] text-[#000080]'
+                        : 'bg-[#F1F1FA] text-[#002B7A]'
                     }
                   `}
                 >
@@ -1096,7 +1096,7 @@ export const CVUSidebar = ({
                       ${
                         isActive
                           ? 'text-white'
-                          : 'text-slate-700 group-hover:text-[#000080]'
+                          : 'text-slate-700 group-hover:text-[#002B7A]'
                       }
                     `}
                   >
@@ -1152,7 +1152,7 @@ export const CVUSidebar = ({
                     ${
                       isActive
                         ? 'translate-x-0.5 text-white'
-                        : 'text-slate-300 group-hover:translate-x-0.5 group-hover:text-[#000080]'
+                        : 'text-slate-300 group-hover:translate-x-0.5 group-hover:text-[#002B7A]'
                     }
                   `}
                 >
@@ -1264,7 +1264,7 @@ export const CVUSidebar = ({
             hover:shadow-md
           '
           style={{
-            backgroundColor: '#000080'
+            backgroundColor: '#002B7A'
           }}
         >
 
@@ -1305,8 +1305,8 @@ export const CVUSidebar = ({
               mt-3
               rounded-xl
               border
-              border-[#D6D6EF]
-              bg-[#F7F7FC]
+              border-[#D1DCEB]
+              bg-[#F6F8FB]
               px-3
               py-2.5
             '
@@ -1317,7 +1317,7 @@ export const CVUSidebar = ({
             </p>
 
 
-            <p className='mt-0.5 truncate text-xs font-medium text-[#000080]'>
+            <p className='mt-0.5 truncate text-xs font-medium text-[#002B7A]'>
               {getCategoryName(
                 currentTab,
                 safeData[currentTab]

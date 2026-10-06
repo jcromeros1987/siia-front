@@ -263,7 +263,7 @@ const Home = () => {
 
             <div className='flex min-w-0 items-center gap-3'>
 
-              <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#000080] text-sm font-black text-white shadow-sm'>
+              <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#002B7A] text-sm font-black text-white shadow-sm'>
                 CVU
               </div>
 
@@ -294,10 +294,10 @@ const Home = () => {
 
           <div className='w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm'>
 
-            <div className='mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#F3F3FC]'>
+            <div className='mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#F1F5FA]'>
 
               <span
-                className='loading loading-spinner loading-lg text-[#000080]'
+                className='loading loading-spinner loading-lg text-[#002B7A]'
                 aria-label='Cargando'
               />
 
@@ -359,7 +359,7 @@ const Home = () => {
 
             <div className='flex min-w-0 items-center gap-3'>
 
-              <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#000080] text-sm font-black text-white shadow-sm'>
+              <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#002B7A] text-sm font-black text-white shadow-sm'>
                 CVU
               </div>
 
@@ -439,7 +439,7 @@ const Home = () => {
 
               <button
                 type='button'
-                className='mt-6 inline-flex items-center gap-2 rounded-xl bg-[#000080] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#000066] focus:outline-none focus:ring-2 focus:ring-[#000080]/30 focus:ring-offset-2'
+                className='mt-6 inline-flex items-center gap-2 rounded-xl bg-[#002B7A] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#001F5B] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30 focus:ring-offset-2'
                 onClick={() => fetchCVUData({ skipCache: true })}
               >
 
@@ -517,7 +517,7 @@ const Home = () => {
 
           <div className='flex min-w-0 items-center gap-3'>
 
-            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#000080] text-sm font-black text-white shadow-sm'>
+            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#002B7A] text-sm font-black text-white shadow-sm'>
               CVU
             </div>
 
@@ -576,7 +576,7 @@ const Home = () => {
                 type='search'
                 placeholder='Buscar en el CVU...'
                 aria-label='Buscar en el CVU'
-                className='h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#000080] focus:bg-white focus:ring-2 focus:ring-[#000080]/10'
+                className='h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#002B7A] focus:bg-white focus:ring-2 focus:ring-[#002B7A]/10'
               />
 
             </div>
@@ -590,7 +590,7 @@ const Home = () => {
 
           <div className='flex shrink-0 items-center gap-3'>
 
-            <div className='hidden items-center gap-2 rounded-full border border-[#D6D6EF] bg-[#F3F3FC] px-3 py-1.5 text-xs font-semibold text-[#000080] lg:flex'>
+            <div className='hidden items-center gap-2 rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-3 py-1.5 text-xs font-semibold text-[#002B7A] lg:flex'>
 
               <span className='h-2 w-2 rounded-full bg-emerald-500' />
 
@@ -601,7 +601,7 @@ const Home = () => {
 
             {/* Avatar */}
 
-            <div className='flex h-10 w-10 items-center justify-center rounded-full bg-[#000080] text-sm font-bold text-white shadow-sm'>
+            <div className='flex h-10 w-10 items-center justify-center rounded-full bg-[#002B7A] text-sm font-bold text-white shadow-sm'>
 
               {userData
                 ? `${userData.nombre?.[0] || ''}${userData.primer_apellido?.[0] || ''}`.toUpperCase()
@@ -649,7 +649,7 @@ const Home = () => {
 
               <button
                 type='button'
-                className='flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-[#000080] focus:outline-none focus:ring-2 focus:ring-[#000080]/20'
+                className='flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-[#002B7A] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20'
                 aria-label='Abrir menú de usuario'
                 aria-haspopup='menu'
                 aria-expanded={userMenuOpen}
@@ -779,7 +779,7 @@ const Home = () => {
               type='search'
               placeholder='Buscar en el CVU...'
               aria-label='Buscar en el CVU'
-              className='h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#000080] focus:bg-white focus:ring-2 focus:ring-[#000080]/10'
+              className='h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#002B7A] focus:bg-white focus:ring-2 focus:ring-[#002B7A]/10'
             />
 
           </div>
@@ -802,7 +802,7 @@ const Home = () => {
 
           <a
             href='#perfil'
-            className='shrink-0 rounded-lg bg-[#F3F3FC] px-3 py-2 text-xs font-semibold text-[#000080]'
+            className='shrink-0 rounded-lg bg-[#F1F5FA] px-3 py-2 text-xs font-semibold text-[#002B7A]'
           >
             Perfil principal
           </a>
@@ -892,7 +892,7 @@ const Home = () => {
 
               <div className='border-b border-slate-100 px-5 py-4'>
 
-                <p className='text-[11px] font-bold uppercase tracking-wider text-[#000080]'>
+                <p className='text-[11px] font-bold uppercase tracking-wider text-[#002B7A]'>
                   Información académica
                 </p>
 
@@ -914,7 +914,7 @@ const Home = () => {
 
                 <a
                   href='#perfil'
-                  className='flex items-center gap-3 rounded-xl bg-[#F3F3FC] px-3 py-2.5 text-sm font-semibold text-[#000080]'
+                  className='flex items-center gap-3 rounded-xl bg-[#F1F5FA] px-3 py-2.5 text-sm font-semibold text-[#002B7A]'
                 >
 
                   <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-white'>
@@ -950,7 +950,7 @@ const Home = () => {
 
                 <a
                   href='#contacto'
-                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#000080]'
+                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#002B7A]'
                 >
 
                   <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50'>
@@ -982,7 +982,7 @@ const Home = () => {
 
                 <a
                   href='#habilidades'
-                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#000080]'
+                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#002B7A]'
                 >
 
                   <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50'>
@@ -1014,7 +1014,7 @@ const Home = () => {
 
                 <a
                   href='#intereses'
-                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#000080]'
+                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#002B7A]'
                 >
 
                   <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50'>
@@ -1046,7 +1046,7 @@ const Home = () => {
 
                 <a
                   href='#area-conocimiento'
-                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#000080]'
+                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#002B7A]'
                 >
 
                   <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50'>
@@ -1090,7 +1090,7 @@ const Home = () => {
 
                 <a
                   href='#informacion-sistema'
-                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#000080]'
+                  className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#002B7A]'
                 >
 
                   <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50'>
@@ -1138,9 +1138,9 @@ const Home = () => {
 
               <div className='border-t border-slate-100 p-4'>
 
-                <div className='rounded-xl bg-[#F3F3FC] p-4'>
+                <div className='rounded-xl bg-[#F1F5FA] p-4'>
 
-                  <p className='text-xs font-bold uppercase tracking-wider text-[#000080]'>
+                  <p className='text-xs font-bold uppercase tracking-wider text-[#002B7A]'>
                     Perfil CVU
                   </p>
 

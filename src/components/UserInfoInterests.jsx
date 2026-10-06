@@ -7,7 +7,7 @@
 //
 // DISEÑO:
 //   - Fondo blanco.
-//   - Azul institucional #000080.
+//   - Azul institucional #002B7A.
 //   - Fondos azules muy suaves.
 //   - Bordes institucionales.
 //   - Etiquetas tipo "chip" modernas.
@@ -52,7 +52,7 @@ const UserInfoInterestsSkeleton = () => (
           Franja institucional
           ------------------------------------------------------------------ */}
 
-      <div className='h-2 bg-[#000080]' />
+      <div className='h-2 bg-[#002B7A]' />
 
       <div className='p-6 sm:p-8'>
 
@@ -62,7 +62,7 @@ const UserInfoInterestsSkeleton = () => (
 
         <div className='mb-6 flex items-center gap-3'>
 
-          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC]'>
+          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA]'>
 
             <Skeleton
               width={20}
@@ -310,7 +310,7 @@ const UserInfoInterests = ({
             FRANJA INSTITUCIONAL
             ------------------------------------------------------------------ */}
 
-        <div className='h-2 bg-[#000080]' />
+        <div className='h-2 bg-[#002B7A]' />
 
 
         <div className='p-6 sm:p-8'>
@@ -325,7 +325,7 @@ const UserInfoInterests = ({
                 Icono
                 -------------------------------------------------------------- */}
 
-            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC] text-[#000080]'>
+            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA] text-[#002B7A]'>
 
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -384,7 +384,7 @@ const UserInfoInterests = ({
 
                 <span
                   key={`${interes}-${index}`}
-                  className='inline-flex items-center gap-2 rounded-full border border-[#D6D6EF] bg-[#F3F3FC] px-3.5 py-2 text-sm font-semibold text-[#000080] transition-all duration-200 hover:border-[#000080] hover:bg-[#E8E8F7] hover:shadow-sm'
+                  className='inline-flex items-center gap-2 rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-3.5 py-2 text-sm font-semibold text-[#002B7A] transition-all duration-200 hover:border-[#002B7A] hover:bg-[#E6EDF5] hover:shadow-sm'
                 >
 
                   {/* --------------------------------------------------------
@@ -392,7 +392,7 @@ const UserInfoInterests = ({
                       -------------------------------------------------------- */}
 
                   <span
-                    className='h-2 w-2 shrink-0 rounded-full bg-[#000080]'
+                    className='h-2 w-2 shrink-0 rounded-full bg-[#002B7A]'
                     aria-hidden='true'
                   />
 

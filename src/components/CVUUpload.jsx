@@ -1114,7 +1114,7 @@ const CVUUpload = ({
 
       <button
         type='button'
-        className='inline-flex items-center gap-2 rounded-xl border border-[#000080] bg-white px-4 py-2.5 text-sm font-semibold text-[#000080] shadow-sm transition-colors hover:bg-[#F3F3FC] focus:outline-none focus:ring-2 focus:ring-[#000080]/20 disabled:cursor-not-allowed disabled:opacity-50'
+        className='inline-flex items-center gap-2 rounded-xl border border-[#002B7A] bg-white px-4 py-2.5 text-sm font-semibold text-[#002B7A] shadow-sm transition-colors hover:bg-[#F1F5FA] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20 disabled:cursor-not-allowed disabled:opacity-50'
         title='Cargar CVU desde archivo JSON'
         onClick={handleClick}
         disabled={isLoading}

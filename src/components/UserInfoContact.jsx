@@ -7,7 +7,7 @@
 //
 // DISEÑO:
 //   - Fondo blanco.
-//   - Azul institucional #000080.
+//   - Azul institucional #002B7A.
 //   - Tarjetas independientes para cada medio de contacto.
 //   - Diseño responsive.
 //   - Apariencia institucional y académica.
@@ -44,7 +44,7 @@ const UserInfoContactSkeleton = () => (
           Franja institucional
           -------------------------------------------------------------- */}
 
-      <div className='h-2 bg-[#000080]' />
+      <div className='h-2 bg-[#002B7A]' />
 
       <div className='p-6 sm:p-8'>
 
@@ -54,7 +54,7 @@ const UserInfoContactSkeleton = () => (
 
         <div className='mb-6 flex items-center gap-3'>
 
-          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC]'>
+          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA]'>
             <Skeleton
               width={20}
               height={20}
@@ -200,7 +200,7 @@ const UserInfoContact = ({
             FRANJA INSTITUCIONAL
             ------------------------------------------------------------------ */}
 
-        <div className='h-2 bg-[#000080]' />
+        <div className='h-2 bg-[#002B7A]' />
 
 
         <div className='p-6 sm:p-8'>
@@ -215,7 +215,7 @@ const UserInfoContact = ({
                 Icono
                 -------------------------------------------------------------- */}
 
-            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC] text-[#000080]'>
+            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA] text-[#002B7A]'>
 
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -277,14 +277,14 @@ const UserInfoContact = ({
                 }
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D6D6EF] hover:bg-[#F3F3FC] hover:shadow-sm'
+                className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D1DCEB] hover:bg-[#F1F5FA] hover:shadow-sm'
               >
 
                 <div className='flex items-center gap-3'>
 
                   {/* Icono */}
 
-                  <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D6D6EF] bg-[#F3F3FC] text-[#000080] transition-colors duration-200 group-hover:bg-[#E8E8F7]'>
+                  <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] text-[#002B7A] transition-colors duration-200 group-hover:bg-[#E6EDF5]'>
 
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -324,7 +324,7 @@ const UserInfoContact = ({
                     fill='none'
                     stroke='currentColor'
                     strokeWidth='1.8'
-                    className='h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#000080]'
+                    className='h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#002B7A]'
                     aria-hidden='true'
                   >
 
@@ -353,14 +353,14 @@ const UserInfoContact = ({
                 href={`https://orcid.org/${userData.orcid}`}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D6D6EF] hover:bg-[#F3F3FC] hover:shadow-sm'
+                className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D1DCEB] hover:bg-[#F1F5FA] hover:shadow-sm'
               >
 
                 <div className='flex items-center gap-3'>
 
                   {/* Icono */}
 
-                  <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D6D6EF] bg-[#F3F3FC] text-[#000080] transition-colors duration-200 group-hover:bg-[#E8E8F7]'>
+                  <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] text-[#002B7A] transition-colors duration-200 group-hover:bg-[#E6EDF5]'>
 
                     <span className='text-sm font-bold'>
                       iD
@@ -392,7 +392,7 @@ const UserInfoContact = ({
                     fill='none'
                     stroke='currentColor'
                     strokeWidth='1.8'
-                    className='h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#000080]'
+                    className='h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#002B7A]'
                     aria-hidden='true'
                   >
 
@@ -419,14 +419,14 @@ const UserInfoContact = ({
 
               <a
                 href={`mailto:${userData.correo_alternativo}`}
-                className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D6D6EF] hover:bg-[#F3F3FC] hover:shadow-sm'
+                className='group rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-[#D1DCEB] hover:bg-[#F1F5FA] hover:shadow-sm'
               >
 
                 <div className='flex items-center gap-3'>
 
                   {/* Icono */}
 
-                  <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D6D6EF] bg-[#F3F3FC] text-[#000080] transition-colors duration-200 group-hover:bg-[#E8E8F7]'>
+                  <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] text-[#002B7A] transition-colors duration-200 group-hover:bg-[#E6EDF5]'>
 
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -480,7 +480,7 @@ const UserInfoContact = ({
                     fill='none'
                     stroke='currentColor'
                     strokeWidth='1.8'
-                    className='h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#000080]'
+                    className='h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#002B7A]'
                     aria-hidden='true'
                   >
 

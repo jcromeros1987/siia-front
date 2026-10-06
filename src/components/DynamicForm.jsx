@@ -126,7 +126,7 @@ class FormStructureErrorBoundary extends React.Component {
 
                   <h3
                     id='form-structure-error-title'
-                    className='text-lg font-bold text-[#000080]'
+                    className='text-lg font-bold text-[#002B7A]'
                   >
                     No es posible modificar este registro
                   </h3>
@@ -158,7 +158,7 @@ class FormStructureErrorBoundary extends React.Component {
               <div className='flex justify-end border-t border-[#E5E7EB] bg-[#FAFBFC] px-6 py-4'>
                 <button
                   type='button'
-                  className='rounded-lg bg-[#000080] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#000066] focus:outline-none focus:ring-2 focus:ring-[#000080]/30'
+                  className='rounded-lg bg-[#002B7A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#001F5B] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30'
                   onClick={this.handleClose}
                 >
                   Entendido
@@ -313,7 +313,7 @@ const DynamicForm = forwardRef(
 
         {/* Aviso informativo */}
         <div className='flex items-start gap-3 rounded-xl border border-[#D9E2EC] bg-[#F5F7FB] p-4 shadow-sm'>
-          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#E8EEF8] text-[#000080]'>
+          <div className='flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#E8EEF8] text-[#002B7A]'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-5 w-5'
@@ -331,7 +331,7 @@ const DynamicForm = forwardRef(
           </div>
 
           <div className='flex flex-col gap-1'>
-            <h3 className='text-base font-bold text-[#000080]'>
+            <h3 className='text-base font-bold text-[#002B7A]'>
               Atención importante
             </h3>
 
@@ -390,7 +390,7 @@ const DynamicForm = forwardRef(
             ? (
               <>
                 <div>
-                  <h2 className='mb-6 border-b border-[#E5E7EB] pb-4 text-2xl font-bold text-[#000080]'>
+                  <h2 className='mb-6 border-b border-[#E5E7EB] pb-4 text-2xl font-bold text-[#002B7A]'>
                     {isEdit
                       ? 'Editar registro'
                       : 'Crear nuevo registro'}
@@ -439,7 +439,7 @@ const DynamicForm = forwardRef(
             <div className='flex gap-3 border-t border-[#E5E7EB] pt-4'>
               <button
                 type='submit'
-                className='flex-1 rounded-lg bg-[#000080] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#000066] disabled:cursor-not-allowed disabled:opacity-60'
+                className='flex-1 rounded-lg bg-[#002B7A] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#001F5B] disabled:cursor-not-allowed disabled:opacity-60'
                 disabled={submitLoading}
               >
                 {submitLoading

@@ -148,7 +148,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
               Franja superior decorativa.
               --------------------------------------------------------------- */}
 
-          <div className='h-2 bg-gradient-to-r from-[#00005C] via-[#000080] to-[#000080]' />
+          <div className='h-2 bg-gradient-to-r from-[#001F5B] via-[#002B7A] to-[#002B7A]' />
 
           <div className='p-6 sm:p-8'>
 
@@ -156,7 +156,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
                 Cabecera del perfil.
                 ------------------------------------------------------------- */}
 
-            <div className='flex flex-col gap-6 md:flex-row md:items-center'>
+            <div className='flex flex-col items-center gap-5 text-center'>
 
               {/* Fotografía de carga */}
 
@@ -171,7 +171,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
 
               {/* Información principal de carga */}
 
-              <div className='min-w-0 flex-1'>
+              <div className='min-w-0 w-full max-w-3xl'>
 
                 <Skeleton
                   width='65%'
@@ -287,7 +287,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
             identificar visualmente la sección principal del CVU.
         ------------------------------------------------------------------ */}
 
-        <div className='h-2 bg-gradient-to-r from-[#00005C] via-[#000080] to-[#000080]' />
+        <div className='h-2 bg-gradient-to-r from-[#001F5B] via-[#002B7A] to-[#002B7A]' />
 
 
         <div className='p-6 sm:p-8'>
@@ -296,7 +296,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
               BLOQUE PRINCIPAL DEL INVESTIGADOR
               ================================================================= */}
 
-          <div className='flex flex-col gap-6 md:flex-row md:items-center'>
+          <div className='flex flex-col items-center gap-5 text-center'>
 
             {/* ---------------------------------------------------------------
                 FOTOGRAFÍA
@@ -316,7 +316,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
 
                   {/* Borde exterior decorativo */}
 
-                  <div className='flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-[#00005C] to-[#000080] p-1 shadow-md'>
+                  <div className='flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-[#001F5B] to-[#002B7A] p-1 shadow-md'>
 
                     {/* Imagen real */}
 
@@ -341,7 +341,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
                    Avatar alternativo cuando no existe fotografía.
                 ----------------------------------------------------------- */
 
-                <div className='flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-[#00005C] to-[#000080] text-3xl font-bold text-white shadow-md'>
+                <div className='flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-[#001F5B] to-[#002B7A] text-3xl font-bold text-white shadow-md'>
                   CVU
                 </div>
 
@@ -354,15 +354,15 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
                 INFORMACIÓN PRINCIPAL
                 ================================================================= */}
 
-            <div className='min-w-0 flex-1'>
+            <div className='min-w-0 w-full'>
 
               {/* -------------------------------------------------------------
                   Etiqueta institucional.
                   ------------------------------------------------------------- */}
 
-              <div className='mb-2 flex items-center gap-2'>
+              <div className='mb-2 flex items-center justify-center gap-2'>
 
-                <span className='inline-flex items-center rounded-full bg-[#F3F3FC] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#000080]'>
+                <span className='inline-flex items-center rounded-full bg-[#F1F5FA] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#002B7A]'>
                   Perfil del investigador
                 </span>
 
@@ -384,12 +384,12 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
               ------------------------------------------------------------- */}
 
               {userData.titulo && (
-                <p className='mb-1 text-base font-semibold tracking-wide text-[#000080] sm:text-lg'>
+                <p className='mb-1 text-base font-semibold tracking-wide text-[#002B7A] sm:text-lg'>
                   {userData.titulo}
                 </p>
               )}
 
-              <h1 className='break-words text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl'>
+              <h1 className='mx-auto max-w-4xl break-words text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl'>
                 {[
                   userData.nombre,
                   userData.primer_apellido,
@@ -408,9 +408,9 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
               ------------------------------------------------------------- */}
 
               {userData.nivel_academico && (
-                <div className='mt-3'>
+                <div className='mt-3 flex justify-center'>
 
-                  <span className='inline-flex items-center rounded-full border border-[#D6D6EF] bg-[#F3F3FC] px-3 py-1.5 text-sm font-semibold text-[#000080]'>
+                  <span className='inline-flex items-center rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-3 py-1.5 text-sm font-semibold text-[#002B7A]'>
                     {userData.nivel_academico}
                   </span>
 
@@ -428,7 +428,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
                   manera más clara.
               ------------------------------------------------------------- */}
 
-              <div className='mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm'>
+              <div className='mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm'>
 
                 {/* CVU */}
 
@@ -436,7 +436,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
                   <div className='flex items-center gap-2 text-slate-600'>
 
                     <svg
-                      className='h-4 w-4 text-[#000080]'
+                      className='h-4 w-4 text-[#002B7A]'
                       viewBox='0 0 24 24'
                       fill='none'
                       stroke='currentColor'
@@ -472,7 +472,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
                   <div className='flex items-center gap-2 text-slate-600'>
 
                     <svg
-                      className='h-4 w-4 text-[#000080]'
+                      className='h-4 w-4 text-[#002B7A]'
                       viewBox='0 0 24 24'
                       fill='none'
                       stroke='currentColor'
@@ -522,7 +522,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
 
               <div className='mb-3 flex items-center gap-3'>
 
-                <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F3F3FC] text-[#000080]'>
+                <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F1F5FA] text-[#002B7A]'>
 
                   <svg
                     className='h-5 w-5'
@@ -580,7 +580,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
 
             <div className='mb-5 flex items-center gap-3'>
 
-              <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F3F3FC] text-[#000080]'>
+              <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F1F5FA] text-[#002B7A]'>
 
                 <svg
                   className='h-5 w-5'
@@ -760,7 +760,7 @@ const InfoItem = ({ label, value }) => {
   // --------------------------------------------------------------------------
 
   return (
-    <div className='rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 transition-colors duration-150 hover:border-[#BFBFE6] hover:bg-[#F3F3FC]'>
+    <div className='rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 transition-colors duration-150 hover:border-[#B7C9DF] hover:bg-[#F1F5FA]'>
 
       {/* Etiqueta */}
 

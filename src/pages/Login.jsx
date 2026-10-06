@@ -57,12 +57,12 @@ const Login = () => {
         {/* Identidad institucional del sistema. */}
         <div className='text-center mb-6'>
           <div className='inline-flex items-center gap-2'>
-            <div className='flex h-11 w-11 items-center justify-center rounded-xl bg-[#000080] shadow-sm'>
+            <div className='flex h-11 w-11 items-center justify-center rounded-xl bg-[#002B7A] shadow-sm'>
               <span className='text-lg font-bold text-white'>S</span>
             </div>
 
             <div className='text-left'>
-              <div className='text-lg font-bold leading-none text-[#000080]'>
+              <div className='text-lg font-bold leading-none text-[#002B7A]'>
                 SIIA
               </div>
               <div className='text-xs font-medium tracking-wide text-slate-500'>
@@ -74,7 +74,7 @@ const Login = () => {
 
         {/* Tarjeta principal de autenticación. */}
         <section className='overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60'>
-          <div className='h-1.5 bg-[#000080]' />
+          <div className='h-1.5 bg-[#002B7A]' />
 
           <div className='px-7 py-8 sm:px-9 sm:py-9'>
             {/* Encabezado del formulario. */}
@@ -86,7 +86,7 @@ const Login = () => {
                   viewBox='0 0 24 24'
                   strokeWidth='1.7'
                   stroke='currentColor'
-                  className='h-8 w-8 text-[#000080]'
+                  className='h-8 w-8 text-[#002B7A]'
                   aria-hidden='true'
                 >
                   <path
@@ -97,7 +97,7 @@ const Login = () => {
                 </svg>
               </div>
 
-              <h1 className='text-2xl font-bold text-[#000080] sm:text-3xl'>
+              <h1 className='text-2xl font-bold text-[#002B7A] sm:text-3xl'>
                 Bienvenido
               </h1>
 
@@ -143,7 +143,7 @@ const Login = () => {
                       setEmailFilled(e.target.value.length > 0)
                     }}
                     placeholder='Ingresa tu correo'
-                    className='w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#000080] focus:ring-4 focus:ring-indigo-100'
+                    className='w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#002B7A] focus:ring-4 focus:ring-indigo-100'
                     required
                   />
                 </div>
@@ -185,7 +185,7 @@ const Login = () => {
                       setPasswordFilled(e.target.value.length > 0)
                     }}
                     placeholder='Ingresa tu contraseña'
-                    className='w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#000080] focus:ring-4 focus:ring-indigo-100'
+                    className='w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:border-[#002B7A] focus:ring-4 focus:ring-indigo-100'
                     required
                   />
                 </div>
@@ -194,7 +194,7 @@ const Login = () => {
               <div className='flex justify-end'>
                 <a
                   href='#'
-                  className='text-sm font-medium text-[#000080] transition hover:text-indigo-700 hover:underline'
+                  className='text-sm font-medium text-[#002B7A] transition hover:text-indigo-700 hover:underline'
                 >
                   ¿Olvidaste tu contraseña?
                 </a>
@@ -226,7 +226,7 @@ const Login = () => {
               <button
                 type='submit'
                 disabled={isLoading}
-                className='flex w-full items-center justify-center gap-2 rounded-xl bg-[#000080] px-5 py-3.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition hover:bg-indigo-900 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-100 disabled:cursor-not-allowed disabled:opacity-60'
+                className='flex w-full items-center justify-center gap-2 rounded-xl bg-[#002B7A] px-5 py-3.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition hover:bg-indigo-900 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-100 disabled:cursor-not-allowed disabled:opacity-60'
               >
                 {isLoading && (
                   <span className='loading loading-spinner loading-sm' />
@@ -242,7 +242,7 @@ const Login = () => {
           ¿No tienes una cuenta? 
           <a
             href='#'
-            className='font-semibold text-[#000080] transition hover:text-indigo-700 hover:underline'
+            className='font-semibold text-[#002B7A] transition hover:text-indigo-700 hover:underline'
           >
             Regístrate aquí
           </a>

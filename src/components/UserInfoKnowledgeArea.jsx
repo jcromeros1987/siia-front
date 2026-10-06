@@ -21,7 +21,7 @@
 // }
 //
 // DISEÑO:
-// Identidad institucional azul basada en #000080.
+// Identidad institucional azul basada en #002B7A.
 // ============================================================================
 
 import Skeleton from 'react-loading-skeleton'
@@ -38,7 +38,7 @@ const UserInfoKnowledgeAreaSkeleton = () => (
     <div className='overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm'>
 
       {/* Franja institucional */}
-      <div className='h-2 bg-[#000080]' />
+      <div className='h-2 bg-[#002B7A]' />
 
       <div className='p-6 sm:p-8'>
 
@@ -46,7 +46,7 @@ const UserInfoKnowledgeAreaSkeleton = () => (
 
         <div className='mb-6 flex items-center gap-3'>
 
-          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC]'>
+          <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA]'>
 
             <Skeleton
               width={20}
@@ -319,7 +319,7 @@ const KnowledgeItem = ({
 
 
   return (
-    <div className='group rounded-xl border border-[#D6D6EF] bg-white p-4 transition-all duration-200 hover:border-[#000080] hover:bg-[#F3F3FC] hover:shadow-sm'>
+    <div className='group rounded-xl border border-[#D1DCEB] bg-white p-4 transition-all duration-200 hover:border-[#002B7A] hover:bg-[#F1F5FA] hover:shadow-sm'>
 
       <div className='flex items-start gap-3'>
 
@@ -327,7 +327,7 @@ const KnowledgeItem = ({
             Indicador visual institucional
             ------------------------------------------------------------------ */}
 
-        <div className='mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F3F3FC] text-[#000080] transition-colors duration-200 group-hover:bg-[#000080] group-hover:text-white'>
+        <div className='mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F1F5FA] text-[#002B7A] transition-colors duration-200 group-hover:bg-[#002B7A] group-hover:text-white'>
 
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -377,7 +377,7 @@ const KnowledgeItem = ({
           {clave && (
             <div className='mt-2'>
 
-              <span className='inline-flex items-center rounded-full border border-[#D6D6EF] bg-[#F3F3FC] px-2.5 py-1 text-xs font-semibold text-[#000080]'>
+              <span className='inline-flex items-center rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-2.5 py-1 text-xs font-semibold text-[#002B7A]'>
 
                 Clave: {clave}
 
@@ -499,7 +499,7 @@ const UserInfoKnowledgeArea = ({
             FRANJA INSTITUCIONAL
             ------------------------------------------------------------------ */}
 
-        <div className='h-2 bg-[#000080]' />
+        <div className='h-2 bg-[#002B7A]' />
 
 
         <div className='p-6 sm:p-8'>
@@ -514,7 +514,7 @@ const UserInfoKnowledgeArea = ({
                 Icono
                 -------------------------------------------------------------- */}
 
-            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3F3FC] text-[#000080]'>
+            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1F5FA] text-[#002B7A]'>
 
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -593,9 +593,9 @@ const UserInfoKnowledgeArea = ({
               INDICADOR INSTITUCIONAL
               ================================================================== */}
 
-          <div className='mt-6 flex items-start gap-3 rounded-xl border border-[#D6D6EF] bg-[#F3F3FC] p-4'>
+          <div className='mt-6 flex items-start gap-3 rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] p-4'>
 
-            <div className='mt-0.5 shrink-0 text-[#000080]'>
+            <div className='mt-0.5 shrink-0 text-[#002B7A]'>
 
               <svg
                 xmlns='http://www.w3.org/2000/svg'
