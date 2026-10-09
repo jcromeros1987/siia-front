@@ -174,6 +174,39 @@ const uploadCVU = ({ api, file }) => {
 }
 
 /**
+ * Descarga el CVU con la misma estructura del archivo de Rizoma.
+ *
+ * GET /api/v1/cvu/{userId}/export/
+ */
+const downloadCVU = ({ api, userId }) => {
+  return api.get(`/api/v1/cvu/${userId}/export/`, {
+    responseType: 'blob',
+  })
+}
+
+const saveBlobAsFile = (data, filename) => {
+  const blob = data instanceof Blob
+    ? data
+    : new Blob(
+      [data],
+      { type: 'application/json;charset=utf-8' }
+    )
+
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+
+  link.href = url
+  link.download = filename
+  link.style.display = 'none'
+
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+
+  URL.revokeObjectURL(url)
+}
+
+/**
  * ============================================================
  * Exportaciones
  * ============================================================
@@ -193,4 +226,6 @@ export {
   addEntry,
   updateEntry,
   uploadCVU,
+  downloadCVU,
+  saveBlobAsFile,
 }

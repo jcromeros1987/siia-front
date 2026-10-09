@@ -209,6 +209,8 @@ const DynamicForm = forwardRef(
 
     const [submitError, setSubmitError] = useState(null)
 
+    const submitErrorRef = useRef(null)
+
     /**
      * Mantiene la compatibilidad con los componentes
      * que utilizan DynamicForm mediante ref.
@@ -233,11 +235,35 @@ const DynamicForm = forwardRef(
      * Envía el formulario para crear o actualizar
      * un registro CVU.
      */
+    const showSubmitError = (message) => {
+      setSubmitError(message)
+
+      window.setTimeout(() => {
+        submitErrorRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        })
+      }, 0)
+    }
+
+    const readSubmitError = (error) => {
+      const data = error?.response?.data
+      const message = data?.message
+
+      if (typeof message === 'string' && message.trim()) {
+        return message
+      }
+
+      return isEdit
+        ? 'No se pudo actualizar el registro.'
+        : 'No se pudo crear el registro.'
+    }
+
     const submitForm = async () => {
       setFormValidated(true)
 
       if (!formRef.current?.checkValidity()) {
-        setSubmitError(
+        showSubmitError(
           'Por favor, complete todos los campos requeridos correctamente.'
         )
 
@@ -263,29 +289,14 @@ const DynamicForm = forwardRef(
           data.id = idEntry
         }
 
-        repoMethod({
+        const response = await repoMethod({
           api,
           entryData: data
         })
-          .then((res) => {
-            onSuccess && onSuccess(res)
-          })
-          .catch((err) => {
-            setSubmitError(
-              err.message ||
-              'Error al enviar el formulario'
-            )
-          })
-          .finally(() => {
-            setSubmitLoading(false)
-          })
-      } catch (error) {
-        setSubmitError(
-          error.message ||
-          'Error al enviar el formulario'
-        )
 
-        throw error
+        onSuccess && onSuccess(response)
+      } catch (error) {
+        showSubmitError(readSubmitError(error))
       } finally {
         setSubmitLoading(false)
       }
@@ -346,36 +357,6 @@ const DynamicForm = forwardRef(
           </div>
         </div>
 
-        {/* Error de envío */}
-        {submitError && (
-          <div className='flex items-start gap-3 rounded-xl border border-[#E8B4B4] bg-[#FFF5F5] p-4'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-6 w-6 flex-shrink-0 text-[#B42318]'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-              />
-            </svg>
-
-            <div>
-              <h3 className='font-semibold text-[#991B1B]'>
-                Error al enviar
-              </h3>
-
-              <span className='text-sm text-[#7F1D1D]'>
-                {submitError}
-              </span>
-            </div>
-          </div>
-        )}
-
         {/* Formulario */}
         <form
           ref={formRef}
@@ -433,6 +414,39 @@ const DynamicForm = forwardRef(
                 </p>
               </div>
               )}
+
+          {submitError && (
+            <div
+              ref={submitErrorRef}
+              className='flex items-start gap-3 rounded-xl border border-[#E8B4B4] bg-[#FFF5F5] p-4'
+              role='alert'
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-6 w-6 flex-shrink-0 text-[#B42318]'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                />
+              </svg>
+
+              <div>
+                <h3 className='font-semibold text-[#991B1B]'>
+                  {isEdit ? 'No se pudo actualizar' : 'No se pudo crear'}
+                </h3>
+
+                <span className='text-sm text-[#7F1D1D]'>
+                  {submitError}
+                </span>
+              </div>
+            </div>
+          )}
 
           {/* Botones */}
           {formSpecification && (

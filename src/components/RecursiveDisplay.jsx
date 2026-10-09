@@ -1,200 +1,178 @@
-const getDisplayValue = (value) => {
-  if (value === null || value === undefined) return 'N/A'
+import { formatFieldLabel } from '@/utils/formatFieldLabel'
 
-  if (typeof value === 'string') return value
-  if (typeof value === 'number') return String(value)
-  if (typeof value === 'boolean') return value ? 'Sí' : 'No'
+const isHiddenKey = (key) => String(key).toLowerCase() === 'id'
 
-  if (Array.isArray(value)) {
-    return value
-      .map((item) => getDisplayValue(item))
-      .filter((item) => item !== 'N/A' && item !== '')
-      .join(', ')
+const isEmptyValue = (value) => (
+  value === null ||
+  value === undefined ||
+  value === ''
+)
+
+const isRecord = (value) => (
+  value !== null &&
+  typeof value === 'object' &&
+  !Array.isArray(value)
+)
+
+const formatScalar = (value) => {
+  if (typeof value === 'boolean') {
+    return value ? 'Sí' : 'No'
   }
 
-  if (typeof value === 'object') {
-    if (value.nombre !== null && value.nombre !== undefined) {
-      return getDisplayValue(value.nombre)
-    }
+  if (typeof value === 'string') {
+    const date = value.match(/^(\d{4})-(\d{2})-(\d{2})/)
 
-    if (value.descripcion !== null && value.descripcion !== undefined) {
-      return getDisplayValue(value.descripcion)
+    if (date) {
+      return `${date[3]}/${date[2]}/${date[1]}`
     }
-
-    if (value.label !== null && value.label !== undefined) {
-      return getDisplayValue(value.label)
-    }
-
-    if (value.name !== null && value.name !== undefined) {
-      return getDisplayValue(value.name)
-    }
-
-    return Object.entries(value)
-      .map(([key, item]) => {
-        const display = getDisplayValue(item)
-        return display === 'N/A' || display === ''
-          ? ''
-          : `${key}: ${display}`
-      })
-      .filter(Boolean)
-      .join(' | ')
   }
 
   return String(value)
 }
 
+const catalogText = (value) => {
+  if (!isRecord(value)) {
+    return null
+  }
+
+  const visibleEntries = Object.entries(value).filter(
+    ([key, item]) => !isHiddenKey(key) && !isEmptyValue(item)
+  )
+
+  const simpleKeys = ['nombre', 'clave', 'version', 'descripcion', 'label', 'name']
+  const nombre = value.nombre ?? value.label ?? value.name
+
+  if (
+    !isEmptyValue(nombre) &&
+    visibleEntries.every(([key]) => simpleKeys.includes(key))
+  ) {
+    return formatScalar(nombre)
+  }
+
+  if (visibleEntries.length === 0 && !isEmptyValue(value.id)) {
+    return formatScalar(value.id)
+  }
+
+  return null
+}
+
+const FieldValue = ({ value }) => {
+  const text = formatScalar(value)
+  const isLong = typeof value === 'string' && value.length > 80
+
+  return (
+    <p className={`mt-1 font-semibold text-slate-800 ${isLong ? 'text-sm leading-6' : 'text-sm'}`}>
+      {text}
+    </p>
+  )
+}
+
 const RecursiveDisplay = ({ data, spec = {} }) => {
-  const isList = Array.isArray(data)
-
-  if (data === null || data === undefined) {
-    return <span className='text-slate-400'>N/A</span>
+  if (isEmptyValue(data)) {
+    return <span className='text-sm text-slate-400'>Sin información</span>
   }
 
-  if (typeof data !== 'object' && !isList) {
-    return <span className='font-bold text-black'>{getDisplayValue(data)}</span>
-  }
-
-  const getSortedKeys = () => {
-    if (isList) return []
-
-    const keys = Object.keys(data)
-    if (!spec || Object.keys(spec).length === 0) {
-      return keys
+  if (Array.isArray(data)) {
+    if (data.length === 0) {
+      return <span className='text-sm text-slate-400'>Sin información</span>
     }
 
-    return keys.sort((a, b) => {
-      const orderA = spec[a]?.order ?? 9999
-      const orderB = spec[b]?.order ?? 9999
-      return orderA - orderB
-    })
-  }
+    const objects = data.every((item) => isRecord(item))
 
-  const getLabel = (key) => {
-    if (spec && spec[key] && spec[key].label) {
-      return getDisplayValue(spec[key].label)
-    }
-    return key
-  }
-
-  const getChildSpec = (key) => {
-    if (spec && spec[key]) {
-      return spec[key]
-    }
-    return {}
-  }
-
-  const sortedKeys = getSortedKeys()
-
-  if (isList) {
-    // If it's a list with 'list' spec, render as simple list
-    if ('list' in spec && spec.list) {
+    if (!objects) {
       return (
-        <ul className='space-y-2'>
-          {data.map((item, index) => (
-            <li key={index} className='list-disc list-inside text-black'>
-              {item != null && typeof item === 'object'
-                ? (
-                  <div className='ml-6 mt-2 pl-4 border-l-2 border-[#002B7A]'>
-                    <RecursiveDisplay data={item} spec={spec} />
-                  </div>
-                  )
-                : (
-                  <span className='font-bold text-black'>{getDisplayValue(item)}</span>
-                  )}
-            </li>
+        <div className='flex flex-wrap gap-2'>
+          {data.filter((item) => !isEmptyValue(item)).map((item, index) => (
+            <span
+              key={index}
+              className='rounded-full bg-[#F1F5FA] px-3 py-1 text-sm font-medium text-[#002B7A]'
+            >
+              {formatScalar(item)}
+            </span>
           ))}
-        </ul>
+        </div>
       )
     }
 
-    // Otherwise render as responsive table
     return (
-      <div className='overflow-x-auto'>
-        <table className='table table-sm w-full border border-[#D1DCEB]'>
-          {data.length > 0 && (
-            <thead className='bg-[#F1F5FA]'>
-              <tr>
-                {Object.keys(data[0]).map((key) => (
-                  <th key={key} className='text-black font-semibold text-sm'>
-                    {key}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-          )}
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index} className='hover:bg-[#F7F9FC]'>
-                {Object.entries(item).map(([key, value]) => (
-                  <td key={key} className='text-sm text-black'>
-                    {typeof value === 'object'
-                      ? (
-                        <RecursiveDisplay data={item[key]} spec={spec} />
-                        )
-                      : (
-                        <span className='font-bold text-black'>{getDisplayValue(value)}</span>
-                        )}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className='space-y-3'>
+        {data.map((item, index) => (
+          <div
+            key={index}
+            className='rounded-xl border border-[#D1DCEB] bg-white p-4'
+          >
+            <RecursiveDisplay data={item} spec={spec} />
+          </div>
+        ))}
       </div>
     )
   }
 
-  // For objects
+  if (!isRecord(data)) {
+    return <FieldValue value={data} />
+  }
+
+  const summarized = catalogText(data)
+
+  if (summarized !== null && Object.keys(spec).length === 0) {
+    return <FieldValue value={summarized} />
+  }
+
+  const keys = Object.keys(data)
+    .filter((key) => !isHiddenKey(key) && !isEmptyValue(data[key]))
+    .sort((a, b) => {
+      const orderA = spec?.[a]?.order ?? 9999
+      const orderB = spec?.[b]?.order ?? 9999
+      return orderA - orderB
+    })
+
+  if (keys.length === 0) {
+    if (!isEmptyValue(data.id)) {
+      return <FieldValue value={data.id} />
+    }
+
+    return <span className='text-sm text-slate-400'>Sin información</span>
+  }
+
   return (
-    <ul className='space-y-2'>
-      {sortedKeys.map((key) => (
-        <li key={key} className='text-black'>
-          <div className='flex flex-col gap-1'>
-            <span className='font-semibold text-[#002B7A] text-sm'>{getLabel(key)}:</span>
-            {data[key] != null && typeof data[key] === 'object'
-              ? (
-                <div className='ml-4 pl-4 border-l-2 border-[#002B7A]'>
-                  {!Array.isArray(data[key]) &&
-                  'list' in getChildSpec(key) &&
-                  !getChildSpec(key).list
-                    ? (
-                      <div className='overflow-x-auto'>
-                        <table className='table table-sm w-full border border-[#D1DCEB]'>
-                          <thead className='bg-[#F1F5FA]'>
-                            <tr>
-                              {Object.keys(data[key]).map((k) => (
-                                <th key={k} className='text-black font-semibold text-sm'>
-                                  {getLabel(k)}
-                                </th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className='hover:bg-[#F7F9FC]'>
-                              {Object.entries(data[key]).map(([k, value]) => (
-                                <td key={k} className='text-sm text-black'>
-                                  <span className='font-bold text-black'>{getDisplayValue(value)}</span>
-                                </td>
-                              ))}
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      )
-                    : (
-                      <RecursiveDisplay data={data[key]} spec={getChildSpec(key)} />
-                      )}
-                </div>
-                )
-              : (
-                <span className='font-bold text-black ml-4'>
-                  {getDisplayValue(data[key])}
-                </span>
-                )}
+    <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+      {keys.map((key) => {
+        const value = data[key]
+        const label = formatFieldLabel(
+          key,
+          typeof spec?.[key]?.label === 'string' ? spec[key].label : ''
+        )
+        const childSpec = spec?.[key] && typeof spec[key] === 'object'
+          ? spec[key]
+          : {}
+        const summary = catalogText(value)
+        const nested = summary === null && (isRecord(value) || Array.isArray(value))
+        const wide = nested || (typeof value === 'string' && value.length > 80)
+
+        return (
+          <div
+            key={key}
+            className={`rounded-xl border border-[#D1DCEB] px-4 py-3 ${
+              wide
+                ? 'bg-white sm:col-span-2'
+                : 'bg-[#F7F9FC]'
+            }`}
+          >
+            <p className='text-xs font-semibold uppercase tracking-wide text-slate-500'>
+              {label}
+            </p>
+
+            <div className={nested ? 'mt-3' : ''}>
+              {summary !== null
+                ? <FieldValue value={summary} />
+                : nested
+                  ? <RecursiveDisplay data={value} spec={childSpec} />
+                  : <FieldValue value={value} />}
+            </div>
           </div>
-        </li>
-      ))}
-    </ul>
+        )
+      })}
+    </div>
   )
 }
 

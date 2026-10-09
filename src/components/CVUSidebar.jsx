@@ -11,7 +11,6 @@
 // 3. Permitir cambiar de categoría.
 // 4. Mostrar visualmente la categoría activa.
 // 5. Permitir buscar categorías.
-// 6. Permitir solicitar la creación de un nuevo producto.
 //
 // INTEGRACIÓN:
 // Este componente funciona como el panel derecho del diseño
@@ -35,9 +34,6 @@
 //
 // changeTab
 //    Función utilizada para cambiar la categoría.
-//
-// onNewProduct
-//    Función utilizada para solicitar la creación de un producto.
 //
 // setSidebarOpen
 //    Se conserva por compatibilidad con la versión anterior.
@@ -651,7 +647,6 @@ export const CVUSidebar = ({
   cvuData,
   currentTab,
   changeTab,
-  onNewProduct,
   setSidebarOpen
 }) => {
 
@@ -748,30 +743,6 @@ export const CVUSidebar = ({
     ) {
       setSidebarOpen(false)
     }
-  }
-
-
-  // ==========================================================
-  // NUEVO PRODUCTO
-  // ==========================================================
-
-  const handleNewProduct = () => {
-
-    if (
-      typeof onNewProduct === 'function'
-    ) {
-
-      onNewProduct()
-
-      return
-    }
-
-
-    // Compatibilidad: si el padre todavía no proporciona
-    // onNewProduct, no provocamos ningún error.
-    console.warn(
-      '[CVU] onNewProduct no fue proporcionado.'
-    )
   }
 
 
@@ -958,7 +929,7 @@ export const CVUSidebar = ({
         >
 
 
-          {categories.map((item, index) => {
+          {categories.map((item) => {
 
             const isActive =
               currentTab === item.key
@@ -1014,35 +985,6 @@ export const CVUSidebar = ({
                   }
                 `}
               >
-
-
-                {/* ==========================================
-                    NÚMERO
-                    ========================================== */}
-
-                <span
-                  className={`
-                    flex
-                    h-7
-                    w-7
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-lg
-                    text-xs
-                    font-bold
-
-                    ${
-                      isActive
-                        ? 'bg-white/15 text-white'
-                        : 'bg-slate-100 text-[#002B7A]'
-                    }
-                  `}
-                >
-
-                  {index + 1}
-
-                </span>
 
 
                 {/* ==========================================
@@ -1225,108 +1167,6 @@ export const CVUSidebar = ({
 
         </nav>
 
-
-        {/* ====================================================
-            SEPARADOR
-            ==================================================== */}
-
-        <div className='my-4 border-t border-slate-200' />
-
-
-        {/* ====================================================
-            BOTÓN NUEVO PRODUCTO
-            ==================================================== */}
-
-        <button
-          type='button'
-          onClick={handleNewProduct}
-          disabled={
-            !currentTab
-          }
-          className='
-            flex
-            min-h-[48px]
-            w-full
-            items-center
-            justify-center
-            gap-2
-            rounded-xl
-            px-4
-            py-3
-            text-sm
-            font-semibold
-            text-white
-            shadow-sm
-            transition-all
-            duration-200
-            disabled:cursor-not-allowed
-            disabled:opacity-50
-            hover:shadow-md
-          '
-          style={{
-            backgroundColor: '#002B7A'
-          }}
-        >
-
-          {/* --------------------------------------------------
-              ICONO PLUS
-              -------------------------------------------------- */}
-
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            className='h-5 w-5 stroke-current'
-          >
-
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth='2'
-              d='M12 5v14M5 12h14'
-            />
-
-          </svg>
-
-
-          Nuevo producto
-
-        </button>
-
-
-        {/* ====================================================
-            INFORMACIÓN DE CATEGORÍA ACTIVA
-            ==================================================== */}
-
-        {currentTab && safeData[currentTab] && (
-
-          <div
-            className='
-              mt-3
-              rounded-xl
-              border
-              border-[#D1DCEB]
-              bg-[#F6F8FB]
-              px-3
-              py-2.5
-            '
-          >
-
-            <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>
-              Seleccionado
-            </p>
-
-
-            <p className='mt-0.5 truncate text-xs font-medium text-[#002B7A]'>
-              {getCategoryName(
-                currentTab,
-                safeData[currentTab]
-              )}
-            </p>
-
-          </div>
-
-        )}
 
       </div>
 

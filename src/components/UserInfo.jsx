@@ -34,7 +34,6 @@
 // 3. Habilidades.
 // 4. Intereses.
 // 5. Área de conocimiento.
-// 6. Información de sistema.
 //
 // IMPORTANTE:
 // -----------------------------------------------------------------------------
@@ -49,7 +48,6 @@
 //     UserInfoSkills
 //     UserInfoInterests
 //     UserInfoKnowledgeArea
-//     UserInfoSystemInfo
 //
 // continúan siendo responsables de presentar sus propios datos.
 //
@@ -65,8 +63,10 @@ import UserInfoContact from '@/components/UserInfoContact'
 import UserInfoSkills from '@/components/UserInfoSkills'
 import UserInfoInterests from '@/components/UserInfoInterests'
 import UserInfoKnowledgeArea from '@/components/UserInfoKnowledgeArea'
-import UserInfoSystemInfo from '@/components/UserInfoSystemInfo'
 import CVUUpload from '@/components/CVUUpload'
+import { downloadCVU, saveBlobAsFile } from '@/services/cvuApi'
+import { useApi } from '@/hooks/useApi'
+import { useToken } from '@/hooks/useToken'
 
 
 // ============================================================================
@@ -90,7 +90,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const UserInfo = ({
   userData,
-  cvuData = null,
   isLoading = false,
   fetchCVUData = null
 }) => {
@@ -100,220 +99,51 @@ const UserInfo = ({
   // ==========================================================================
 
   const [showDownloadConfirm, setShowDownloadConfirm] = useState(false)
+  const [downloadError, setDownloadError] = useState('')
+  const [isDownloading, setIsDownloading] = useState(false)
+
+  const api = useApi()
+  const { userId } = useToken()
 
 
-  const handleDownloadCVU = () => {
+  const handleDownloadCVU = async () => {
 
-    if (!cvuData || typeof cvuData !== 'object') {
+    if (!userId || isDownloading) {
       return
     }
 
-    // ------------------------------------------------------------
-    // La descarga debe conservar EXACTAMENTE la estructura del
-    // archivo CVU_estructura_correcta.json:
-    //
-    // {
-    //   usuario_id: ...,
-    //   perfil: {
-    //     cvu: ...,
-    //     nivelAcademico: ...,
-    //     titulo: ...,
-    //     principal: { ... },
-    //     correoAlternativo: ...
-    //   }
-    // }
-    //
-    // No se descarga directamente cvuData porque cvuData es la
-    // estructura interna utilizada por la interfaz y contiene
-    // categorías/productos que no forman parte de la estructura
-    // solicitada para el archivo CVU.
-    // ------------------------------------------------------------
+    setIsDownloading(true)
+    setDownloadError('')
 
-    const sourceProfile =
-      cvuData?.perfil &&
-      typeof cvuData.perfil === 'object'
-        ? cvuData.perfil
-        : (userData || {})
+    try {
+      const response = await downloadCVU({
+        api,
+        userId
+      })
 
-    const sourcePrincipal =
-      sourceProfile?.principal &&
-      typeof sourceProfile.principal === 'object'
-        ? sourceProfile.principal
-        : (userData || {})
+      saveBlobAsFile(response.data, 'CVU.json')
+      setShowDownloadConfirm(false)
+    } catch (error) {
+      let message = 'No se pudo descargar el CVU.'
+      const data = error?.response?.data
 
-    const sourceArea =
-      sourcePrincipal?.areaConocimiento &&
-      typeof sourcePrincipal.areaConocimiento === 'object'
-        ? sourcePrincipal.areaConocimiento
-        : (userData?.area_conocimiento || {})
-
-    const normalizeCatalog = (value) => {
-      if (!value || typeof value !== 'object') {
-        return value ?? null
+      if (data instanceof Blob) {
+        try {
+          const parsed = JSON.parse(await data.text())
+          message = parsed.message || message
+        } catch {
+          message = 'No se pudo descargar el CVU.'
+        }
+      } else if (data?.message) {
+        message = data.message
       }
 
-      const result = {}
-
-      if ('id' in value) {
-        result.id = value.id
-      }
-
-      if ('clave' in value) {
-        result.clave = value.clave
-      }
-
-      if ('nombre' in value) {
-        result.nombre = value.nombre
-      }
-
-      if ('version' in value) {
-        result.version = value.version
-      }
-
-      return result
+      setDownloadError(message)
+    } finally {
+      setIsDownloading(false)
     }
-
-    const usuarioId =
-      cvuData?.usuario_id ??
-      userData?.usuario_id ??
-      userData?.usuarioId ??
-      null
-
-    const cvuExport = {
-      usuario_id: usuarioId,
-      perfil: {
-        cvu: sourceProfile?.cvu ?? userData?.cvu ?? null,
-        nivelAcademico:
-          sourceProfile?.nivelAcademico ??
-          userData?.nivel_academico ??
-          null,
-        titulo:
-          sourceProfile?.titulo ??
-          userData?.titulo ??
-          null,
-        principal: {
-          nombre:
-            sourcePrincipal?.nombre ??
-            userData?.nombre ??
-            null,
-          primerApellido:
-            sourcePrincipal?.primerApellido ??
-            userData?.primer_apellido ??
-            null,
-          segundoApellido:
-            sourcePrincipal?.segundoApellido ??
-            userData?.segundo_apellido ??
-            null,
-          fotografia: sourcePrincipal?.fotografia ??
-            userData?.fotografia ??
-            null,
-          semblanza:
-            sourcePrincipal?.semblanza ??
-            userData?.semblanza ??
-            null,
-          linkedin:
-            sourcePrincipal?.linkedin ??
-            userData?.linkedin ??
-            null,
-          orcId:
-            sourcePrincipal?.orcId ??
-            sourcePrincipal?.orcid ??
-            userData?.orcid ??
-            null,
-          intereses:
-            Array.isArray(sourcePrincipal?.intereses)
-              ? sourcePrincipal.intereses
-              : (Array.isArray(userData?.intereses)
-                ? userData.intereses
-                : []),
-          habilidades:
-            Array.isArray(sourcePrincipal?.habilidades)
-              ? sourcePrincipal.habilidades
-              : (Array.isArray(userData?.habilidades)
-                ? userData.habilidades
-                : []),
-          curp:
-            sourcePrincipal?.curp ??
-            userData?.curp ??
-            null,
-          rfc:
-            sourcePrincipal?.rfc ??
-            userData?.rfc ??
-            null,
-          fechaNacimiento:
-            sourcePrincipal?.fechaNacimiento ??
-            userData?.fecha_nacimiento ??
-            null,
-          sexo: sourcePrincipal?.sexo ??
-            userData?.sexo ??
-            null,
-          paisNacimiento:
-            sourcePrincipal?.paisNacimiento ??
-            userData?.pais_nacimiento ??
-            null,
-          entidadFederativa:
-            sourcePrincipal?.entidadFederativa ??
-            userData?.entidad_federativa ??
-            null,
-          estadoCivil:
-            sourcePrincipal?.estadoCivil ??
-            userData?.estado_civil ??
-            null,
-          nacionalidad:
-            sourcePrincipal?.nacionalidad ??
-            userData?.nacionalidad ??
-            null,
-          areaConocimiento: {
-            area: normalizeCatalog(
-              sourceArea?.area ??
-              userData?.area_conocimiento?.area
-            ),
-            campo: normalizeCatalog(
-              sourceArea?.campo ??
-              userData?.area_conocimiento?.campo
-            ),
-            disciplina: normalizeCatalog(
-              sourceArea?.disciplina ??
-              userData?.area_conocimiento?.disciplina
-            ),
-            subdisciplina: normalizeCatalog(
-              sourceArea?.subdisciplina ??
-              userData?.area_conocimiento?.subdisciplina
-            )
-          }
-        },
-        correoAlternativo:
-          sourceProfile?.correoAlternativo ??
-          userData?.correo_alternativo ??
-          null
-      }
-    }
-
-    const jsonContent = JSON.stringify(
-      cvuExport,
-      null,
-      2
-    )
-
-    const blob = new Blob(
-      [jsonContent],
-      { type: 'application/json;charset=utf-8' }
-    )
-
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-
-    link.href = url
-    link.download = 'CVU.json'
-    link.style.display = 'none'
-
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-
-    URL.revokeObjectURL(url)
-    setShowDownloadConfirm(false)
   }
+
 
 
   // ==========================================================================
@@ -506,10 +336,13 @@ const UserInfo = ({
             <button
               type='button'
               className='inline-flex h-10 items-center gap-2 rounded-xl border border-[#002B7A] bg-white px-3 text-sm font-semibold text-[#002B7A] shadow-sm transition-colors hover:bg-[#F1F5FA] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20 disabled:cursor-not-allowed disabled:opacity-50'
-              title='Descargar CVU completo en formato JSON'
-              aria-label='Descargar CVU completo en formato JSON'
-              disabled={isLoading}
-              onClick={() => setShowDownloadConfirm(true)}
+              title='Descargar CVU con la estructura de Rizoma'
+              aria-label='Descargar CVU con la estructura de Rizoma'
+              disabled={isLoading || !userId}
+              onClick={() => {
+                setDownloadError('')
+                setShowDownloadConfirm(true)
+              }}
             >
 
               <svg
@@ -658,52 +491,6 @@ const UserInfo = ({
 
         </section>
 
-
-        {/* ====================================================================
-            INFORMACIÓN DE SISTEMA
-            ==================================================================== */}
-
-        <section
-          id='informacion-sistema'
-          className='scroll-mt-24'
-          aria-label='Información de sistema'
-        >
-
-          <UserInfoSystemInfo
-            userData={userData}
-            isLoading={isLoading}
-          />
-
-        </section>
-
-
-        {/* ====================================================================
-            IDENTIDAD DEL PERFIL
-            ====================================================================
-
-            Este pequeño bloque sustituye únicamente al footer interno que
-            existía en la versión anterior.
-
-            No representa el footer general de la aplicación; ese footer
-            corresponde a Home.jsx.
-            ==================================================================== */}
-
-        <div className='border-t border-slate-200 pt-5'>
-
-          <div className='flex flex-col gap-1 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between'>
-
-            <span>
-              Perfil académico
-            </span>
-
-            <span>
-              Currículum Vitae Único
-            </span>
-
-          </div>
-
-        </div>
-
       </div>
 
 
@@ -730,8 +517,14 @@ const UserInfo = ({
             </h3>
 
             <p className='mt-2 text-sm leading-6 text-gray-600'>
-              ¿Está seguro de descargar todo el CVU en formato JSON?
+              Se descargará el CVU con la misma estructura del archivo de Rizoma, incluyendo el perfil y los productos actualizados.
             </p>
+
+            {downloadError && (
+              <p className='mt-3 text-sm text-red-600'>
+                {downloadError}
+              </p>
+            )}
 
             <div className='mt-6 flex justify-end gap-3'>
 
@@ -739,16 +532,18 @@ const UserInfo = ({
                 type='button'
                 className='rounded-xl border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300'
                 onClick={() => setShowDownloadConfirm(false)}
+                disabled={isDownloading}
               >
                 Cancelar
               </button>
 
               <button
                 type='button'
-                className='rounded-xl bg-[#002B7A] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#164A8A] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30'
+                className='rounded-xl bg-[#002B7A] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#164A8A] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30 disabled:opacity-50'
                 onClick={handleDownloadCVU}
+                disabled={isDownloading}
               >
-                Aceptar
+                {isDownloading ? 'Descargando...' : 'Aceptar'}
               </button>
 
             </div>

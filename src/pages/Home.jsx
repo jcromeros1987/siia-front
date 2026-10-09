@@ -105,7 +105,6 @@ const Home = () => {
   // CVUInfo expondrá:
   //
   //     changeCategory(key)
-  //     openNewProduct()
   //
   // De esta manera CVUSidebar funciona como navegador y CVUInfo conserva
   // toda la lógica de productos.
@@ -537,54 +536,6 @@ const Home = () => {
 
 
           {/* ------------------------------------------------------------------
-              BUSCADOR
-              ------------------------------------------------------------------
-              Se mantiene como elemento visual del encabezado.
-              La búsqueda global no se implementa aquí porque no forma parte
-              de la funcionalidad existente de Home.
-              ------------------------------------------------------------------ */}
-
-          <div className='hidden max-w-xl flex-1 md:block'>
-
-            <div className='relative'>
-
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth='1.8'
-                aria-hidden='true'
-              >
-
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M21 21l-4.35-4.35'
-                />
-
-                <circle
-                  cx='11'
-                  cy='11'
-                  r='7'
-                />
-
-              </svg>
-
-              <input
-                type='search'
-                placeholder='Buscar en el CVU...'
-                aria-label='Buscar en el CVU'
-                className='h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#002B7A] focus:bg-white focus:ring-2 focus:ring-[#002B7A]/10'
-              />
-
-            </div>
-
-          </div>
-
-
-          {/* ------------------------------------------------------------------
               INFORMACIÓN DEL INVESTIGADOR
               ------------------------------------------------------------------ */}
 
@@ -742,50 +693,6 @@ const Home = () => {
 
         </div>
 
-
-        {/* --------------------------------------------------------------------
-            BUSCADOR PARA DISPOSITIVOS PEQUEÑOS
-            -------------------------------------------------------------------- */}
-
-        <div className='border-t border-slate-100 px-4 py-3 md:hidden'>
-
-          <div className='relative'>
-
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-              strokeWidth='1.8'
-              aria-hidden='true'
-            >
-
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M21 21l-4.35-4.35'
-              />
-
-              <circle
-                cx='11'
-                cy='11'
-                r='7'
-              />
-
-            </svg>
-
-            <input
-              type='search'
-              placeholder='Buscar en el CVU...'
-              aria-label='Buscar en el CVU'
-              className='h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#002B7A] focus:bg-white focus:ring-2 focus:ring-[#002B7A]/10'
-            />
-
-          </div>
-
-        </div>
-
       </header>
 
 
@@ -835,12 +742,12 @@ const Home = () => {
             Área de conocimiento
           </a>
 
-          <a
+          {/* <a
             href='#informacion-sistema'
             className='shrink-0 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50'
           >
             Información de sistema
-          </a>
+          </a> */}
 
         </nav>
 
@@ -1088,7 +995,7 @@ const Home = () => {
                 </a>
 
 
-                <a
+                {/* <a
                   href='#informacion-sistema'
                   className='mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-[#002B7A]'
                 >
@@ -1127,7 +1034,7 @@ const Home = () => {
 
                   Información de sistema
 
-                </a>
+                </a> */}
 
               </nav>
 
@@ -1174,7 +1081,6 @@ const Home = () => {
 
             <UserInfo
               userData={userData}
-              cvuData={cvuData}
               isLoading={isLoading}
               fetchCVUData={fetchCVUData}
             />
@@ -1191,7 +1097,7 @@ const Home = () => {
 
             <div
               id='cvu-info'
-              className='mt-5 min-w-0'
+              className='min-w-0'
             >
 
               <CVUInfo
@@ -1220,8 +1126,7 @@ const Home = () => {
             {/* ----------------------------------------------------------------
                 CVUSidebar no administra productos.
 
-                Su función es navegar entre las categorías y solicitar a
-                CVUInfo que abra el formulario de nuevo producto.
+                Su función es navegar entre las categorías.
 
                 Esto evita duplicar estados y mantiene una única fuente de
                 verdad para los productos.
@@ -1240,13 +1145,6 @@ const Home = () => {
                 // Solicitamos a CVUInfo que cambie realmente de categoría.
 
                 cvuInfoRef.current?.changeCategory(key)
-
-              }}
-              onNewProduct={() => {
-
-                // Solicitamos a CVUInfo que abra el formulario de alta.
-
-                cvuInfoRef.current?.openNewProduct()
 
               }}
             />

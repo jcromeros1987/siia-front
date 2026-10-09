@@ -14,7 +14,6 @@
 //   - Información general:
 //       * Sexo.
 //       * Nacionalidad.
-//       * Fecha de nacimiento.
 //       * País de nacimiento.
 //       * Entidad de nacimiento.
 //       * Estado civil.
@@ -32,9 +31,43 @@
 //
 // ============================================================================
 
-import { useFormatDate } from '@/hooks/useFormatDate'
+import { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+
+
+// El JSON de Rizoma guarda la fotografía como enlace público de
+// Nextcloud (https://.../s/TOKEN). Esa dirección devuelve una página
+// HTML, no la imagen. El archivo se obtiene en /s/TOKEN/download.
+const resolveFotoURL = (uri) => {
+  if (!uri || typeof uri !== 'string') {
+    return null
+  }
+
+  const trimmed = uri.trim()
+
+  if (!trimmed) {
+    return null
+  }
+
+  if (trimmed.startsWith('data:')) {
+    return trimmed
+  }
+
+  try {
+    const url = new URL(trimmed)
+    const path = url.pathname.replace(/\/+$/, '')
+
+    if (/\/s\/[^/]+$/.test(path)) {
+      url.pathname = `${path}/download`
+      return url.toString()
+    }
+  } catch {
+    return trimmed
+  }
+
+  return trimmed
+}
 
 
 // ============================================================================
@@ -90,45 +123,12 @@ const getDisplayValue = (value) => {
 // ============================================================================
 
 const UserInfoHeader = ({ userData, isLoading = false }) => {
-  // --------------------------------------------------------------------------
-  // Formateamos la fecha de nacimiento.
-  //
-  // Se mantiene el hook existente del proyecto para conservar exactamente
-  // el comportamiento que ya tenía la aplicación para las fechas.
-  // --------------------------------------------------------------------------
+  const fotoURL = resolveFotoURL(userData?.fotografia?.uri)
+  const [fotoFallida, setFotoFallida] = useState(false)
 
-  const fechaNacimiento = useFormatDate(userData?.fecha_nacimiento)
-
-
-  // --------------------------------------------------------------------------
-  // Obtiene la URL de la fotografía.
-  //
-  // La API actualmente proporciona la fotografía dentro de:
-  //
-  //     userData.fotografia.uri
-  //
-  // Se utilizan optional chaining (?) para evitar errores si:
-  //
-  //     userData
-  //     userData.fotografia
-  //     userData.fotografia.uri
-  //
-  // todavía no existen.
-  //
-  // Si no existe una fotografía válida, se devuelve null y posteriormente
-  // mostramos un avatar alternativo.
-  // --------------------------------------------------------------------------
-
-  const getFotoURL = () => {
-    return userData?.fotografia?.uri || null
-  }
-
-
-  // --------------------------------------------------------------------------
-  // Obtenemos la URL de la fotografía.
-  // --------------------------------------------------------------------------
-
-  const fotoURL = getFotoURL()
+  useEffect(() => {
+    setFotoFallida(false)
+  }, [fotoURL])
 
 
   // --------------------------------------------------------------------------
@@ -255,6 +255,14 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
     return null
   }
 
+  const tieneInformacionGeneral = [
+    userData.sexo,
+    userData.nacionalidad,
+    userData.pais_nacimiento,
+    userData.entidad_nacimiento,
+    userData.estado_civil,
+  ].some((value) => getDisplayValue(value) !== '')
+
 
   // ==========================================================================
   // RENDER PRINCIPAL
@@ -311,7 +319,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
 
             <div className='shrink-0'>
 
-              {fotoURL ? (
+              {fotoURL && !fotoFallida ? (
                 <div className='relative'>
 
                   {/* Borde exterior decorativo */}
@@ -324,12 +332,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
                       src={fotoURL}
                       alt={`Fotografía de ${userData.nombre || 'investigador'}`}
                       className='h-full w-full rounded-full object-cover bg-white'
-                      onError={(event) => {
-                        // Si la URL de la fotografía no es válida,
-                        // ocultamos la imagen para evitar mostrar un icono
-                        // de imagen rota.
-                        event.currentTarget.style.display = 'none'
-                      }}
+                      onError={() => setFotoFallida(true)}
                     />
 
                   </div>
@@ -572,6 +575,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
               INFORMACIÓN GENERAL
               ================================================================= */}
 
+          {tieneInformacionGeneral && (
           <div className='mt-8 border-t border-slate-100 pt-6'>
 
             {/* ---------------------------------------------------------------
@@ -646,14 +650,6 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
               />
 
 
-              {/* Fecha de nacimiento */}
-
-              <InfoItem
-                label='Fecha de nacimiento'
-                value={fechaNacimiento}
-              />
-
-
               {/* País de nacimiento */}
 
               <InfoItem
@@ -680,6 +676,7 @@ const UserInfoHeader = ({ userData, isLoading = false }) => {
             </div>
 
           </div>
+          )}
 
 
           {/* =================================================================

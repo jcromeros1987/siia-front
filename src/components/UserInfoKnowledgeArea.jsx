@@ -593,7 +593,7 @@ const UserInfoKnowledgeArea = ({
               INDICADOR INSTITUCIONAL
               ================================================================== */}
 
-          <div className='mt-6 flex items-start gap-3 rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] p-4'>
+          {/* <div className='mt-6 flex items-start gap-3 rounded-xl border border-[#D1DCEB] bg-[#F1F5FA] p-4'>
 
             <div className='mt-0.5 shrink-0 text-[#002B7A]'>
 
@@ -638,7 +638,7 @@ const UserInfoKnowledgeArea = ({
 
             </p>
 
-          </div>
+          </div> */}
 
         </div>
 

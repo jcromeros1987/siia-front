@@ -12,9 +12,8 @@
 // 3. Mostrar el detalle de un registro.
 // 4. Permitir agregar un nuevo registro.
 // 5. Permitir editar un registro creado manualmente.
-// 6. Permitir cargar un archivo CVU.
-// 7. Mostrar el formulario dinámico.
-// 8. Actualizar la información después de guardar/cargar datos.
+// 6. Mostrar el formulario dinámico.
+// 7. Actualizar la información después de guardar datos.
 //
 // INTEGRACIÓN 9.5.2:
 // El selector de categorías deja de pertenecer visualmente a
@@ -25,7 +24,6 @@
 // componente, se utiliza forwardRef/useImperativeHandle.
 //
 // Métodos expuestos:
-//   - openNewProduct()
 //   - changeCategory(key)
 // ============================================================
 
@@ -44,10 +42,6 @@ import RecursiveDisplay from '@/components/RecursiveDisplay'
 
 // Formulario dinámico utilizado para crear y editar registros CVU.
 import DynamicForm from '@/components/DynamicForm'
-
-// Componente encargado de seleccionar y cargar el archivo JSON del CVU.
-import CVUUpload from '@/components/CVUUpload'
-
 
 // ------------------------------------------------------------
 // REACT
@@ -235,14 +229,6 @@ export const CVUInfo = forwardRef(({
 
 
   // ----------------------------------------------------------
-  // showDownloadConfirm
-  //
-  // Controla la ventana de confirmación para descargar el CVU.
-  // ----------------------------------------------------------
-  const [showDownloadConfirm, setShowDownloadConfirm] = useState(false)
-
-
-  // ----------------------------------------------------------
   // formSpecification
   //
   // Contiene la especificación del formulario obtenida desde
@@ -276,9 +262,6 @@ export const CVUInfo = forwardRef(({
   // ==========================================================
   // PROTECCIÓN CONTRA cvuData NULL/UNDEFINED
   // ==========================================================
-
-  const safeData = cvuData || {}
-
 
   // ==========================================================
   // OBTENER PRODUCTOS DE UNA CATEGORÍA
@@ -413,28 +396,6 @@ export const CVUInfo = forwardRef(({
   // ==========================================================
 
   useImperativeHandle(ref, () => ({
-
-    // --------------------------------------------------------
-    // openNewProduct()
-    //
-    // Permite que Home.jsx o CVUSidebar.jsx soliciten la apertura
-    // del formulario para crear un nuevo producto.
-    // --------------------------------------------------------
-    openNewProduct: () => {
-
-      if (!currentTab) {
-
-        console.warn(
-          '[CVU] No hay una categoría seleccionada para crear un producto.'
-        )
-
-        return
-      }
-
-      setCategoryModalOpen(true)
-      addNewCVUEntry(false)
-    },
-
 
     // --------------------------------------------------------
     // changeCategory(key)
@@ -685,161 +646,12 @@ export const CVUInfo = forwardRef(({
 
 
   // ==========================================================
-  // DESCARGAR CVU COMPLETO
-  // ==========================================================
-
-  const handleDownloadCVU = () => {
-
-    // No descargamos si todavía no existe información del CVU.
-    if (!cvuData || typeof cvuData !== 'object') {
-      return
-    }
-
-    // Convertimos todo el CVU cargado a JSON legible.
-    const jsonContent = JSON.stringify(cvuData, null, 2)
-
-    const blob = new Blob(
-      [jsonContent],
-      { type: 'application/json;charset=utf-8' }
-    )
-
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-
-    link.href = url
-    link.download = 'CVU.json'
-    link.style.display = 'none'
-
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-
-    URL.revokeObjectURL(url)
-
-    // Cerramos la confirmación después de iniciar la descarga.
-    setShowDownloadConfirm(false)
-  }
-
-
-  // ==========================================================
   // RENDER
   // ==========================================================
 
   return (
 
     <div className='w-full'>
-
-
-      {/* ======================================================
-          CABECERA PRINCIPAL
-          ====================================================== */}
-
-      <div className='mb-6 flex flex-col gap-4'>
-
-        <div className='flex flex-col gap-1'>
-
-          <h2 className='text-xl font-bold text-[#002B7A] md:text-2xl'>
-            Productos del investigador
-          </h2>
-
-          <p className='text-sm text-slate-500'>
-            Selecciona una categoría en el panel derecho para consultar sus
-            productos sin desplazarte por la página.
-          </p>
-
-        </div>
-
-
-        <div className='flex flex-wrap items-center gap-2'>
-
-          {/* ==================================================
-              CARGAR CVU
-              ==================================================
-
-              La carga del CVU permanece fuera de la ventana de
-              categoría porque afecta al conjunto completo del CVU.
-          ================================================== */}
-
-          <CVUUpload
-            onSuccess={async () => {
-              await fetchCVUData({
-                skipCache: true
-              })
-            }}
-            onError={(error) => {
-              console.error(
-                '[CVU] Error uploading CVU file:',
-                error
-              )
-            }}
-          />
-
-          <button
-            type='button'
-            className='inline-flex items-center gap-2 rounded-xl border border-[#002B7A] bg-white px-4 py-2.5 text-sm font-semibold text-[#002B7A] shadow-sm transition-colors hover:bg-[#F1F5FA] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/20 disabled:cursor-not-allowed disabled:opacity-50'
-            title='Descargar CVU completo en formato JSON'
-            disabled={
-              isLoading ||
-              !cvuData ||
-              Object.keys(cvuData).length === 0
-            }
-            onClick={() => setShowDownloadConfirm(true)}
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              className='h-5 w-5 stroke-current'
-              aria-hidden='true'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M12 3v12m0 0l-4-4m4 4l4-4M5 21h14'
-              />
-            </svg>
-            Descargar CVU
-          </button>
-
-        </div>
-
-      </div>
-
-
-      {/* ======================================================
-          ESTADO DE CATEGORÍA
-          ====================================================== */}
-
-      <div className='rounded-2xl border border-[#D1DCEB] bg-white p-6 shadow-sm'>
-
-        <div className='flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between'>
-
-          <div>
-
-            <p className='text-xs font-semibold uppercase tracking-wide text-slate-500'>
-              Productos CVU
-            </p>
-
-            <h3 className='mt-1 text-lg font-bold text-[#002B7A]'>
-              Selecciona una categoría
-            </h3>
-
-            <p className='mt-1 max-w-2xl text-sm leading-6 text-slate-500'>
-              Al seleccionar una categoría desde «Productos del investigador»
-              se abrirá aquí mismo una ventana con sus registros, detalle y
-              acciones disponibles.
-            </p>
-
-          </div>
-
-          <div className='shrink-0 rounded-full border border-[#D1DCEB] bg-[#F1F5FA] px-4 py-2 text-sm font-semibold text-[#002B7A]'>
-            {Object.keys(safeData).length} categorías
-          </div>
-
-        </div>
-
-      </div>
 
 
       {/* ======================================================
@@ -1029,11 +841,7 @@ export const CVUInfo = forwardRef(({
 
                             <div className='min-w-0'>
 
-                              <span className='block text-xs font-medium text-slate-500'>
-                                Registro #{productoId}
-                              </span>
-
-                              <span className='mt-1 block break-words text-sm font-bold text-[#002B7A] md:text-base'>
+                              <span className='block break-words text-sm font-bold text-[#002B7A] md:text-base'>
                                 {getSafeText(producto.titulo)}
                               </span>
 
@@ -1107,82 +915,6 @@ export const CVUInfo = forwardRef(({
                   </div>
 
                 )}
-
-            </div>
-
-          </div>
-
-        </div>
-
-      )}
-
-
-      {/* ======================================================
-          CONFIRMACIÓN DE DESCARGA DEL CVU
-          ====================================================== */}
-
-      {showDownloadConfirm && (
-
-        <div
-          className='fixed inset-0 z-[100] flex items-center justify-center bg-black/40 px-4'
-          role='dialog'
-          aria-modal='true'
-          aria-labelledby='download-cvu-title'
-        >
-
-          <div className='w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl'>
-
-            <div className='flex items-start gap-4'>
-
-              <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F1F5FA] text-[#002B7A]'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  className='h-6 w-6 stroke-current'
-                  aria-hidden='true'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M12 9v3.75m0 3.25h.01M10.29 3.86l-7.5 13A1.5 1.5 0 004.09 19h15.82a1.5 1.5 0 001.3-2.14l-7.5-13a1.5 1.5 0 00-2.62 0z'
-                  />
-                </svg>
-              </div>
-
-              <div>
-                <h3
-                  id='download-cvu-title'
-                  className='text-lg font-bold text-[#002B7A]'
-                >
-                  Descargar CVU
-                </h3>
-
-                <p className='mt-2 text-sm leading-6 text-gray-600'>
-                  ¿Está seguro de descargar todo el CVU en formato JSON?
-                </p>
-              </div>
-
-            </div>
-
-            <div className='mt-6 flex justify-end gap-3'>
-
-              <button
-                type='button'
-                className='rounded-xl border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300'
-                onClick={() => setShowDownloadConfirm(false)}
-              >
-                Cancelar
-              </button>
-
-              <button
-                type='button'
-                className='rounded-xl bg-[#002B7A] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#164A8A] focus:outline-none focus:ring-2 focus:ring-[#002B7A]/30'
-                onClick={handleDownloadCVU}
-              >
-                Aceptar
-              </button>
 
             </div>
 

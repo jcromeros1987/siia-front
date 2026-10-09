@@ -1,3 +1,31 @@
+import { formatFieldLabel } from '@/utils/formatFieldLabel'
+
+const META_KEYS = new Set([
+  'list',
+  'label',
+  'order',
+  'final',
+  'type',
+  'required',
+  'invalid_feedback',
+  'id',
+  'maxlength',
+  'pattern',
+  'disabled'
+])
+
+const getRenderableChildren = (value) => {
+  if (!value || typeof value !== 'object' || value.final || value.list) {
+    return []
+  }
+
+  return Object.entries(value).filter(([childKey, childValue]) => (
+    !META_KEYS.has(childKey) &&
+    childValue &&
+    typeof childValue === 'object'
+  ))
+}
+
 const RecursiveForm = ({
   data,
   modelValue = {},
@@ -32,7 +60,26 @@ const RecursiveForm = ({
 
   return (
     <div className='space-y-5'>
-      {Object.entries(data).map(([key, value]) => (
+      {Object.entries(data).map(([key, value]) => {
+        const children = getRenderableChildren(value)
+        const flatChild = (
+          children.length === 1 &&
+          children[0][1].final
+        )
+          ? children[0]
+          : null
+        const flatKey = flatChild?.[0]
+        const flatSpec = flatChild?.[1]
+        const flatValue = (
+          flatChild &&
+          modelValue[key] &&
+          typeof modelValue[key] === 'object'
+        )
+          ? modelValue[key][flatKey]
+          : ''
+        const flatLabel = formatFieldLabel(key, value?.label)
+
+        return (
         <div key={key}>
           {/* Final form fields - Checkbox */}
           {value && typeof value === 'object' && 'final' in value && value.final && value.type === 'checkbox' && (
@@ -46,7 +93,7 @@ const RecursiveForm = ({
                   required={value.required}
                   id={value.id}
                 />
-                <span className='font-medium text-slate-700'>{value.label || key}</span>
+                <span className='font-medium text-slate-700'>{formatFieldLabel(key, value.label)}</span>
                 {value.required && <span className='ml-auto text-sm text-red-600'>*</span>}
               </label>
 
@@ -63,14 +110,14 @@ const RecursiveForm = ({
             <div className='form-control w-full'>
               <label className='mb-1 block' htmlFor={value.id}>
                 <span className='font-semibold text-slate-700'>
-                  {value.label || key}
+                  {formatFieldLabel(key, value.label)}
                   {value.required && <span className='ml-1 text-red-600'>*</span>}
                 </span>
               </label>
 
               <input
                 id={value.id}
-                placeholder={value.label || key}
+                placeholder={formatFieldLabel(key, value.label)}
                 type={value.type || 'text'}
                 className='w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-700 outline-none transition-colors placeholder:text-slate-400 focus:border-[#002B7A] focus:ring-2 focus:ring-[#002B7A]/15 disabled:cursor-not-allowed disabled:bg-slate-100'
                 value={modelValue[key] || ''}
@@ -96,7 +143,7 @@ const RecursiveForm = ({
                 <div className='mb-4'>
                   <label className='block' htmlFor={value.id}>
                     <div className='flex items-center justify-between gap-3'>
-                      <span className='text-lg font-bold text-[#002B7A]'>{value.label || key}</span>
+                      <span className='text-lg font-bold text-[#002B7A]'>{formatFieldLabel(key, value.label)}</span>
                       <span className='rounded bg-[#F1F5FA] px-2 py-1 text-xs text-slate-600'>
                         {(modelValue[key] || []).length} registro{(modelValue[key] || []).length !== 1 ? 's' : ''}
                       </span>
@@ -157,16 +204,64 @@ const RecursiveForm = ({
                 >
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
                 </svg>
-                Agregar nuevo {key}
+                Agregar {formatFieldLabel(key, value.label)}
               </button>
             </div>
           )}
 
+          {flatChild && flatSpec.type === 'checkbox' && (
+            <div className='form-control'>
+              <label className='flex cursor-pointer items-center gap-3 rounded-lg p-3 transition-colors hover:bg-[#F1F5FA]'>
+                <input
+                  type='checkbox'
+                  className='checkbox border-[#002B7A] [--chk:#002B7A]'
+                  checked={Boolean(flatValue)}
+                  onChange={(e) => updateNestedValue(key, {
+                    ...(modelValue[key] && typeof modelValue[key] === 'object'
+                      ? modelValue[key]
+                      : {}),
+                    [flatKey]: e.target.checked
+                  })}
+                  required={flatSpec.required}
+                />
+                <span className='font-medium text-slate-700'>{flatLabel}</span>
+              </label>
+            </div>
+          )}
+
+          {flatChild && flatSpec.type !== 'checkbox' && (
+            <div className='form-control w-full'>
+              <label className='mb-1 block'>
+                <span className='font-semibold text-slate-700'>
+                  {flatLabel}
+                  {flatSpec.required && <span className='ml-1 text-red-600'>*</span>}
+                </span>
+              </label>
+
+              <input
+                placeholder=''
+                type={flatSpec.type || 'text'}
+                className='w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-700 outline-none transition-colors placeholder:text-slate-400 focus:border-[#002B7A] focus:ring-2 focus:ring-[#002B7A]/15 disabled:cursor-not-allowed disabled:bg-slate-100'
+                value={flatValue || ''}
+                onChange={(e) => updateNestedValue(key, {
+                  ...(modelValue[key] && typeof modelValue[key] === 'object'
+                    ? modelValue[key]
+                    : {}),
+                  [flatKey]: e.target.value
+                })}
+                required={flatSpec.required}
+                maxLength={flatSpec.maxlength || undefined}
+                pattern={flatSpec.pattern || undefined}
+                disabled={flatSpec.disabled || false}
+              />
+            </div>
+          )}
+
           {/* Nested object field */}
-          {value && typeof value === 'object' && !value.list && !('final' in value) && (
+          {value && typeof value === 'object' && !value.list && !('final' in value) && !flatChild && (
             <div className='space-y-4 rounded-xl border border-[#D1DCEB] bg-[#F7F9FC] p-4'>
               <label className='block' htmlFor={value.id}>
-                <span className='text-lg font-bold text-[#002B7A]'>{value.label || key}</span>
+                <span className='text-lg font-bold text-[#002B7A]'>{formatFieldLabel(key, value.label)}</span>
               </label>
 
               <div className='rounded-lg border border-[#E6E6F2] bg-white p-4'>
@@ -180,7 +275,8 @@ const RecursiveForm = ({
             </div>
           )}
         </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
